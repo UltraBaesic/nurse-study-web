@@ -14,14 +14,6 @@
           </div>
       </section>
       <section>
-          <div class="uplaod-option mb-3">
-              <span>Add Video</span>
-              <b-form-file v-model="file" accept="video/*" ref="file-input" class="mb-2"></b-form-file>
-          </div>
-          <div class="uplaod-option mb-3">
-              <span>Add Audio</span>
-              <b-form-file v-model="file" accept="audio/*" ref="file-input" class="mb-2"></b-form-file>
-          </div>
           <div class="upload-option mb-3">
               <span>Add Article</span>
               <editor
@@ -41,6 +33,9 @@
                      bullist numlist outdent indent | removeformat | help'
                  }"
                />
+         </div>
+         <div>
+           <button class="btn btn-primary" type="submit">Submit Article</button>
          </div>
       </section>
   </main>

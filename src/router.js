@@ -41,8 +41,16 @@ export const router = new Router({
                     component: () => import('./views/ReadTopic.vue')
                 },
                 {
-                    path: '/sections/sectioname/topicname/addnew',
-                    component: () => import('./views/NewSubSection.vue')
+                    path: '/sections/sectioname/addsection',
+                    component: () => import('./views/AddSection.vue')
+                },
+                {
+                    path: '/sections/sectioname/addsvideo',
+                    component: () => import('./views/AddVideo.vue')
+                },
+                {
+                    path: '/sections/sectioname/addaudio',
+                    component: () => import('./views/AddAudio.vue')
                 },
                 {
                     path: '/quiz',

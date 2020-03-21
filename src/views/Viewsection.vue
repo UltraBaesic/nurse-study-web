@@ -57,7 +57,7 @@
               <Tabs cache-lifetime="0.0000010" class="tabs">
                   <Tab  name="Articles">
                     <div class="d-flex justify-content-end mb-2">
-                      <b-button variant="info">Add Article</b-button>
+                      <b-button @click="addSection()" variant="info">Add Article</b-button>
                     </div>
                     <div class="row">
                         <div class="col-4">
@@ -271,7 +271,7 @@
                   </Tab>
                   <Tab name="Videos">
                     <div class="d-flex justify-content-end mb-2">
-                      <b-button variant="info">Add Video</b-button>
+                      <b-button @click="addVideo()" variant="info">Add Video</b-button>
                     </div>
                     <div class="row">
                         <div class="col-4">
@@ -362,7 +362,7 @@
                   </Tab>
                   <Tab name="Audios">
                     <div class="d-flex justify-content-end mb-2">
-                      <b-button variant="info">Add Audio</b-button>
+                      <b-button @click="addAudio()" variant="info">Add Audio</b-button>
                     </div>
                     <div class="row">
                       <div class="col-4">
@@ -381,7 +381,7 @@
                   </Tab>
                   <Tab name="Questions">
                     <div class="d-flex justify-content-end mb-2">
-                      <b-button variant="info">Add Questions</b-button>
+                      <b-button @click="addQuestions()" variant="info">Add Questions</b-button>
                     </div>
                     <div class="row">
                       <div class="col-6" v-for="i in 20 " :key="i.id">
@@ -438,6 +438,20 @@ export default {
       return this.$store.state.Sections.section
     }
   },
+  methods: {
+    addSection(){
+      this.$router.push('/sections/sectioname/addsection')
+    },
+    addVideo(){
+      this.$router.push('/sections/sectioname/addsvideo')
+    },
+    addAudio(){
+      this.$router.push('/sections/sectioname/addaudio')
+    },
+    addQuestions(){
+      this.$router.push('/quiz')
+    },
+  }
 }
 </script>
 
