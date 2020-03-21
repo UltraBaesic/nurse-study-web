@@ -23,13 +23,6 @@
           </p>
 
           <p>
-            <router-link to="/quiz">
-              <span class="icon"><i class="fas fa-question-circle"></i></span>
-              Quiz
-            </router-link>
-          </p>
-
-          <p>
             <router-link to="/users">
               <span class="icon"><i class="fas fa-users"></i></span>
               Users
@@ -57,7 +50,7 @@
             <div class="avatar">
               <img src="../assets/img/hs1.jpg" alt="">
             </div> 
-            <div>
+            <div @click='logout' style='cursor: pointer'>
               <p class="pt-3" style="font-size:14px">
                 Logout
                 <i class="fas fa-arrow-alt-circle-right"></i>
@@ -66,7 +59,6 @@
           </div>
         </div>
       </div>
-
       <div class="main-section__container">
         <router-view></router-view>
       </div>
@@ -77,6 +69,12 @@
 
 <script>
 export default {
+  methods: {
+    logout() {
+      localStorage.removeItem('Nurse-Token')
+      this.$router.push('/')
+    }
+  }
 
 }
 </script>

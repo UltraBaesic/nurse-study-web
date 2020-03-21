@@ -29,7 +29,7 @@ export const router = new Router({
                     component: () => import('./views/Sections.vue')
                 },
                 {
-                    path: '/sections/sectionname',
+                    path: '/sections/:sectionName',
                     component: () => import('./views/Viewsection.vue'),
                 },
                 {

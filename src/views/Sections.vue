@@ -1,5 +1,5 @@
- <template>
-   <main id="sections">
+<template>
+  <main id="sections">
       <section class="page-name">
           <div class="d-flex header">
             <div>
@@ -29,20 +29,20 @@
                   <div class="pa-3">
                     <div class="fields mt-7">
                       <span class="">Name of Section</span>
-                      <b-form-input id="input-small" class="py-3" size="sm" placeholder=""></b-form-input>
+                      <b-form-input v-model="sectionName" id="input-small" class="py-3" size="sm" placeholder=""></b-form-input>
                     </div>
                     <div class="fields mt-7">
                       <span class="mt-3">Short description of Section</span>
-                      <b-form-textarea id="textarea" v-model="text" placeholder="" rows="2" max-rows="2"></b-form-textarea>
+                      <b-form-textarea id="textarea" v-model="sectionDesc" placeholder="" rows="2" max-rows="2"></b-form-textarea>
                     </div>
                     <div class="fields mt-7">
                       <span class="mt-3">Attach an Image</span>
-                      <b-form-file v-model="file" ref="file-input" accept="image/*" class="mb-2"></b-form-file>
+                      <b-form-file v-model="sectionImg" ref="file-input" accept="image/*" class="mb-2"></b-form-file>
                     </div>
                   </div>
                   <div class="modal-button">
-                    <b-button class="mt-2 mr-3" variant="info" @click="hideModal">Submit</b-button>
-                    <b-button class="mt-2" variant="info" @click="toggleModal">Cancel</b-button>
+                    <b-button class="mt-2 mr-3" variant="info" @click="handleSubmit" >Submit</b-button>
+                    <b-button class="mt-2" variant="info">Cancel</b-button>
                   </div>
                 </b-modal>
               </div>
@@ -51,92 +51,88 @@
         <section class="main-section">
             <div class="main-body">
                 <div class="row .mx-lg-n5 ">
-                    <div class="col-3">
-                        <div class="card card-style mb-3">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
+                  <div class="col-3" v-for="section in showSection" :key="section.section_id">
+                      <div class="card card-style mb-3" @click="showSectionInfo(section.section_name, section.section_id )">
+                        <img :src="section.section_image" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h6 class="card-title">{{section.section_name}}</h6>
+                          <p class="card-text ">{{section.section_description | truncate(80)}}.</p>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card card-style">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card card-style">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card card-style">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card card-style">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card card-style">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make</p>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card card-style">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card card-style">
-                          <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h6 class="card-title">Pharmacology</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          </div>
-                        </div>
-                    </div>
+                      </div>
+                  </div>     
                 </div>
             </div>
         </section>
    </main>
- </template>
+</template>
+
+<script>
+
+import { mapActions } from 'vuex'
+// import userToken from '@/utils/helper.js'
+// import axios from 'axios'
+
+export default {
+data(){
+  return {
+    sectionName: '',
+    sectionDesc: '',
+    sectionImg: '', 
+    userSections: null
+  }
+},
+methods: {
+  ...mapActions(['getAllSections', 'submitSection']),
+  showSectionInfo(sectionName, sectionId){
+      this.$store.dispatch( 'loadSectionsInfo', sectionId )
+      this.$router.push( {path: `/sections/${sectionName}`} )
+  },
+
+  // handleSubmit(event) {
+  //   event.preventDefault()
+  //   let {
+  //       sectionName,
+  //       sectionDesc,
+  //       sectionImg
+  //   } = this.sectionInfo
+    
+  //   this.submitSection(this.sectionInfo)
+  //   .then(() => {
+  //     this.clearFields()
+  //   })
+  // },
+
+  // clearFields() {
+  //     this.sectionName = "",
+  //     this.sectionDesc = "",
+  //     this.sectionImg = ""
+  // },
+  // getAllUserSections() {
+  //   let url = 'https://nurse-study.herokuapp.com/content/sections'
+  //   axios.get(url, {
+  //     headers: {
+  //       Authorization: userToken
+  //     }
+  //   })
+  //   .then(res => console.log(res))
+  // }
  
- <script>
- export default {
-  
- }
- </script>
- 
- <style scoped>
-   .header{
+  },
+
+  computed: {
+    showSection() {
+      return this.$store.state.Sections.allSections
+    }
+  },
+   async mounted() {
+     await this.getAllSections()
+     console.log(this.getAllUserSections())
+  }
+} 
+</script>
+
+<style>
+ .header{
      display: flex;
      justify-content: space-between;
    }   
@@ -161,6 +157,11 @@
     .card-style h5{
         color: #292929;
     }
+    .card-style img{
+      height: 120px;
+      object-fit: cover;
+      margin: 0 auto;
+    }
     .right-page-name p{
          color: #292929;
          font-size: 14px;
@@ -168,34 +169,4 @@
     .right-page-name select{
         width: 102px;
     }
-    .modal-vue .overlay {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-}
-
-.modal-vue .modal {
-  position: relative;
-  width: 300px;
-  z-index: 9999;
-  margin: 0 auto;
-  padding: 20px 30px;
-  background-color: #fff;
-}
-
-.modal-vue .close{
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-.modal-button{
-  display: flex;
-}
-.fields{
-  margin-bottom: 20px;
-}
- </style>
+</style>

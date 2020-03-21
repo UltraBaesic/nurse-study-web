@@ -22,131 +22,14 @@
                         Date Joined
                     </th>
                 </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2 mb-5">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
+                <tr class=" w-100 user-details" v-for="user in Users" :key="user.id">
                     <td class="py-2 pl-2">
                         <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
+                        {{ user.userName }}
                     </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
-                </tr>
-                <tr class=" w-100 user-details">
-                    <td class="py-2 pl-2">
-                        <img src="../assets/img/hs1.jpg" alt="">
-                        chukwudum chinaemenma
-                    </td>
-                    <td>chukwudumchinaemenma@gmail.com</td>
-                    <td> Premium</td>
-                    <td>12 May '20</td>
+                    <td>{{ user.userEmail }}</td>
+                    <td>{{ user.userSub }}</td>
+                    <td>{{ user.userDateAdded }}</td>
                 </tr>
             </table>
         </div>
@@ -155,9 +38,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
 
-}
+methods: {
+    ...mapActions(['getAllUsers'])
+},
+computed: {
+    Users() {
+      return this.$store.state.Users.allUsers
+    }
+  },
+   async mounted() {
+     await this.getAllUsers()
+  }
+} 
 </script>
 
 <style>

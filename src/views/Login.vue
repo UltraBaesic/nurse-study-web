@@ -15,15 +15,15 @@
           </span>
           <form class="login-details">
             <div class="form-group email-address">
-              <input type="email" outline class= "input-field">
+              <input type="email" v-model ="user.email" outline class= "input-field">
               <span class="floating-label">Email Address</span>
             </div>
-            <div class="form-group password pt-2">
-              <input type="password" class="input-field">
+            <div class="form-group password pt-3">
+              <input type="password"  v-model ="user.password" class="input-field">
               <span class="floating-label">Password</span>
             </div>
             <div class="forgot-password">Forgot Password</div>
-            <button type="submit" class="btn mt-4 submit-button  btn-md btn-primary">Submit</button>
+            <button type="submit" class="btn mt-4 submit-button btn-md btn-primary" @click='handleLogin'>Submit</button>
           </form>
        </div>
       </div>
@@ -32,8 +32,43 @@
 </template>
 
 <script>
+import axios from 'axios'
+// eslint-disable-line
 export default {
+  data(){
+    return{
+      user:{
+        email:'',
+        password: ''
+      }
+    }
+  },
+  methods: {
+   async handleLogin(e) {
+      e.preventDefault()
 
+      const payload = {
+        email: this.user.email,
+        password: this.user.password
+      }
+
+      let url = 'https://nurse-study.herokuapp.com/auth/login'
+
+      axios.post(url, payload)
+        .then(res => {
+          if(res.data.code == 200) {
+            const token = res.data.token
+            localStorage.setItem('Nurse-Token', token)
+            this.clearFields()
+            this.$router.push('/dashboard')
+          }
+        })
+     },
+     clearFields() {
+       this.user.email= '',
+       this.user.password= ''
+     }
+    }
 }
 </script>
 
@@ -72,17 +107,26 @@ export default {
   #home .login-details{
     margin-top: 35px;
   }
+  input[ type=text],
+  input[type=password]{
+    background-color: transparent !important ;
+    color:#ffffff !important;
+
+  }
   #home .input-field{
-    border: 1.2px solid white;
+    border: 1.2px solid white !important;
+    color: #ffffff;
     border-radius: 5px;
     background-color: transparent;
     padding: 8px 15px;
+    width: 300px;
+    font-size:14px;
   }
   #home .floating-label {
-  position: absolute;
+  position: absolute !important;
   pointer-events: none;
-  left: 5px;
-  bottom: 42px;
+  left: 5px !important;
+  bottom: 42px !important;
   transition: 0.3s ease all;
   font-size: 12px;
   color: #ffffff;
@@ -121,7 +165,7 @@ export default {
   width: 200px;
   background-color: #04809A;
   border: none;
-  padding: 10px 5px;
+  padding: 12px 7px;
   font-size: 12px;
   letter-spacing: 1px;
 }

@@ -7,7 +7,7 @@
                   Back to Sections
               </p>
           </div>
-          <div>
+          <div> 
               <select class="custom-select" id="inputGroupSelect01">
                 <option selected>Premium</option>
                 <option value="1">Free</option>
@@ -19,10 +19,10 @@
           <div class="row">
               <div class="col-3">
                   <div class="card card-style">
-                    <img src="../assets/img/selective-focus-photo-of-pink-tablets-2919591.png" class="card-img-top" alt="...">
+                    <img :src="showSection.section_image" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h6 class="card-title">Pharmacology</h6>
-                      <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <h6 class="card-title"> {{ showSection.section_name }} </h6>
+                      <p class="card-text "> {{ showSection.section_description }} </p>
                     </div>
                   </div>
               </div>
@@ -55,7 +55,10 @@
       <section class="topics">
           <div>
               <Tabs cache-lifetime="0.0000010" class="tabs">
-                  <Tab name="Articles">
+                  <Tab  name="Articles">
+                    <div class="d-flex justify-content-end mb-2">
+                      <b-button variant="info">Add Article</b-button>
+                    </div>
                     <div class="row">
                         <div class="col-4">
                             <div class="card card-style">
@@ -267,6 +270,9 @@
                     </div>
                   </Tab>
                   <Tab name="Videos">
+                    <div class="d-flex justify-content-end mb-2">
+                      <b-button variant="info">Add Video</b-button>
+                    </div>
                     <div class="row">
                         <div class="col-4">
                           <div class="card card-style">
@@ -355,6 +361,9 @@
                     </div>
                   </Tab>
                   <Tab name="Audios">
+                    <div class="d-flex justify-content-end mb-2">
+                      <b-button variant="info">Add Audio</b-button>
+                    </div>
                     <div class="row">
                       <div class="col-4">
                           <div class="card card-style">
@@ -370,28 +379,17 @@
                         </div>
                     </div>
                   </Tab>
-                  <Tab name="Quiz">
-                    <div class=" row quiz-stats">
-                      <div class="quiz-det ml-3">
-                        <div class="d-flex justify-content-end">
-                          <p class= "mr-4" style="font-size: 12px; color: #04809A;">
-                            <i class="fas fa-pen"></i>
-                            Edit Quiz
-                          </p>
-                          <p class= "mr-3" style="font-size: 12px; color: red">
-                            <i class="fas fa-trash"></i>
-                            Delete Quiz
-                          </p>
-                        </div>
-                      </div>
+                  <Tab name="Questions">
+                    <div class="d-flex justify-content-end mb-2">
+                      <b-button variant="info">Add Questions</b-button>
                     </div>
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-6" v-for="i in 20 " :key="i.id">
                           <div class="card card-style">
                             <div class="card-body card-styling">
-                              <div class="questions pb-4">
+                              <div class="questions px-1">
                                 <div class="question">
-                                    <h6>Question 1</h6>
+                                    <h6>Question {{ i++ }}</h6>
                                     <p> What is the name of the president of the united states of America?</p>
                                 </div>
                                 <div class="options">
@@ -400,197 +398,18 @@
                                     <p>C. President Donald Trump</p>
                                     <p>D. President Hillary Clinton</p>
                                 </div>
-                                <div class="answer">
+                                <div class="answer d-flex justify-content-between">
                                   Answer: c
+                                   <div class="d-flex justify-content-end">
+                                  <p class= "mr-4" style="font-size: 12px; color: #04809A;">
+                                    <i class="fas fa-pen"></i>
+                                    Edit
+                                  </p>
+                                  <p class= "mr-3" style="font-size: 12px; color: red">
+                                    <i class="fas fa-trash"></i>
+                                    Delete
+                                  </p>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 2</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 3</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 4</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 5</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 6</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 7</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 8</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 9</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="card card-style">
-                            <div class="card-body card-styling">
-                              <div class="questions pb-4">
-                                <div class="question">
-                                    <h6>Question 1</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
-                                </div>
-                                <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
-                                </div>
-                                <div class="answer">
-                                  Answer: c
                                 </div>
                               </div>
                             </div>
@@ -613,7 +432,12 @@ export default {
         Tabs,
         Tab,
         Progress
+    },
+    computed: {
+    showSection() {
+      return this.$store.state.Sections.section
     }
+  },
 }
 </script>
 
@@ -667,5 +491,8 @@ li{
 .quiz-det{
   display: flex;
   justify-content: space-between !important;
+}
+.tabs-component-tab{
+  padding-right: 50px;
 }
 </style>

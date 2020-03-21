@@ -67,110 +67,322 @@
       </section>
 
       <section>
-          <div>
-              <div>
-                  <p>Set Questions</p>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-                  <div class="ans">
-                      <p>Answer:  A </p>
-                  </div>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-                  <div class="ans">
-                      <p>Answer:  A </p>
-                  </div>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-                  <div class="ans">
-                      <p>Answer:  A </p>
-                  </div>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-                  <div class="ans">
-                      <p>Answer:  A </p>
-                  </div>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-              </div>
-              <div class="questions pb-4">
-                  <div class="question">
-                      <p>1.   What is the name of the president of the united states of America?</p>
-                  </div>
-                  <div class="options">
-                      <p>A. President Olusegun Obasanjo</p>
-                      <p>B. President Barrack Obama</p>
-                      <p>C. President Donald Trump</p>
-                      <p>D. President Hillary Clinton</p>
-                  </div>
-              </div>
+          <div class="row">
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-style">
+                <div class="card-body card-styling">
+                    <div class="questions pb-4">
+                    <div class="question">
+                        <h6>Question 1</h6>
+                        <p> What is the name of the president of the united states of America?</p>
+                    </div>
+                    <div class="options">
+                        <p>A. President Olusegun Obasanjo</p>
+                        <p>B. President Barrack Obama</p>
+                        <p>C. President Donald Trump</p>
+                        <p>D. President Hillary Clinton</p>
+                    </div>
+                    <div class="answer">
+                        Answer: c
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
           </div>
           <button class="btn btn-primary" type="submit">Submit Questions</button>
       </section>
