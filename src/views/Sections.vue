@@ -41,7 +41,7 @@
                     </div>
                   </div>
                   <div class="modal-button">
-                    <b-button class="mt-2 mr-3" variant="info" @click="handleSubmit" >Submit</b-button>
+                    <b-button class="mt-2 mr-3" variant="info">Submit</b-button>
                     <b-button class="mt-2" variant="info">Cancel</b-button>
                   </div>
                 </b-modal>
@@ -55,8 +55,8 @@
                       <div class="card card-style mb-3" @click="showSectionInfo(section.section_name, section.section_id )">
                         <img :src="section.section_image" class="card-img-top" alt="...">
                         <div class="card-body">
-                          <h6 class="card-title">{{section.section_name}}</h6>
-                          <p class="card-text ">{{section.section_description | truncate(80)}}.</p>
+                          <h6 class="card-title">{{section.title}}</h6>
+                          <p class="card-text ">{{section.description | truncate(80)}}.</p>
                         </div>
                       </div>
                   </div>     
@@ -69,8 +69,6 @@
 <script>
 
 import { mapActions } from 'vuex'
-// import userToken from '@/utils/helper.js'
-// import axios from 'axios'
 
 export default {
 data(){
@@ -107,16 +105,6 @@ methods: {
   //     this.sectionDesc = "",
   //     this.sectionImg = ""
   // },
-  // getAllUserSections() {
-  //   let url = 'https://nurse-study.herokuapp.com/content/sections'
-  //   axios.get(url, {
-  //     headers: {
-  //       Authorization: userToken
-  //     }
-  //   })
-  //   .then(res => console.log(res))
-  // }
- 
   },
 
   computed: {
@@ -126,8 +114,7 @@ methods: {
   },
    async mounted() {
      await this.getAllSections()
-     console.log(this.getAllUserSections())
-  }
+     }
 } 
 </script>
 

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import userToken from '../utils/helper.js'
 import axios from 'axios'
  
 Vue.use(Vuex)
@@ -24,7 +25,11 @@ export default {
         //to get all the sections in the database
         async getAllUsers({ commit }) {
             try{
-               const response = await axios.get('https://5e738263be8c5400165c3ad4.mockapi.io/Users')
+               const response = await axios.get('https://nurse-study.herokuapp.com/users',{
+                headers: {
+                    'x-auth-token': userToken
+                   }
+               })
                commit('setUsers', response.data)
             }catch(error){
                throw new Error(error.response)

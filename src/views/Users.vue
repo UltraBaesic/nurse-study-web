@@ -25,11 +25,11 @@
                 <tr class=" w-100 user-details" v-for="user in Users" :key="user.id">
                     <td class="py-2 pl-2">
                         <img src="../assets/img/hs1.jpg" alt="">
-                        {{ user.userName }}
+                        {{ user.firstname }}
                     </td>
-                    <td>{{ user.userEmail }}</td>
+                    <td>{{ user.email }}</td>
                     <td>{{ user.userSub }}</td>
-                    <td>{{ user.userDateAdded }}</td>
+                    <td>{{ user.created_on | fullDate }}</td>
                 </tr>
             </table>
         </div>

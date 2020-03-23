@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
- 
+import userToken from '../utils/helper.js'
+
 Vue.use(Vuex)
 Vue.use(axios)
 
@@ -31,9 +32,14 @@ export default {
         //to get all the sections in the database
         async getAllSections({ commit }) {
             try{
-               const response = await axios.get('https://5e738263be8c5400165c3ad4.mockapi.io/sections')
-               commit('setSections', response.data)
-            }catch(error){
+               const response = await axios.get('https://nurse-study.herokuapp.com/content/sections', {
+                     headers: {
+                     'x-auth-token': userToken
+                    }
+               })
+               commit('setSections', response.data.data)
+               console.log(response.data.data);
+            }catch(error){ 
                throw new Error(error.response)
             }
         },

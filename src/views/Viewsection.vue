@@ -56,7 +56,7 @@
           <div>
               <Tabs cache-lifetime="0.0000010" class="tabs">
                   <Tab  name="Articles">
-                    <div class="d-flex justify-content-end mb-2">
+                    <div class="d-flex justify-content-end mb-2 add-btn">
                       <b-button @click="addSection()" variant="info">Add Article</b-button>
                     </div>
                     <div class="row">
@@ -270,7 +270,7 @@
                     </div>
                   </Tab>
                   <Tab name="Videos">
-                    <div class="d-flex justify-content-end mb-2">
+                    <div class="d-flex justify-content-end mb-2 add-btn">
                       <b-button @click="addVideo()" variant="info">Add Video</b-button>
                     </div>
                     <div class="row">
@@ -361,7 +361,7 @@
                     </div>
                   </Tab>
                   <Tab name="Audios">
-                    <div class="d-flex justify-content-end mb-2">
+                    <div class="d-flex justify-content-end mb-2 add-btn">
                       <b-button @click="addAudio()" variant="info">Add Audio</b-button>
                     </div>
                     <div class="row">
@@ -380,7 +380,7 @@
                     </div>
                   </Tab>
                   <Tab name="Questions">
-                    <div class="d-flex justify-content-end mb-2">
+                    <div class="d-flex justify-content-end mb-2 add-btn">
                       <b-button @click="addQuestions()" variant="info">Add Questions</b-button>
                     </div>
                     <div class="row">
@@ -508,5 +508,10 @@ li{
 }
 .tabs-component-tab{
   padding-right: 50px;
+}
+.add-btn{
+  position: absolute;
+  top: 350px;
+  right: 20px;
 }
 </style>

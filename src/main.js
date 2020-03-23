@@ -4,6 +4,7 @@ import { router } from './router'
 import store from './store'
 import axios from 'axios'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import moment from 'moment'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -20,6 +21,10 @@ Vue.filter('truncate', function (string, number) {
   } else {
     return string;
   }
+})
+
+Vue.filter('fullDate', (value) => {
+  return moment().format(value, 'll')
 })
 
 new Vue({
