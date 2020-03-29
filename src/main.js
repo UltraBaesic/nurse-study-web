@@ -24,8 +24,12 @@ Vue.filter('truncate', function (string, number) {
 })
 
 Vue.filter('fullDate', (value) => {
-  return moment().format(value, 'll')
+  return moment(value).format('ll')
 })
+
+// Vue.filter('todaysDate', => {
+//   return moment("dddd, MMMM Do YYYY, h:mm:ss a")
+// })
 
 new Vue({
   router,

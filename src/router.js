@@ -53,8 +53,12 @@ export const router = new Router({
                     component: () => import('./views/AddAudio.vue')
                 },
                 {
-                    path: '/quiz',
-                    component: () => import('./views/Quiz.vue')
+                    path: '/settings',
+                    component: () => import('./views/Settings.vue')
+                },
+                {
+                    path: '/admin',
+                    component: () => import('./views/Admin.vue')
                 },
             ]
         }

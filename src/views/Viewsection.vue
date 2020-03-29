@@ -19,10 +19,11 @@
           <div class="row">
               <div class="col-3">
                   <div class="card card-style">
-                    <img :src="showSection.section_image" class="card-img-top" alt="...">
+                    <img v-if="section_image != null " :src="showSection.section_image" class="card-img-top" alt="...">
+                    <img v-else src="https://carrington.edu/wp-content/uploads/2015/01/pharmacy-pills.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h6 class="card-title"> {{ showSection.section_name }} </h6>
-                      <p class="card-text "> {{ showSection.section_description }} </p>
+                      <h6 class="card-title"> {{ showSection.title }} </h6>
+                      <p class="card-text "> {{ showSection.description }} </p>
                     </div>
                   </div>
               </div>
@@ -365,16 +366,16 @@
                       <b-button @click="addAudio()" variant="info">Add Audio</b-button>
                     </div>
                     <div class="row">
-                      <div class="col-4">
-                          <div class="card card-style">
-                            <audio controls> 
-                              <source src="horse.ogg" type="audio/ogg">
-                              <source src="horse.mp3" type="audio/mpeg">
+                      <div v-for="i in 8" :key="i" class="col-4">
+                          <div class="card audio-card card-style">
+                            <div class="card-body">
+                              <h6 class="card-title" style="margin-bottom: 0px !important; font-size: 14px;">Things to do when going treating contaminable infections</h6>
+                            </div>
+                            <audio controls  style="width: 344px;"> 
+                              <!-- <source src="horse.ogg" type="audio/ogg"> -->
+                              <source src="../assets/vid/greatful.mp3" type="audio/mpeg">
                               Your browser does not support the audio element.
                             </audio>
-                            <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
-                            </div>
                           </div>
                         </div>
                     </div>
@@ -513,5 +514,20 @@ li{
   position: absolute;
   top: 350px;
   right: 20px;
+}
+
+.audio-card audio
+{
+-webkit-transition:all 0.5s linear;
+background-color: #F1F3F4;
+-moz-transition:all 0.5s linear;
+-o-transition:all 0.5s linear;
+transition:all 0.5s linear;
+-moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+-webkit-box-shadow:  2px 2px 4px rgba(0, 0, 0, 0.1 );
+box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+-moz-border-radius:7px 7px 7px 7px ;
+-webkit-border-radius:7px 7px 7px 7px ;
+border-radius:7px 7px 7px 7px ;
 }
 </style>

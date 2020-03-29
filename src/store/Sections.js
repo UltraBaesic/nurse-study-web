@@ -44,9 +44,9 @@ export default {
             }
         },
          //to get one section in the database
-        async loadSectionsInfo({ commit }, sectionId) {
+        async loadSectionsInfo({ commit }, id) {
             try{
-               const response = await axios.get(`https://5e738263be8c5400165c3ad4.mockapi.io/sections/${sectionId}`)
+               const response = await axios.get(`https://5e738263be8c5400165c3ad4.mockapi.io/sections/${id}`)
                commit('setSection', response.data)
             }catch(error){
                throw new Error(error.response)

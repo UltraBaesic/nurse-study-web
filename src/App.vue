@@ -17,13 +17,14 @@ export default {
 }
 body{
   margin: 0 auto;
-  background-color: #F6FAFB !important;
+  background-color: #F6FAFF !important;
 }
 a{
-  color: #707070 !important;
+  color: #3E3E3E !important;
 }
 a.router-link-exact-active{
   color: #04809A !important;
+  font-weight: 600;
   text-decoration-line: none !important;
 }
 </style>

@@ -18,7 +18,7 @@
           <p>
             <router-link to="/sections" >
               <span class="icon"><i class="fas fa-book-medical"></i></span>
-              Sections
+              Topics
             </router-link>
           </p>
 
@@ -33,6 +33,13 @@
             <router-link to="/admin">
               <span class="icon"><i class="fas fa-user-cog"></i></span>
               Admin
+            </router-link>
+          </p>
+
+           <p>
+            <router-link to="/settings">
+              <span class="icon"><i class="fas fa-cog"></i></span>
+              Settings
             </router-link>
           </p>
         </div>
@@ -90,16 +97,15 @@ export default {
   padding: 20px 50px 0px 30px;
   width: 13rem;
   background-color: #ffffff;
-  color: #707070;
+  color: #000000;
   height: 100vh;
   position: fixed;
   left: 0;
   bottom: 0;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 ); 
   z-index: 31
 }
 #dashboard-layout .icon{
-  margin-right: 30px;
+  margin-right: 15px;
 }
 #dashboard-layout .logo{
   text-align: center;
@@ -111,12 +117,12 @@ export default {
   height: 2.5rem
 }
 #dashboard-layout .navigation p{
-  margin: 25px 0px;
+  margin: 35px 0px;
   font-size: 14px;
-  font-weight: 500;
+  /* font-weight: 500; */
 }
 #dashboard-layout .navigation p{
-  color: #707070;
+  color: #000000;
   text-decoration-line: none;
 }
 #dashboard-layout .navigation p a:hover{
@@ -130,7 +136,7 @@ export default {
   border-radius: 100%;
 }
 #dashboard-layout .avatar{
-  margin-right: 20px; 
+  margin-right: 10px; 
 }
 #dashboard-layout .top-nav-content {
   display: flex;
@@ -147,6 +153,7 @@ export default {
   width: 100vw;
   z-index: 30;
   overflow: hidden;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 ); 
 }
 #dashboard-layout .search-container {
   position: relative;

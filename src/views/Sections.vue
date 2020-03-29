@@ -1,11 +1,28 @@
 <template>
   <main id="sections">
+    <section class="page-name" v-if="showSection.length === 0">
+      <div class="d-flex header">
+        <div>
+            <h6>Topics</h6>
+            <p>{{ moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</p>
+        </div>
+      </div> 
+      <div class="d-flex justify-content-center align-item-center" style="margin-top: 100px;">
+        <div class="text-center">
+          <img src="../assets/img/product.png" style="height: 5rem; margin-bottom: 20px;">
+          <p style="color: #9F9F9F; font-size: 12px;">You don't have any Topic added yet,<br/> click on button to Start</p>
+          <button style="background-color: #04809A;  border: none;" class="btn btn-primary" type="submit">Add Topic</button>
+        </div>
+      </div>
+    </section>
+
+    <div v-else>
       <section class="page-name">
           <div class="d-flex header">
             <div>
-                <h6>Sections</h6>
-                <p>Tuesday,June 14,2020</p>
-            </div>
+                <h6>Topics</h6>
+                <p>{{ moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</p>
+            </div>          
             <div class=" d-flex justify-content-end">
               <div class="right-page-name d-flex ">
                 <div>
@@ -24,45 +41,60 @@
             </div>   
           </div>
           <div>
-                <!-- The modal -->
-                <b-modal id="my-modal" hide-footer title="Create New Section">
-                  <div class="pa-3">
-                    <div class="fields mt-7">
-                      <span class="">Name of Section</span>
-                      <b-form-input v-model="sectionName" id="input-small" class="py-3" size="sm" placeholder=""></b-form-input>
-                    </div>
-                    <div class="fields mt-7">
-                      <span class="mt-3">Short description of Section</span>
-                      <b-form-textarea id="textarea" v-model="sectionDesc" placeholder="" rows="2" max-rows="2"></b-form-textarea>
-                    </div>
-                    <div class="fields mt-7">
-                      <span class="mt-3">Attach an Image</span>
-                      <b-form-file v-model="sectionImg" ref="file-input" accept="image/*" class="mb-2"></b-form-file>
-                    </div>
-                  </div>
-                  <div class="modal-button">
-                    <b-button class="mt-2 mr-3" variant="info">Submit</b-button>
-                    <b-button class="mt-2" variant="info">Cancel</b-button>
-                  </div>
-                </b-modal>
-              </div>
-      </section>
-
-        <section class="main-section">
-            <div class="main-body">
-                <div class="row .mx-lg-n5 ">
-                  <div class="col-3" v-for="section in showSection" :key="section.section_id">
-                      <div class="card card-style mb-3" @click="showSectionInfo(section.section_name, section.section_id )">
-                        <img :src="section.section_image" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h6 class="card-title">{{section.title}}</h6>
-                          <p class="card-text ">{{section.description | truncate(80)}}.</p>
-                        </div>
-                      </div>
-                  </div>     
+            <!-- The modal -->
+            <b-modal id="my-modal" hide-footer title="Create New Section">
+              <div class="pa-3">
+                <div class="fields mt-7">
+                  <span class="">Name of Section</span>
+                  <b-form-input v-model="sectionName" id="input-small" class="py-3" size="sm" placeholder=""></b-form-input>
                 </div>
+                <div class="fields mt-7">
+                  <span class="mt-3">Short description of Section</span>
+                  <b-form-textarea id="textarea" v-model="sectionDesc" placeholder="" rows="2" max-rows="2"></b-form-textarea>
+                </div>
+                <div class="fields mt-7">
+                  <span class="mt-3">Attach an Image</span>
+                  <b-form-file v-model="sectionImg" ref="file-input" accept="image/*" class="mb-2"></b-form-file>
+                </div>
+              </div>
+              <div class="modal-button">
+                <b-button class="mt-2 mr-3" variant="info">Submit</b-button>
+                <b-button class="mt-2" variant="info">Cancel</b-button>
+              </div>
+            </b-modal>
+          </div>
+      </section>
+      <section class="main-section">
+        <!-- <div class="main-body">
+            <div class="row .mx-lg-n5 ">
+              <div class="col-3" v-for="i in 12" :key="i">
+                  <div class="card card-style mb-3" @click="showSectionInfo(section.section_name, section.section_id )">
+                    <img src="https://carrington.edu/wp-content/uploads/2015/01/pharmacy-pills.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h6 class="card-title">Phamacology</h6>
+                      <p class="card-text ">Pharmacology is the branch of pharmaceutical sciences which is concerned with the study of drug or medication action</p>
+                    </div>
+                  </div>
+              </div>     
             </div>
-        </section>
+        </div> -->
+
+          <div class="main-body">
+              <div class="row .mx-lg-n5 ">
+                <div class="col-3" v-for="section in showSection" :key="section._id">
+                    <div class="card card-style mb-3" @click="showSectionInfo(section.title, section._id )">
+                      <img v-if="section_image != null " :src="section.section_image" class="card-img-top" alt="...">
+                      <img v-else src="https://carrington.edu/wp-content/uploads/2015/01/pharmacy-pills.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h6 class="card-title">{{section.title}}</h6>
+                        <p class="card-text ">{{section.description | truncate(80)}}.</p>
+                      </div>
+                    </div>
+                </div>     
+              </div>
+          </div>
+      </section>
+    </div>
    </main>
 </template>
 
@@ -76,14 +108,16 @@ data(){
     sectionName: '',
     sectionDesc: '',
     sectionImg: '', 
+    AllSection: [], 
     userSections: null
   }
 },
 methods: {
   ...mapActions(['getAllSections', 'submitSection']),
-  showSectionInfo(sectionName, sectionId){
-      this.$store.dispatch( 'loadSectionsInfo', sectionId )
-      this.$router.push( {path: `/sections/${sectionName}`} )
+  showSectionInfo(title, id){
+      this.$store.dispatch( 'loadSectionsInfo', id )
+      this.$router.push( {path: `/sections/${title}`} )
+    }
   },
 
   // handleSubmit(event) {
@@ -105,7 +139,7 @@ methods: {
   //     this.sectionDesc = "",
   //     this.sectionImg = ""
   // },
-  },
+  // },
 
   computed: {
     showSection() {

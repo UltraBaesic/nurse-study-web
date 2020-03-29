@@ -9,17 +9,26 @@
           </div>
           <div class="pagetitle">
               <h6>
-                  Add Topic to section
+                  Add Audio to section
               </h6>
           </div>
       </section>
       <section>
           <div class="uplaod-option mb-3">
-              <span>Add Audio</span>
-              <b-form-file v-model="file" accept="audio/*" ref="file-input" class="mb-2"></b-form-file>
-          </div>
-          <div>
-              <button class="btn btn-primary" type="submit">Submit Audio</button>
+              <div class="card card-style">
+                <div class="card-body">
+                    <div class="uplaod-option mb-3">
+                        <div class="form-group mb-4">
+                            <label for="title"> Audio Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Lecture Title">
+                        </div>
+                        <b-form-file v-model="file" accept="audio/*" ref="file-input" class="mb-2"></b-form-file>
+                    </div>
+                    <div class="uplaod-option mb-3">
+                        <button style="background-color: #04809A; border: none;" class="btn btn-primary" type="submit">Add Audio</button>
+                    </div>
+                </div>
+              </div>
           </div>
       </section>
   </main>
