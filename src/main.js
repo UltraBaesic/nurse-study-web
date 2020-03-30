@@ -27,9 +27,9 @@ Vue.filter('fullDate', (value) => {
   return moment(value).format('ll')
 })
 
-// Vue.filter('todaysDate', => {
-//   return moment("dddd, MMMM Do YYYY, h:mm:ss a")
-// })
+Vue.filter('todaysDate',  (val)  => {
+  return moment(val).format('LLLL');
+})
 
 new Vue({
   router,

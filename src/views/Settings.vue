@@ -4,7 +4,7 @@
         <div class="d-flex header">
           <div>
               <h6>Settings</h6>
-              <p>Tuesday,June 14,2020</p>
+              <p>{{timestamp | todaysDate}}</p>
           </div>
         </div> 
       </section>
@@ -15,7 +15,7 @@
                 <div class="card-header" id="headingOne">
                   <h2 class="mb-0">
                     <button class="btn btn-link settings-header" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Quiz Settings
+                      Quiz Settings 
                     </button>
                   </h2>
                 </div>

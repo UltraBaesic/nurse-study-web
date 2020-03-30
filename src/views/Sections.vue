@@ -4,7 +4,7 @@
       <div class="d-flex header">
         <div>
             <h6>Topics</h6>
-            <p>{{ moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</p>
+            <p>{{ timestamp | todaysDate }}</p>
         </div>
       </div> 
       <div class="d-flex justify-content-center align-item-center" style="margin-top: 100px;">
@@ -21,7 +21,7 @@
           <div class="d-flex header">
             <div>
                 <h6>Topics</h6>
-                <p>{{ moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</p>
+                <p>{{ timestamp | todaysDate }}</p>
             </div>          
             <div class=" d-flex justify-content-end">
               <div class="right-page-name d-flex ">
@@ -109,7 +109,8 @@ data(){
     sectionDesc: '',
     sectionImg: '', 
     AllSection: [], 
-    userSections: null
+    userSections: null,
+    timestamp: ""
   }
 },
 methods: {
@@ -117,8 +118,18 @@ methods: {
   showSectionInfo(title, id){
       this.$store.dispatch( 'loadSectionsInfo', id )
       this.$router.push( {path: `/sections/${title}`} )
-    }
+    },
+    getNow: function() {
+                    const today = new Date();
+                    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    const dateTime = date +' '+ time;
+                    this.timestamp = dateTime;
+                }
   },
+   created() {
+                setInterval(this.getNow, 1000);
+            },
 
   // handleSubmit(event) {
   //   event.preventDefault()

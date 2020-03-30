@@ -4,7 +4,7 @@
       <div class="d-flex header">
         <div>
             <h6>Admin</h6>
-            <p>Tuesday,June 14,2020</p>
+            <p>{{timestamp | todaysDate}}</p>
         </div>
       </div> 
       <div class="d-flex justify-content-center align-item-center" style="margin-top: 100px;">

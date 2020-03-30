@@ -2,7 +2,7 @@
   <main id="all-users">
     <section class="page-name">
         <h6>Users</h6>
-        <p>Tuesday,June 14,2020</p>
+        <p>{{timestamp | todaysDate}}</p>
     </section>
 
     <section>
@@ -104,15 +104,24 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-
 methods: {
-    ...mapActions(['getAllUsers'])
+    ...mapActions(['getAllUsers']),
+    getNow: function() {
+                    const today = new Date();
+                    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    const dateTime = date +' '+ time;
+                    this.timestamp = dateTime;
+                }
 },
 computed: {
     Users() {
       return this.$store.state.Users.allUsers
     }
   },
+created() {
+        setInterval(this.getNow, 1000);
+            },
    async mounted() {
      await this.getAllUsers()
   }

@@ -450,7 +450,7 @@ export default {
       this.$router.push('/sections/sectioname/addaudio')
     },
     addQuestions(){
-      this.$router.push('/quiz')
+      this.$router.push('/sections/sectioname/quiz')
     },
   }
 }

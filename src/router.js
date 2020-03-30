@@ -53,6 +53,10 @@ export const router = new Router({
                     component: () => import('./views/AddAudio.vue')
                 },
                 {
+                    path: '/sections/sectioname/quiz',
+                    component: () => import('./views/Quiz.vue')
+                },
+                {
                     path: '/settings',
                     component: () => import('./views/Settings.vue')
                 },
