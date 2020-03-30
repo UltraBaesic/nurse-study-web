@@ -15,11 +15,11 @@
           </span>
           <form class="login-details">
             <div class="form-group email-address">
-              <input type="email" v-model ="user.email" outline class= "input-field">
+              <input type="email" v-model ="user.email" class= "input-field">
               <span class="floating-label">Email Address</span>
             </div>
             <div class="form-group password pt-3">
-              <input type="password"  v-model ="user.password" class="input-field">
+              <input type="password" v-model ="user.password" class="input-field">
               <span class="floating-label">Password</span>
             </div>
             <div class="forgot-password">Forgot Password</div>
@@ -40,7 +40,8 @@ export default {
       user:{
         email:'',
         password: ''
-      }
+      },
+      errors: []
     }
   },
   methods: {
@@ -122,6 +123,13 @@ export default {
     width: 300px;
     font-size:14px;
   }
+
+  #home .input-field:focus,
+  #home .input-field:active{
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
   #home .floating-label {
   position: absolute !important;
   pointer-events: none;
@@ -168,5 +176,10 @@ export default {
   padding: 12px 7px;
   font-size: 12px;
   letter-spacing: 1px;
+}
+
+#home .error-text {
+  color: '#F88080';
+  font-size: 13;
 }
 </style>
