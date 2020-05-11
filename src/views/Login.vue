@@ -53,12 +53,15 @@ export default {
         password: this.user.password
       }
 
-      let url = 'https://nurse-study.herokuapp.com/auth/login'
-
+      let url = 'https://nurse-study-backend.herokuapp.com/auth/login'
+      console.log(url)
       axios.post(url, payload)
         .then(res => {
+           console.log(res.data.code);
           if(res.data.code == 200) {
-            const token = res.data.token
+            console.log(res);
+            const token = res.data.token.token;
+            console.log(res.data.token.token);
             localStorage.setItem('Nurse-Token', token)
             this.clearFields()
             this.$router.push('/dashboard')

@@ -18,13 +18,14 @@
             <div class="card-body">
               <div class="form-group mb-5 mt-3">
                 <label for="Topic">Topic</label>
-                <input type="text" class="form-control" id="Topic" aria-describedby="textHelp">
+                <input type="text" v-model="title" class="form-control" id="Topic" aria-describedby="textHelp">
                 <small id="textHelp" class="form-text text-muted">Keep it short and Simple</small>
               </div>
 
                <label for="Story">Content</label>
               <editor
               id="Story"
+              v-model="content"
               style="border: none;"
                  api-key="774tkv0y3q4mghhaagtmxn76g9sbq9yfzy320a0gkwd4v0cr"
                  :init="{
@@ -44,7 +45,7 @@
                />
 
                <div class="mt-4">
-                <button  style="background-color: #04809A; padding: 10px; margin-bottom: 18px;" class="btn btn-primary" type="submit">Submit Article</button>
+                <button @click="createNewArticle" style="background-color: #04809A; padding: 10px; margin-bottom: 18px;" class="btn btn-primary" type="submit">Submit Article</button>
               </div>
             </div>
          </div>
@@ -60,7 +61,35 @@ import Editor from '@tinymce/tinymce-vue'
    name: 'app',
    components: {
      'editor': Editor
-   }
+   },
+   data(){
+     return{
+       title:"",
+       content: "",
+       category: "Introduction",
+     }
+   },
+  //  computed:{
+  //    ID(){
+  //      return this.$store.getters.getSectionId
+  //    }
+  //  },
+   methods: {
+      createNewArticle(event) {
+        event.preventDefault()
+        let payload = {
+            "title" : this.title,
+            "content" : this.content,
+            "category" : this.category,
+        }
+        
+        console.log(payload)
+        this.$store.dispatch('newArticle', payload)
+        .then(() => {
+          this.clearFields()
+        })
+      },
+   },
  }
 </script>
 

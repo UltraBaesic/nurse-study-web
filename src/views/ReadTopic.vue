@@ -3,7 +3,7 @@
     <section>
         <div class="card card-style">
             <div class="card-body">
-                <div class="class-header">
+                <div class="class-header" v-for="article in showArticle" :key="article._id">
                     <h3 class="mb-4">
                         Respiratory diseases
                     </h3>
@@ -52,8 +52,17 @@
 </template>
 
 <script>
-export default {
+// import { mapGetters } from 'vuex'
 
+export default {
+computed: {
+    // to get the article details using getters
+    showArticle(){
+        let topicname = this.$route.params.topicname
+        console.log(topicname)
+        return this.$store.getters.getArticleInfo(topicname)
+    }
+  }
 }
 </script>
 

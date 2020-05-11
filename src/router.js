@@ -57,6 +57,10 @@ export const router = new Router({
                     component: () => import('./views/Quiz.vue')
                 },
                 {
+                    path: '/sections/sectioname/:topicname',
+                    component: () => import('./views/ReadTopic.vue')
+                },
+                {
                     path: '/settings',
                     component: () => import('./views/Settings.vue')
                 },

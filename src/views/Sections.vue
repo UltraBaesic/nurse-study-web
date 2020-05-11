@@ -44,46 +44,32 @@
             <!-- The modal -->
             <b-modal id="my-modal" hide-footer title="Create New Section">
               <div class="pa-3">
-                <div class="fields mt-7">
-                  <span class="">Name of Section</span>
-                  <b-form-input v-model="sectionName" id="input-small" class="py-3" size="sm" placeholder=""></b-form-input>
+                <div class="fields pt-1">
+                  <span class="">Name of Section</span><br/>
+                  <input v-model="sectionName" id="input-small" class="py-2" size="sm" placeholder="">
                 </div>
-                <div class="fields mt-7">
-                  <span class="mt-3">Short description of Section</span>
-                  <b-form-textarea id="textarea" v-model="sectionDesc" placeholder="" rows="2" max-rows="2"></b-form-textarea>
+                <div class="fields pt-2">
+                  <span class="mt-3">Short description of Section</span><br/>
+                  <input id="textarea" v-model="sectionDesc" placeholder="" class="py-2">
                 </div>
-                <div class="fields mt-7">
-                  <span class="mt-3">Attach an Image</span>
-                  <b-form-file v-model="sectionImg" ref="file-input" accept="image/*" class="mb-2"></b-form-file>
+                <div class="fields pt-2">
+                  <span class="mt-3">Attach an Image</span><br/>
+                  <input id="textarea" v-model="sectionImg" placeholder="" class="py-2">
                 </div>
               </div>
               <div class="modal-button">
-                <b-button class="mt-2 mr-3" variant="info">Submit</b-button>
-                <b-button class="mt-2" variant="info">Cancel</b-button>
+                <b-button class="mt-2 mr-3" @click="handleSubmit" variant="info">Submit</b-button>
               </div>
             </b-modal>
           </div>
       </section>
       <section class="main-section">
-        <!-- <div class="main-body">
-            <div class="row .mx-lg-n5 ">
-              <div class="col-3" v-for="i in 12" :key="i">
-                  <div class="card card-style mb-3" @click="showSectionInfo(section.section_name, section.section_id )">
-                    <img src="https://carrington.edu/wp-content/uploads/2015/01/pharmacy-pills.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h6 class="card-title">Phamacology</h6>
-                      <p class="card-text ">Pharmacology is the branch of pharmaceutical sciences which is concerned with the study of drug or medication action</p>
-                    </div>
-                  </div>
-              </div>     
-            </div>
-        </div> -->
 
           <div class="main-body">
               <div class="row .mx-lg-n5 ">
                 <div class="col-3" v-for="section in showSection" :key="section._id">
                     <div class="card card-style mb-3" @click="showSectionInfo(section.title, section._id )">
-                      <img v-if="section_image != null " :src="section.section_image" class="card-img-top" alt="...">
+                      <img v-if="section.image_link != null " :src="section.image_link" class="card-img-top" alt="...">
                       <img v-else src="https://carrington.edu/wp-content/uploads/2015/01/pharmacy-pills.jpg" class="card-img-top" alt="...">
                       <div class="card-body">
                         <h6 class="card-title">{{section.title}}</h6>
@@ -114,9 +100,10 @@ data(){
   }
 },
 methods: {
-  ...mapActions(['getAllSections', 'submitSection']),
+  ...mapActions(['getAllSections']),
   showSectionInfo(title, id){
       this.$store.dispatch( 'loadSectionsInfo', id )
+      this.$store.dispatch( 'getSectionArticles', id )
       this.$router.push( {path: `/sections/${title}`} )
     },
     getNow: function() {
@@ -125,39 +112,42 @@ methods: {
                     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     const dateTime = date +' '+ time;
                     this.timestamp = dateTime;
-                }
-  },
-   created() {
-                setInterval(this.getNow, 1000);
-            },
+                },
 
-  // handleSubmit(event) {
-  //   event.preventDefault()
-  //   let {
-  //       sectionName,
-  //       sectionDesc,
-  //       sectionImg
-  //   } = this.sectionInfo
+  handleSubmit(event) {
+    event.preventDefault()
+    let payload = {
+        "title" : this.sectionName,
+        "description" : this.sectionDesc,
+        "image_link" : this.sectionImg
+    }
     
-  //   this.submitSection(this.sectionInfo)
-  //   .then(() => {
-  //     this.clearFields()
-  //   })
-  // },
+    console.log(payload)
+    this.$store.dispatch('submitSection', payload)
+    .then(() => {
+      this.clearFields()
+    })
+  },
 
-  // clearFields() {
-  //     this.sectionName = "",
-  //     this.sectionDesc = "",
-  //     this.sectionImg = ""
-  // },
-  // },
+  clearFields() {
+      this.sectionName = "",
+      this.sectionDesc = "",
+      this.sectionImg = ""
+  },
+  },
+  created(){
+      setInterval(this.getNow, 1000);
+  },
+updated(){
+    this.$store.commit('setSections')
+  },
 
-  computed: {
+computed: {
     showSection() {
       return this.$store.state.Sections.allSections
     }
   },
-   async mounted() {
+async mounted() {
      await this.getAllSections()
      }
 } 
@@ -200,5 +190,8 @@ methods: {
     }
     .right-page-name select{
         width: 102px;
+    }
+    .fields input{
+      width: 100%;
     }
 </style>

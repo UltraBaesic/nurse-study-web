@@ -17,13 +17,13 @@
 
       <section class="about-section">
           <div class="row">
-              <div class="col-3">
+              <div class="col-3" v-for="section in showSection.data" :key="section._id">
                   <div class="card card-style">
-                    <img v-if="section_image != null " :src="showSection.section_image" class="card-img-top" alt="...">
+                    <img v-if="section.image_link != null " :src="section.image_link" class="card-img-top" alt="...">
                     <img v-else src="https://carrington.edu/wp-content/uploads/2015/01/pharmacy-pills.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h6 class="card-title"> {{ showSection.title }} </h6>
-                      <p class="card-text "> {{ showSection.description }} </p>
+                      <h6 class="card-title"> {{ section.title }} </h6>
+                      <p class="card-text "> {{ section.description }} </p>
                     </div>
                   </div>
               </div>
@@ -61,11 +61,11 @@
                       <b-button @click="addSection()" variant="info">Add Article</b-button>
                     </div>
                     <div class="row">
-                        <div class="col-4">
-                            <div class="card card-style">
+                        <div class="col-4" v-for="articles in showSectionArticles.data" :key="articles._id">
+                            <div class="card card-style" @click="readArticle(articles.title)">
                               <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <h5 class="card-title"> {{articles.title}}</h5>
+                                <p class="card-text">{{articles.content  | truncate(80)}}</p>
                                 <div class="d-flex" style="display: flex; justify-content: space-between !important;">
                                   <p style="margin-bottom: 0px !important;">
                                     <i class="fas fa-book-open"></i> 124 Reads
@@ -83,191 +83,7 @@
                                 </div>
                               </div>
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open" ></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open" ></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open"></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open" ></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open"></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open"></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #048464; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open"></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card card-style">
-                              <div class="card-body card-styling">
-                                <h5 class="card-title">Taking Blood Samples</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
-                                  <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open" ></i> 124 Reads
-                                  </p>
-                                  <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
-                                      <i class="fas fa-pen"></i>
-                                      Edit
-                                    </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
-                                      <i class="fas fa-trash"></i>
-                                      Delete
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
+                        </div> 
                     </div>
                   </Tab>
                   <Tab name="Videos">
@@ -434,12 +250,19 @@ export default {
         Tab,
         Progress
     },
+    beforeMount(){
+       this.showSection
+    },
     computed: {
     showSection() {
       return this.$store.state.Sections.section
+    },
+    showSectionArticles() {
+      return this.$store.state.Sections.sectionArticles
     }
   },
   methods: {
+    // ...mapActions(['getSectionArticles']),
     addSection(){
       this.$router.push('/sections/sectioname/addsection')
     },
@@ -451,6 +274,9 @@ export default {
     },
     addQuestions(){
       this.$router.push('/sections/sectioname/quiz')
+    },
+    readArticle(title){
+      this.$router.push(`/sections/sectioname/${title}`)
     },
   }
 }
@@ -499,6 +325,7 @@ li{
 }
 .card-style p{
     font-size: 12px;
+
     }
 .topics{
     margin-top: 1.08rem ;
