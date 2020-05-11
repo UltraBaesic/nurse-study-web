@@ -12,11 +12,11 @@ export default {
         allSections: [],
         section: [],
         sectionArticles: [],
+        sectionMedia: [],
         newsection: [],
         newArticle: [],
         isFetching: false
     },
-
 
     //store mutations
     mutations: {
@@ -35,6 +35,10 @@ export default {
             state.sectionArticles = sectionArticles
           },
 
+        //to get all medias under a section
+        setSectionMedia(state, sectionMedia){
+            state.sectionMedia = sectionMedia
+        },
         //to add  new section 
         newSection(state, setnewsection){
           state.newsection = setnewsection
@@ -46,7 +50,6 @@ export default {
         }
         
     },
-
 
     //store actions
     actions: {
@@ -80,7 +83,6 @@ export default {
 
         //to get all articles under a section
         async getSectionArticles({ commit }, id) {
-            // let id = state.section.data[0]._id
             try{
                const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_articles/${id}`, {
                  headers: {'x-auth-token': userToken}
@@ -91,6 +93,18 @@ export default {
             }
         },
         
+        //to get all media video and audio
+        async getSectionMedia({ commit }, id){
+            try{
+                const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_media/${id}`, {
+                    headers: {'x-auth-token': userToken}
+                })
+                commit('setSectionMedia', response.data)
+            }catch(error){
+                throw new Error(error.response)
+            }
+        },
+
         // to post a new section
         submitSection : ({commit}, payload)=>{
             return new Promise((resolve, reject) =>{
@@ -143,9 +157,10 @@ export default {
 
     //store getters
     getters: {
-        getArticleInfo: (state) => (title) => {
-            return state.sectionArticles.data[0].find(sectionArticle => sectionArticle.title === title)
-          }
+        // getArticleInfo: (state) => (title) => {
+        //     return state.sectionArticles.data.find(sectionArticle => sectionArticle.title === title)
+        //   },
+        getArticleInfo: (state) => state.sectionArticles.data,  
     }
 }
 

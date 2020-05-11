@@ -103,78 +103,6 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
-                          <div class="card card-style">
-                            <video height="195" controls>
-                              <source src="../assets/vid/152 Creating text along a circle.mp4" type="video/mp4">
-                              <source src="movie.ogg" type="video/ogg">
-                              Your browser does not support the video tag.
-                            </video>
-                            <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="card card-style">
-                            <video height="195" controls>
-                              <source src="../assets/vid/152 Creating text along a circle.mp4" type="video/mp4">
-                              <source src="movie.ogg" type="video/ogg">
-                              Your browser does not support the video tag.
-                            </video>
-                            <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="card card-style">
-                            <video height="195" controls>
-                              <source src="../assets/vid/152 Creating text along a circle.mp4" type="video/mp4">
-                              <source src="movie.ogg" type="video/ogg">
-                              Your browser does not support the video tag.
-                            </video>
-                            <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="card card-style">
-                            <video height="195" controls>
-                              <source src="../assets/vid/152 Creating text along a circle.mp4" type="video/mp4">
-                              <source src="movie.ogg" type="video/ogg">
-                              Your browser does not support the video tag.
-                            </video>
-                            <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="card card-style">
-                            <video height="195" controls>
-                              <source src="../assets/vid/152 Creating text along a circle.mp4" type="video/mp4">
-                              <source src="movie.ogg" type="video/ogg">
-                              Your browser does not support the video tag.
-                            </video>
-                            <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="card card-style">
-                            <video height="195" controls>
-                              <source src="../assets/vid/152 Creating text along a circle.mp4" type="video/mp4">
-                              <source src="movie.ogg" type="video/ogg">
-                              Your browser does not support the video tag.
-                            </video>
-                            <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
-                            </div>
-                          </div>
-                        </div>
                     </div>
                   </Tab>
                   <Tab name="Audios">
@@ -259,6 +187,9 @@ export default {
     },
     showSectionArticles() {
       return this.$store.state.Sections.sectionArticles
+    },
+    showSectionMedia() {
+      return this.$store.state.Sections.sectionMedia
     }
   },
   methods: {

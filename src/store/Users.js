@@ -25,7 +25,7 @@ export default {
         //to get all the sections in the database
         async getAllUsers({ commit }) {
             try{
-               const response = await axios.get('https://nurse-study.herokuapp.com/users',{
+               const response = await axios.get('https://nurse-study-backend.herokuapp.com/users',{
                 headers: {
                     'x-auth-token': userToken
                    }
