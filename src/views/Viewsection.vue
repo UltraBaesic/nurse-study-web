@@ -182,14 +182,30 @@ export default {
        this.showSection
     },
     computed: {
+    //show the deatils of theselected section
     showSection() {
       return this.$store.state.Sections.section
     },
+
+    //get all the articles under the section
     showSectionArticles() {
       return this.$store.state.Sections.sectionArticles
     },
-    showSectionMedia() {
-      return this.$store.state.Sections.sectionMedia
+
+    //filter and get all the audios in the state.sectionMedia
+    showSectionAudio() {
+      this.$store.state.Sections.sectionMedia
+        let audioResult = [this.$store.getters.getSectionAudio.find((Audios) => Audios.title == "audio" )]
+        console.log(audioResult)
+        return audioResult
+    },
+
+    //filter and get all the audios in the state.sectionMedia
+    showSectionVideo() {
+      this.$store.state.Sections.sectionMedia
+        let videoResult = [this.$store.getters.getSectionAudio.find((Videos) => Videos.title == "video" )]
+        console.log(videoResult)
+        return videoResult
     }
   },
   methods: {

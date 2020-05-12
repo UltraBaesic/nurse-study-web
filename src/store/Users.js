@@ -10,6 +10,7 @@ export default {
     //store state
     state: {
         allUsers: [],
+        blockedUser: [],
         isFetching: false
     },
 
@@ -18,7 +19,14 @@ export default {
         //to get all the sections in into sections in store
         setUsers(state, users){
           state.allUsers = users
+        },
+
+        //to block an active User
+        setblockUser(state, blockedUser){
+            state.blockedUser = blockedUser
         }
+
+
     },
     //store actions
     actions: {
@@ -33,6 +41,22 @@ export default {
                commit('setUsers', response.data)
             }catch(error){
                throw new Error(error.response)
+            }
+        },
+
+        //to block an active user
+        async blockUser({ commit } , id){
+            console.log(id)
+            console.log(userToken)
+            try{
+                const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/block/${id}`, {
+                    headers: {
+                        'x-auth-token': userToken
+                    }
+                })
+                commit('setblockUser', response.data)
+            }catch(error){
+                throw new Error(error.response)
             }
         }
     }

@@ -39,9 +39,6 @@ computed: {
     // to get the article details using getters
     showArticle(){
         let topicname = this.$route.params.topicname
-        console.log(topicname)
-        // return topicname.length;
-        // return this.$store.getters.getArticleInfo(topicname)
         let answ = [this.$store.getters.getArticleInfo.find((sectionArticle) => sectionArticle.title == topicname )]
         console.log(answ)
         return answ

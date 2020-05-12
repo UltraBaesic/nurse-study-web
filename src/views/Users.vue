@@ -89,9 +89,9 @@
                         </div>
                     </td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.userSub }} </td>
+                    <td>{{ user.subscription }} </td>
                     <td>{{ user.created_on | fullDate }}</td>
-                    <td id="userAction" class="pr-2">
+                    <td id="userAction" class="pr-2" @click="blockUser(user._id)">
                         <i  class="fas fa-ban mr-1"></i> Block
                     </td>
                 </tr>
@@ -104,27 +104,31 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-methods: {
-    ...mapActions(['getAllUsers']),
-    getNow: function() {
-                    const today = new Date();
-                    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    const dateTime = date +' '+ time;
-                    this.timestamp = dateTime;
-                }
-},
-computed: {
-    Users() {
-      return this.$store.state.Users.allUsers
-    }
-  },
-created() {
+    methods: {
+        ...mapActions(['getAllUsers']),
+        getNow: function() {
+                        const today = new Date();
+                        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                        const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                        const dateTime = date +' '+ time;
+                        this.timestamp = dateTime;
+        },
+        blockUser(id){
+            console.log(id)
+            this.$store.dispatch('blockUser', id)
+        }
+    },
+    computed: {
+        Users() {
+        return this.$store.state.Users.allUsers
+        }
+    },
+    created() {
         setInterval(this.getNow, 1000);
-            },
-   async mounted() {
-     await this.getAllUsers()
-  }
+    },
+    async mounted() {
+        await this.getAllUsers()
+    }
 } 
 </script>
 
