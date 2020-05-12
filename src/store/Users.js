@@ -11,6 +11,7 @@ export default {
     state: {
         allUsers: [],
         blockedUser: [],
+        unblockedUser: [],
         isFetching: false
     },
 
@@ -24,6 +25,11 @@ export default {
         //to block an active User
         setblockUser(state, blockedUser){
             state.blockedUser = blockedUser
+        },
+
+        //to unblock an active User
+        setunblockUser(state, unblockedUser){
+            state.unblockedUser = unblockedUser
         }
 
 
@@ -58,6 +64,26 @@ export default {
             }catch(error){
                 throw new Error(error.response)
             }
-        }
+        },
+
+        //to unblock an active user
+        async unblockUser({ commit } , id){
+            console.log(id)
+            console.log(userToken)
+            try{
+                const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/unblock/${id}`, {
+                    headers: {
+                        'x-auth-token': userToken
+                    }
+                })
+                commit('setunblockUser', response.data)
+            }catch(error){
+                throw new Error(error.response)
+            }
+        },
+    },
+    getters: {
+        getActiveUsers: (state) => state.allUsers,  
+        getBlockedUsers: (state) => state.allUsers,
     }
 }

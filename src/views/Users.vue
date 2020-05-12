@@ -38,7 +38,7 @@
                         <p>Blocked Users</p>
                     </div>
                     <div class="stats-result">
-                        0
+                         {{activeUsers}}
                     </div>
                 </div>
             </div>
@@ -46,11 +46,11 @@
             <div class="card mr-3" style="width: 15rem;  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 ); border: none;">
                 <div class="card-body">
                     <div class="stat-header d-flex">
-                        <i class="fas fa-user-alt-slash mr-2" style="font-size:15px; color: #9A2804"></i>
-                        <p>Blocked Users</p>
+                        <i class="fas fa-user-check mr-2" style="font-size:15px; color: green"></i>
+                        <p>Active Users</p>
                     </div>
                     <div class="stats-result">
-                        0
+                        {{activeUsers}}
                     </div>
                 </div>
             </div>
@@ -91,8 +91,17 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.subscription }} </td>
                     <td>{{ user.created_on | fullDate }}</td>
-                    <td id="userAction" class="pr-2" @click="blockUser(user._id)">
-                        <i  class="fas fa-ban mr-1"></i> Block
+                    <td id="userAction" v-if="user.status == 'active'" class="pr-3" @click="blockUser(user._id)">
+                        <button 
+                            style="color:green; background-color: #C0E3C1; border: 1px solid #4CAF50; cursor: pointer; border-radius: 5px; font-style: light;"> 
+                            Active 
+                        </button> 
+                    </td>
+                    <td id="userAction" v-else class="pr-2" @click="unblockUser(user._id)">
+                        <button 
+                            style="color:green; background-color: #C0E3C1; border: 1px solid red; cursor: pointer; border-radius: 5px; font-style: light;"> 
+                            Blocked 
+                        </button>
                     </td>
                 </tr>
             </table>
@@ -116,12 +125,27 @@ export default {
         blockUser(id){
             console.log(id)
             this.$store.dispatch('blockUser', id)
-        }
+        },
+        unblockUser(id){
+            console.log(id)
+            this.$store.dispatch('unblockUser', id)
+        },
     },
     computed: {
         Users() {
         return this.$store.state.Users.allUsers
-        }
+        },
+        //filter and get all the audios in the state.sectionMedia
+        activeUsers() {
+            let activeUsers = this.$store.getters.getActiveUsers.filter((activeUsers) => activeUsers.status == "active" ).length
+            console.log(activeUsers)
+            return activeUsers
+        },
+        blockedUsers() {
+            let blockedUsers = [this.$store.getters.getActiveUsers.find((activeUsers) => activeUsers.status == "active" )]
+            console.log(blockedUsers)
+            return blockedUsers
+        },
     },
     created() {
         setInterval(this.getNow, 1000);
