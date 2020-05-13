@@ -110,7 +110,7 @@
                       <b-button @click="addAudio()" variant="info">Add Audio</b-button>
                     </div>
                     <div class="row">
-                      <div v-for="i in 8" :key="i" class="col-4">
+                      <div v-for="i in 1" :key="i" class="col-4">
                           <div class="card audio-card card-style">
                             <div class="card-body">
                               <h6 class="card-title" style="margin-bottom: 0px !important; font-size: 14px;">Things to do when going treating contaminable infections</h6>
@@ -195,7 +195,7 @@ export default {
     //filter and get all the audios in the state.sectionMedia
     showSectionAudio() {
       this.$store.state.Sections.sectionMedia
-        let audioResult = [this.$store.getters.getSectionAudio.find((Audios) => Audios.title == "audio" )]
+        let audioResult = [this.$store.getters.getSectionAudio.filter((Audios) => Audios.title == "audio" )]
         console.log(audioResult)
         return audioResult
     },

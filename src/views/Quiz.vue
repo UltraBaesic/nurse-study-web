@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="options col-6 mb-4">
                         <!-- <span>A.</span> -->
-                        <b-form-textarea id="textarea" v-model="text" placeholder="A" rows="2" max-rows="2"></b-form-textarea>
+                        <b-form-textarea id="textarea" v-model="optionA" placeholder="A" rows="2" max-rows="2"></b-form-textarea>
                         <div class="ml-4 mt-1 la-radio">
                             <input class="form-check-input " type="radio" name="correctAnswer" id="option1" value="A" >
                             <label class="form-check-label " for="option1">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="options col-6 mb-4">
                         <!-- <span>B.</span> -->
-                        <b-form-textarea id="textarea" v-model="text" placeholder="B" rows="2" max-rows="2"></b-form-textarea>
+                        <b-form-textarea id="textarea" v-model="optionB" placeholder="B" rows="2" max-rows="2"></b-form-textarea>
                         <div class="ml-4 mt-1 la-radio">
                             <input class="form-check-input" type="radio" name="correctAnswer" id="option2" value="B" >
                             <label class="form-check-label" for="option2">
@@ -48,9 +48,9 @@
                     </div>
                     <div class="options col-6 mb-4">
                         <!-- <span>C.</span> -->
-                        <b-form-textarea id="textarea" v-model="text" placeholder="C" rows="2" max-rows="2"></b-form-textarea>
+                        <b-form-textarea id="textarea" v-model="optionC" placeholder="C" rows="2" max-rows="2"></b-form-textarea>
                         <div class="ml-4 mt-1 la-radio">
-                            <input class="form-check-input" type="radio" name="correctAnswer" id="option3" value="C" >
+                            <input class="form-check-input" type="radio" name="correctAnswer" id="option" value="C" >
                             <label class="form-check-label" for="option3">
                               Correct Answer
                             </label>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="options col-6 mb-4">
                         <!-- <span>D.</span> -->
-                        <b-form-textarea id="textarea" v-model="text" placeholder="D" rows="2" max-rows="2"></b-form-textarea>
+                        <b-form-textarea id="textarea" v-model="optionD" placeholder="D" rows="2" max-rows="2"></b-form-textarea>
                         <div class="ml-4  mt-1 la-radio">
                             <input class="form-check-input" type="radio" name="correctAnswer" id="option4" value="D" checked>
                             <label class="form-check-label" for="option4">
@@ -82,16 +82,30 @@ export default {
 data (){
   return {
     addedQuestions: [],
-    newQuestion: {
-      "question": "",
-      "options": {
-        "A": "",
-        "B": "",
-        "C": "",
-        "D": ""
-      },
-      correctAnswer: "", 
-    }
+    section_id: "",
+    question: "",
+    correct_option: "", 
+    optionA: "",
+    optionB: "",
+    optionC: "",
+    optionD: "",
+    correctAnswer: "", 
+  }
+},
+method: {
+  createQuiz(){
+  let  newQuestion= {
+        "section_id": "5eb5d87b0f4ba70017769725",
+        "options": {
+          "A": "Symphysis pubis",
+          "B": "Halfway between umbilicus and xiphisternum",
+          "C": "Xiphisternum",
+          "D": "Umbilicus"
+        }, 
+        "correct_option": "C", 
+        "question": "At 36 weeks gestation where would you expect to find the uterine fundus??"
+      }
+      this.$store.dispatch('addQuestion', newQuestion)
   }
 }
 }

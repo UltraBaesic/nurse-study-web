@@ -157,9 +157,6 @@ export default {
 
     //store getters
     getters: {
-        // getArticleInfo: (state) => (title) => {
-        //     return state.sectionArticles.data.find(sectionArticle => sectionArticle.title === title)
-        //   },
         getArticleInfo: (state) => state.sectionArticles.data,  
         getSectionAudio: (state) => state.sectionMedia.data,
         getSectionVideo: (state) => state.sectionMedia.data
