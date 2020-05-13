@@ -15,6 +15,7 @@ export default {
         sectionMedia: [],
         newsection: [],
         newArticle: [],
+        newQuestion: [],
         isFetching: false
     },
 
@@ -39,6 +40,7 @@ export default {
         setSectionMedia(state, sectionMedia){
             state.sectionMedia = sectionMedia
         },
+
         //to add  new section 
         newSection(state, setnewsection){
           state.newsection = setnewsection
@@ -47,6 +49,11 @@ export default {
         //to add new articles
         addArticle(state, setNewArticle){
             state.newArticle = setNewArticle
+        },
+
+        //to add new question
+        addQuestion(state, setNewQuestion){
+            state.newQuestion = setNewQuestion
         }
         
     },
@@ -145,6 +152,32 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/article', load, head)
                 .then((data) => {
                     commit('addArticle', data)
+                    resolve(data)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+            })
+        },
+
+        //to post a new question
+        addQuestion: ({commit, state}, questionPayload) =>{
+            return new Promise((resolve, reject) =>{
+                let head = {
+                    headers: {'x-auth-token': userToken}
+                };
+                let ID = state.section.data[0]._id
+                console.log('this is the ID ' +ID)
+                let load = {
+                    "question" : questionPayload.question,
+                    "options" : questionPayload.options,
+                    "section_id" : ID,
+                    "correct_option" : questionPayload.correct_option,
+                }
+                console.log(load)
+                axios.post('https://nurse-study-backend.herokuapp.com/content/question', load, head)
+                .then((data) => {
+                    commit('addQuestion', data)
                     resolve(data)
                 })
                 .catch((error) => {

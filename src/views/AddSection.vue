@@ -85,9 +85,6 @@ import Editor from '@tinymce/tinymce-vue'
         
         console.log(payload)
         this.$store.dispatch('newArticle', payload)
-        .then(() => {
-          this.clearFields()
-        })
       },
    },
  }
