@@ -133,17 +133,17 @@
                             <div class="card-body card-styling">
                               <div class="questions px-1">
                                 <div class="question">
-                                    <h6>Question {{ i++ }}</h6>
-                                    <p> What is the name of the president of the united states of America?</p>
+                                    <h6>Question {{ 1 }}</h6>
+                                    <p>{{ questions.question }}</p>
                                 </div>
                                 <div class="options">
-                                    <p>A. President Olusegun Obasanjo</p>
-                                    <p>B. President Barrack Obama</p>
-                                    <p>C. President Donald Trump</p>
-                                    <p>D. President Hillary Clinton</p>
+                                    <p>A. {{ questions.options.A }}</p>
+                                    <p>B. {{ questions.options.B }}</p>
+                                    <p>C. {{ questions.options.C }}</p>
+                                    <p>D. {{ questions.options.D }}</p>
                                 </div>
                                 <div class="answer d-flex justify-content-between">
-                                  Answer: c
+                                  Answer: {{ questions.correct_option }}
                                    <div class="d-flex justify-content-end">
                                   <p class= "mr-4" style="font-size: 12px; color: #04809A;">
                                     <i class="fas fa-pen"></i>
@@ -172,6 +172,11 @@ import {Tabs, Tab} from 'vue-tabs-component';
 import Progress from '../components/Progress.vue';
 
 export default {
+    data(){
+      return{
+        i : 1, 
+      }
+    },
     components: {
         Tabs,
         Tab,

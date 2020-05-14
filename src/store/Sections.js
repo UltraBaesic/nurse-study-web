@@ -16,6 +16,7 @@ export default {
         sectionMedia: [],
         newsection: [],
         newArticle: [],
+        newVideo: [],
         newQuestion: [],
         isFetching: false
     },
@@ -55,6 +56,11 @@ export default {
         //to add new articles
         addArticle(state, setNewArticle){
             state.newArticle = setNewArticle
+        },
+
+        //to add new video
+        addVideo(state, setNewVideo){
+            state.newVideo = setNewVideo
         },
 
         //to add new question
@@ -109,7 +115,7 @@ export default {
         //to get all questions under a section
         async getSectionQuestions({ commit }, id) {
             try{
-               const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_quizzes/${id}`, {
+               const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_questions/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
                commit('setSectionQuestions', response.data)
@@ -170,6 +176,31 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/article', load, head)
                 .then((data) => {
                     commit('addArticle', data)
+                    resolve(data)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+            })
+        },
+        //to post a new video
+        newVideo: ({commit, state}, payload) =>{
+            return new Promise((resolve, reject) =>{
+                let head = {
+                    headers: {'x-auth-token': userToken}
+                };
+                let ID = state.section.data[0]._id
+                console.log('this is the ID' +ID)
+                console.log(state.section)
+                let load = {
+                    "title" : payload.title,
+                    "link" : payload.link,
+                    "section_id" : ID,
+                    "type" : "video"
+                }
+                axios.post('https://nurse-study-backend.herokuapp.com/content/media', load, head)
+                .then((data) => {
+                    commit('addVideo', data)
                     resolve(data)
                 })
                 .catch((error) => {

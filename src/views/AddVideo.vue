@@ -19,12 +19,16 @@
                 <div class="uplaod-option mb-3">
                     <div class="form-group mb-4">
                         <label for="title"> Video Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Lecture Title">
+                        <input type="text" v-model="title" class="form-control" id="title" placeholder="Lecture Title">
                     </div>
-                    <b-form-file v-model="file" accept="video/*" ref="file-input" class="mb-2"></b-form-file>
+                    <div class="form-group mb-4">
+                        <label for="title"> Video Link</label>
+                        <input type="text" v-model="link" class="form-control" id="title" placeholder="Lecture Title">
+                    </div>
+                    
                 </div>
                 <div class="uplaod-option mb-3">
-                    <button style="background-color: #04809A; border: none;" class="btn btn-primary" type="submit">Add Video</button>
+                    <button style="background-color: #04809A; border: none;" @click="postNewVideo" class="btn btn-primary" type="submit">Add Video</button>
                 </div>
               </div>
           </div>
@@ -34,7 +38,24 @@
 
 <script>
 export default {
-
+    data(){
+        return{
+            title : "",
+            link : ""
+        }
+    },
+    methods: {
+      postNewVideo(event) {
+        event.preventDefault()
+        let payload = {
+            "title" : this.title,
+            "content" : this.link,
+        }
+        
+        console.log(payload)
+        this.$store.dispatch('newVideo', payload)
+      },
+}
 }
 </script>
 
