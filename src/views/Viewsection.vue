@@ -2,7 +2,7 @@
   <div>
       <section class="header">
           <div>
-              <p>
+              <p @click="$router.go(-1)">
                   <i class="fas fa-angle-double-left"></i>
                   Back to Sections
               </p>
@@ -128,12 +128,12 @@
                       <b-button @click="addQuestions()" variant="info">Add Questions</b-button>
                     </div>
                     <div class="row">
-                      <div class="col-6" v-for="questions in showSectionQuestions.data " :key="questions._id">
+                      <div class="col-6" v-for="(questions, i) in showSectionQuestions.data " :key="questions._id" :i="i">
                           <div class="card card-style">
                             <div class="card-body card-styling">
                               <div class="questions px-1">
                                 <div class="question">
-                                    <h6>Question {{ 1 }}</h6>
+                                    <h6>Question {{ ++i }}</h6>
                                     <p>{{ questions.question }}</p>
                                 </div>
                                 <div class="options">

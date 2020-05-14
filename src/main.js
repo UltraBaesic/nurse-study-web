@@ -3,6 +3,7 @@ import App from './App.vue'
 import { router } from './router'
 import store from './store'
 import axios from 'axios'
+import VueSimpleAlert from "vue-simple-alert";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import moment from 'moment'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -13,6 +14,7 @@ Vue.config.productionTip = false
 Vue.use(IconsPlugin)
 Vue.use(BootstrapVue)
 Vue.use(axios)
+Vue.use(VueSimpleAlert);
 
 
 Vue.filter('truncate', function (string, number) {

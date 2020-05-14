@@ -2,7 +2,7 @@
   <main class="new-sub-section">
       <section class="mb-4">
           <div>
-              <p style="font-size: 16px;">
+              <p @click="$router.go(-1)" style="font-size: 16px;">
                   <i class="fas fa-angle-double-left"></i>
                   Back
               </p>

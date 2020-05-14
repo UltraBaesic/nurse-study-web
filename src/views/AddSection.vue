@@ -2,7 +2,7 @@
   <main class="new-sub-section">
       <section class="mb-4">
           <div>
-              <p @click="goBack()" style="font-size: 16px; cursor:pointer;">
+              <p @click="$router.go(-1)" style="font-size: 16px; cursor:pointer;">
                   <i class="fas fa-angle-double-left"></i>
                   Back
               </p>
@@ -69,11 +69,6 @@ import Editor from '@tinymce/tinymce-vue'
        category: "Introduction",
      }
    },
-  //  computed:{
-  //    ID(){
-  //      return this.$store.getters.getSectionId
-  //    }
-  //  },
    methods: {
       createNewArticle(event) {
         event.preventDefault()
@@ -82,10 +77,16 @@ import Editor from '@tinymce/tinymce-vue'
             "content" : this.content,
             "category" : this.category,
         }
-        
-        console.log(payload)
         this.$store.dispatch('newArticle', payload)
+         .then(() => {
+          this.$alert("Your Article has been added");
+          this.clearFields()
+    })
       },
+      clearFields() {
+      this.title = "",
+      this.content = ""
+  }
    },
  }
 </script>

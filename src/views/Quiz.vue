@@ -2,7 +2,7 @@
   <main>
       <section>
           <div>
-              <p style="font-size: 16px;">
+              <p @click="$router.go(-1)" style="font-size: 16px;">
                   <i class="fas fa-angle-double-left"></i>
                   Back
               </p>
@@ -107,6 +107,18 @@ methods: {
       }
       console.log(newQuestion)
       this.$store.dispatch('addQuestion', newQuestion)
+      .then(() => {
+      this.$alert("Question Added");
+      this.clearFields()
+    })
+  },
+    clearFields() {
+      this.question = "",
+      this.optionA = "",
+      this.optionB = "",
+      this.optionC = "",
+      this.optionD = "",
+      this.correctAnswer = ""
   }
 }
 }
