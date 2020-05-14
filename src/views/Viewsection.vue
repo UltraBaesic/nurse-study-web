@@ -91,15 +91,14 @@
                       <b-button @click="addVideo()" variant="info">Add Video</b-button>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-4" v-for="videos in showSectionVideo[0]" :key="videos._id">
                           <div class="card card-style">
                             <video height="195" controls>
-                              <source src="../assets/vid/152 Creating text along a circle.mp4" type="video/mp4">
-                              <source src="movie.ogg" type="video/ogg">
+                              <source :src="videos.link" type="video/mp4">
                               Your browser does not support the video tag.
                             </video>
                             <div class="card-body card-styling">
-                              <h6 class="card-title">Lecture on how to draw a circle</h6>
+                              <h6 class="card-title">{{videos.title}}</h6>
                             </div>
                           </div>
                         </div>
@@ -129,7 +128,7 @@
                       <b-button @click="addQuestions()" variant="info">Add Questions</b-button>
                     </div>
                     <div class="row">
-                      <div class="col-6" v-for="i in 20 " :key="i.id">
+                      <div class="col-6" v-for="questions in showSectionQuestions.data " :key="questions._id">
                           <div class="card card-style">
                             <div class="card-body card-styling">
                               <div class="questions px-1">
@@ -192,6 +191,11 @@ export default {
       return this.$store.state.Sections.sectionArticles
     },
 
+    //get all the questions under the section
+    showSectionQuestions() {
+      return this.$store.state.Sections.sectionQuestions
+    },
+
     //filter and get all the audios in the state.sectionMedia
     showSectionAudio() {
       this.$store.state.Sections.sectionMedia
@@ -203,7 +207,7 @@ export default {
     //filter and get all the audios in the state.sectionMedia
     showSectionVideo() {
       this.$store.state.Sections.sectionMedia
-        let videoResult = [this.$store.getters.getSectionAudio.find((Videos) => Videos.title == "video" )]
+        let videoResult = [this.$store.getters.getSectionVideo.filter((Videos) => Videos.type == "video" )]
         console.log(videoResult)
         return videoResult
     }

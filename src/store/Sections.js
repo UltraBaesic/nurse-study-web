@@ -12,6 +12,7 @@ export default {
         allSections: [],
         section: [],
         sectionArticles: [],
+        sectionQuestions: [],
         sectionMedia: [],
         newsection: [],
         newArticle: [],
@@ -34,6 +35,11 @@ export default {
         //to get all articles under a section
         setSectionArtcles(state, sectionArticles){
             state.sectionArticles = sectionArticles
+        },
+
+        //to get all questions under a section
+        setSectionQuestions(state, sectionQuestions){
+            state.sectionQuestions = sectionQuestions
           },
 
         //to get all medias under a section
@@ -62,7 +68,7 @@ export default {
     actions: {
         //to get all the sections in the database
         async getAllSections({ commit }) {
-            console.log(userToken)
+            // console.log(userToken)
             try{
                const response = await axios.get('https://nurse-study-backend.herokuapp.com/content/sections', {
                      headers: {
@@ -70,7 +76,7 @@ export default {
                     }
                })
                commit('setSections', response.data.data)
-               console.log(response.data.data);
+            //    console.log(response.data.data);
             }catch(error){ 
                throw new Error(error.response)
             }
@@ -95,6 +101,18 @@ export default {
                  headers: {'x-auth-token': userToken}
                })
                commit('setSectionArtcles', response.data)
+            }catch(error){
+               throw new Error(error.response)
+            }
+        },
+        
+        //to get all questions under a section
+        async getSectionQuestions({ commit }, id) {
+            try{
+               const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_quizzes/${id}`, {
+                 headers: {'x-auth-token': userToken}
+               })
+               commit('setSectionQuestions', response.data)
             }catch(error){
                throw new Error(error.response)
             }

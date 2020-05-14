@@ -104,6 +104,8 @@ methods: {
   showSectionInfo(title, id){
       this.$store.dispatch( 'loadSectionsInfo', id )
       this.$store.dispatch( 'getSectionArticles', id )
+      this.$store.dispatch( 'getSectionQuestions', id )
+      this.$store.dispatch( 'getSectionMedia', id )
       this.$router.push( {path: `/sections/${title}`} )
     },
     getNow: function() {
