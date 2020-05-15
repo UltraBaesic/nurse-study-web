@@ -1,7 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 
 Vue.use(Router)
+
+function guardMyroute(to, from, next){
+let userAuth = store.state.users.isAuthenticated
+if(localStorage.getItem('NurseToken'))
+    userAuth = true;
+ else
+    userAuth = false;
+ if(userAuth) 
+ {
+  next();
+ } 
+ else
+ {
+  next('/');
+ }
+}
 
 export const router = new Router({
     mode: 'history',
@@ -19,6 +36,8 @@ export const router = new Router({
         {
             path: '/dashboard',
             component: () => import('./layouts/DashboardLayout.vue'),
+            beforeEnter : guardMyroute,
+            meta: {},
             children: [
                 {
                     path: '',
@@ -71,4 +90,4 @@ export const router = new Router({
             ]
         }
     ]
-})
+});

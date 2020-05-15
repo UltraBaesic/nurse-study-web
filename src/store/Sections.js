@@ -24,8 +24,16 @@ export default {
     //store mutations
     mutations: {
         //to get all the sections in into sections in store
-        setSections(state, section){
-          state.allSections = section
+        setSections(state, sections){
+          state.allSections = sections
+        },
+
+        startRequest(state){
+            state.isFetching = true
+        },
+
+        endRequest(state){
+            state.isFetching = false
         },
 
         //to get all the sections in into sections in store
@@ -74,7 +82,7 @@ export default {
     actions: {
         //to get all the sections in the database
         async getAllSections({ commit }) {
-            // console.log(userToken)
+            commit('startRequest')
             try{
                const response = await axios.get('https://nurse-study-backend.herokuapp.com/content/sections', {
                      headers: {
@@ -82,32 +90,40 @@ export default {
                     }
                })
                commit('setSections', response.data.data)
+               commit('endRequest')
             //    console.log(response.data.data);
             }catch(error){ 
+               commit('endRequest')
                throw new Error(error.response)
             }
         },
         
          //to get one section in the database
         async loadSectionsInfo({ commit }, id) {
+            commit('startRequest')
             try{
                const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
                commit('setSection', response.data)
+               commit('endRequest')
             }catch(error){
+                commit('endRequest')
                throw new Error(error.response)
             }
         },
 
         //to get all articles under a section
         async getSectionArticles({ commit }, id) {
+            commit('startRequest')
             try{
                const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_articles/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
                commit('setSectionArtcles', response.data)
+               commit('endRequest')
             }catch(error){
+                commit('endRequest')
                throw new Error(error.response)
             }
         },      
@@ -126,30 +142,37 @@ export default {
         
         //to get all questions under a section
         async getSectionQuestions({ commit }, id) {
+            commit('startRequest')
             try{
                const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_questions/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
                commit('setSectionQuestions', response.data)
+               commit('endRequest')
             }catch(error){
+                commit('endRequest')
                throw new Error(error.response)
             }
         },
         
         //to get all media video and audio
         async getSectionMedia({ commit }, id){
+            commit('startRequest')
             try{
                 const response = await axios.get(`https://nurse-study-backend.herokuapp.com/content/section_media/${id}`, {
                     headers: {'x-auth-token': userToken}
                 })
                 commit('setSectionMedia', response.data)
+                commit('endRequest')
             }catch(error){
+                commit('endRequest')
                 throw new Error(error.response)
             }
         },
 
         // to post a new section
         submitSection : ({commit}, payload)=>{
+            commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
                     headers: {'x-auth-token': userToken}
@@ -162,9 +185,11 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/section', load , head)
                 .then((data) =>{
                     commit('newSection', data)
+                    commit('endRequest')
                     resolve(data)
                 })
                 .catch((error) =>{
+                    commit('endRequest')
                     reject(error)
                 })
             })
@@ -172,6 +197,7 @@ export default {
         
         //to post a new article
         newArticle: ({commit, state}, newpayload) =>{
+            commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
                     headers: {'x-auth-token': userToken}
@@ -188,15 +214,18 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/article', load, head)
                 .then((data) => {
                     commit('addArticle', data)
+                    commit('endRequest')
                     resolve(data)
                 })
                 .catch((error) => {
+                    commit('endRequest')
                     reject(error)
                 })
             })
         },
         //to post a new video
-        newVideo: ({commit, state}, payload) =>{
+        newVideo: ({commit, state}, payload) => {
+            commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
                     headers: {'x-auth-token': userToken}
@@ -213,9 +242,11 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/media', load, head)
                 .then((data) => {
                     commit('addVideo', data)
+                    commit('endRequest')
                     resolve(data)
                 })
                 .catch((error) => {
+                    commit('endRequest')
                     reject(error)
                 })
             })
@@ -223,6 +254,7 @@ export default {
 
         //to post a new question
         addQuestion: ({commit, state}, questionPayload) =>{
+            commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
                     headers: {'x-auth-token': userToken}
@@ -239,6 +271,7 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/question', load, head)
                 .then((data) => {
                     commit('addQuestion', data)
+                    commit('endRequest')
                     resolve(data)
                 })
                 .catch((error) => {

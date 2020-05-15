@@ -6,11 +6,15 @@ import axios from 'axios'
 import VueSimpleAlert from "vue-simple-alert";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import moment from 'moment'
+import VueToastr2 from 'vue-toastr-2'
+window.toastr = require('toastr')
+import 'vue-toastr-2/dist/vue-toastr-2.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
-
+ 
+Vue.use(VueToastr2)
 Vue.use(IconsPlugin)
 Vue.use(BootstrapVue)
 Vue.use(axios)

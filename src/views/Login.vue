@@ -23,7 +23,14 @@
               <span class="floating-label">Password</span>
             </div>
             <div class="forgot-password">Forgot Password</div>
-            <button type="submit" class="btn mt-4 submit-button btn-md btn-primary" @click='handleLogin'>Submit</button>
+            <button
+              type="submit"
+              class="btn mt-4 submit-button btn-md btn-primary"
+              @click='handleLogin'
+              :disabled="disabled"
+            >
+              {{ this.users.isFetching ? 'Loading...' : 'Submit'}}
+            </button>
           </form>
        </div>
       </div>
@@ -32,7 +39,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState, mapActions } from "vuex";
 // eslint-disable-line
 export default {
   data(){
@@ -41,32 +48,45 @@ export default {
         email:'',
         password: ''
       },
-      errors: []
+      errors: [],
+      submitted: false,
+      disabled: false
     }
   },
+  watch: {
+    user: {
+      deep: true,
+      immediate: true,
+      handler(x){
+        if(x.password === ''){
+          this.disabled = true;
+        } else {
+          this.disabled = false
+        }
+      }
+    }
+  },
+  computed:{
+    ...mapState(["users"])
+  },
   methods: {
+    ...mapActions(["adminLogin"]),
    async handleLogin(e) {
+     this.submitted = true;
       e.preventDefault()
 
       const payload = {
         email: this.user.email,
         password: this.user.password
       }
+      this.adminLogin(payload)
+        .then(async () => {
+          this.clearFields();
+          this.$router.push('/dashboard');
+          this.$toastr.success('Logged in successfully!!!');
 
-      let url = 'https://nurse-study-backend.herokuapp.com/auth/login'
-      console.log(url)
-      axios.post(url, payload)
-        .then(res => {
-           console.log(res.data.code);
-          if(res.data.code == 200) {
-            console.log(res);
-            const token = res.data.token.token;
-            console.log(res.data.token.token);
-            localStorage.setItem('Nurse-Token', token)
-            this.clearFields()
-            this.$router.push('/dashboard')
-          }
         })
+     
      },
      clearFields() {
        this.user.email= '',
@@ -175,6 +195,8 @@ export default {
 #home .submit-button{
   width: 200px;
   background-color: #04809A;
+  box-shadow: none !important;
+  outline: none !important;
   border: none;
   padding: 12px 7px;
   font-size: 12px;

@@ -1,27 +1,26 @@
 <template>
   <main id="sections">
-    <section class="page-name" v-if="showSection.length === 0">
-      <div class="d-flex header">
-        <div>
-            <h6>Topics</h6>
-            <p>{{ timestamp | todaysDate }}</p>
-        </div>
-      </div> 
-      <div class="d-flex justify-content-center align-item-center" style="margin-top: 100px;">
-        <div class="text-center">
+    <div class="page-name" v-if="this.$store.state.Sections.allSections.length === 0">
+      <div class="d-flex justify-content-center align-items-center loader">
+        <Circle8 />
+        <!-- <div class="text-center">
           <img src="../assets/img/product.png" style="height: 5rem; margin-bottom: 20px;">
           <p style="color: #9F9F9F; font-size: 12px;">You don't have any Topic added yet,<br/> click on button to Start</p>
-          <button style="background-color: #04809A;  border: none;" class="btn btn-primary" v-b-modal.my-modal type="submit">Add Topic</button>
-        </div>
+          <button style="background-color: #04809A;  border: none;" class="btn btn-primary" type="submit">Add Topic</button>
+        </div> -->
       </div>
-    </section>
+    </div>
 
     <div v-else>
+      <!-- <div class="text-center">
+          <img src="../assets/img/product.png" style="height: 5rem; margin-bottom: 20px;">
+          <p style="color: #9F9F9F; font-size: 12px;">You don't have any Topic added yet,<br/> click on button to Start</p>
+          <button style="background-color: #04809A;  border: none;" class="btn btn-primary" type="submit">Add Topic</button>
+        </div> -->
       <section class="page-name">
           <div class="d-flex header">
             <div>
                 <h6>Topics</h6>
-                <p>{{ timestamp | todaysDate }}</p>
             </div>          
             <div class=" d-flex justify-content-end">
               <div class="right-page-name d-flex ">
@@ -63,10 +62,10 @@
             </b-modal>
           </div>
       </section>
-      <section class="main-section">
+      <section class="main-section" v-if="this.showSection">
 
           <div class="main-body">
-              <div class="row .mx-lg-n5 ">
+              <div class="row .mx-lg-n5 mt-5">
                 <div class="col-3" v-for="section in showSection" :key="section._id">
                     <div class="card card-style mb-3" @click="showSectionInfo(section.title, section._id )">
                       <img v-if="section.image_link != null " :src="section.image_link" class="card-img-top" alt="...">
@@ -87,8 +86,12 @@
 <script>
 
 import { mapActions } from 'vuex'
+import { Circle8 } from 'vue-loading-spinner'
 
 export default {
+  components: {
+    Circle8
+  },
 data(){
   return {
     sectionName: '',
@@ -100,21 +103,21 @@ data(){
   }
 },
 methods: {
-  ...mapActions(['getAllSections']),
+  ...mapActions([
+    'getAllSections',
+    'submitSection',
+    'loadSectionsInfo',
+    'getSectionArticles',
+    'getSectionQuestions',
+    'getSectionMedia'
+    ]),
   showSectionInfo(title, id){
-      this.$store.dispatch( 'loadSectionsInfo', id )
-      this.$store.dispatch( 'getSectionArticles', id )
-      this.$store.dispatch( 'getSectionQuestions', id )
-      this.$store.dispatch( 'getSectionMedia', id )
+      this.loadSectionsInfo(id)
+      this.getSectionArticles(id)
+      this.getSectionQuestions(id)
+      this.getSectionMedia(id)
       this.$router.push( {path: `/sections/${title}`} )
     },
-    getNow: function() {
-                    const today = new Date();
-                    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    const dateTime = date +' '+ time;
-                    this.timestamp = dateTime;
-                },
 
   handleSubmit(event) {
     event.preventDefault()
@@ -123,9 +126,7 @@ methods: {
         "description" : this.sectionDesc,
         "image_link" : this.sectionImg
     }
-    
-    console.log(payload)
-    this.$store.dispatch('submitSection', payload)
+    this.submitSection( payload)
     .then(() => {
       if(this.$store.state.Section.newsection == payload){
         this.clearFields()
@@ -135,13 +136,13 @@ methods: {
   },
 
   clearFields() {
-      this.sectionName = "",
-      this.sectionDesc = "",
-      this.sectionImg = ""
+    this.sectionName = "",
+    this.sectionDesc = "",
+    this.sectionImg = ""
   },
   },
   created(){
-      setInterval(this.getNow, 1000);
+    setInterval(this.getNow, 1000);
   },
 updated(){
     this.$store.commit('setSections')
@@ -152,38 +153,43 @@ computed: {
       return this.$store.state.Sections.allSections
     }
   },
-async mounted() {
-     await this.getAllSections()
-     }
+  async mounted() {
+    await this.getAllSections();
+  }
 } 
 </script>
 
 <style>
+
+.loader {
+  padding: 15rem;
+}
  .header{
      display: flex;
      justify-content: space-between;
    }   
-    .page-name h6{
-      font-weight: 700;
-      color: #292929;
-    }
-    .page-name p{
-      font-weight: 500;
-      color: #9F9F9F;
-      font-size: 12px;
-      margin-top: -8px;
-    }
-    .card-style{
-      border: none;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
-    }
-    .card-style p{
-        font-size: 12px;
-        color: #9F9F9F;
-    }
-    .card-style h5{
-        color: #292929;
-    }
+  .page-name h6{
+    font-weight: 700;
+    color: #292929;
+  }
+  .page-name p{
+    font-weight: 500;
+    color: #9F9F9F;
+    font-size: 12px;
+    margin-top: -8px;
+  }
+  .card-style{
+    border: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+  }
+  .card-style p{
+    font-size: 12px;
+    color: #9F9F9F;
+  }
+  .card-style h5{
+    color: #292929;
+  }
     .card-style img{
       height: 120px;
       object-fit: cover;

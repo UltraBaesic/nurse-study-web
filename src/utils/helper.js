@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const nurseToken = localStorage.getItem('Nurse-Token')
+const nurseToken = localStorage.getItem('NurseToken')
 
 var userToken = axios.defaults.headers.common['Authorization'] = nurseToken
 
