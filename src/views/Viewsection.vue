@@ -71,11 +71,11 @@
                                     <i class="fas fa-book-open"></i> 124 Reads
                                   </p>
                                   <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; color: #04809A; margin-bottom: 0px !important;">
+                                    <p class= "mr-4" style="font-size: 12px; cursor: pointer; color: #04809A; margin-bottom: 0px !important;">
                                       <i class="fas fa-pen"></i>
                                       Edit
                                     </p>
-                                    <p class= "" style="font-size: 12px; color: #9A2804; margin-bottom: 0px !important;">
+                                    <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-bottom: 0px !important;" @click="deleteArticle(articles._id)">
                                       <i class="fas fa-trash"></i>
                                       Delete
                                     </p>
@@ -94,7 +94,7 @@
                         <div class="col-4" v-for="videos in showSectionVideo[0]" :key="videos._id">
                           <div class="card card-style">
                             <video height="195" controls>
-                              <source :src="videos.link" type="video/mp4">
+                              <source src="https://drive.google.com/open?id=1T1vqS1nBGO-ZkE7hqbLS6CAz3a_SSLGC" type="video/mp4">
                               Your browser does not support the video tag.
                             </video>
                             <div class="card-body card-styling">
@@ -173,9 +173,9 @@ import Progress from '../components/Progress.vue';
 
 export default {
     data(){
-      return{
-        i : 1, 
-      }
+        return{
+          i : 1, 
+        }
     },
     components: {
         Tabs,
@@ -183,59 +183,63 @@ export default {
         Progress
     },
     beforeMount(){
-       this.showSection
+        this.showSection
     },
+
     computed: {
-    //show the deatils of theselected section
-    showSection() {
-      return this.$store.state.Sections.section
-    },
+        //show the deatils of theselected section
+        showSection() {
+          return this.$store.state.Sections.section
+        },
 
-    //get all the articles under the section
-    showSectionArticles() {
-      return this.$store.state.Sections.sectionArticles
-    },
+        //get all the articles under the section
+        showSectionArticles() {
+          return this.$store.state.Sections.sectionArticles
+        },
 
-    //get all the questions under the section
-    showSectionQuestions() {
-      return this.$store.state.Sections.sectionQuestions
-    },
+        //get all the questions under the section
+        showSectionQuestions() {
+          return this.$store.state.Sections.sectionQuestions
+        },
 
-    //filter and get all the audios in the state.sectionMedia
-    showSectionAudio() {
-      this.$store.state.Sections.sectionMedia
-        let audioResult = [this.$store.getters.getSectionAudio.filter((Audios) => Audios.title == "audio" )]
-        console.log(audioResult)
-        return audioResult
-    },
+        //filter and get all the audios in the state.sectionMedia
+        showSectionAudio() {
+          this.$store.state.Sections.sectionMedia
+            let audioResult = [this.$store.getters.getSectionAudio.filter((Audios) => Audios.title == "audio" )]
+            console.log(audioResult)
+            return audioResult
+        },
 
-    //filter and get all the audios in the state.sectionMedia
-    showSectionVideo() {
-      this.$store.state.Sections.sectionMedia
-        let videoResult = [this.$store.getters.getSectionVideo.filter((Videos) => Videos.type == "video" )]
-        console.log(videoResult)
-        return videoResult
+        //filter and get all the audios in the state.sectionMedia
+        showSectionVideo() {
+          this.$store.state.Sections.sectionMedia
+            let videoResult = [this.$store.getters.getSectionVideo.filter((Videos) => Videos.type == "video" )]
+            console.log(videoResult)
+            return videoResult
+        }
+    },
+    methods: {
+          // ...mapActions(['getSectionArticles']),
+          addSection(){
+            this.$router.push('/sections/sectioname/addsection')
+          },
+          addVideo(){
+            this.$router.push('/sections/sectioname/addsvideo')
+          },
+          addAudio(){
+            this.$router.push('/sections/sectioname/addaudio')
+          },
+          addQuestions(){
+            this.$router.push('/sections/sectioname/quiz')
+          },
+          readArticle(title){
+            this.$router.push(`/sections/sectioname/${title}`)
+          },
+          deleteArticle(id){
+             this.$store.dispatch('deleteQuestion', id)
+          },
+        }
     }
-  },
-  methods: {
-    // ...mapActions(['getSectionArticles']),
-    addSection(){
-      this.$router.push('/sections/sectioname/addsection')
-    },
-    addVideo(){
-      this.$router.push('/sections/sectioname/addsvideo')
-    },
-    addAudio(){
-      this.$router.push('/sections/sectioname/addaudio')
-    },
-    addQuestions(){
-      this.$router.push('/sections/sectioname/quiz')
-    },
-    readArticle(title){
-      this.$router.push(`/sections/sectioname/${title}`)
-    },
-  }
-}
 </script>
 
 <style>

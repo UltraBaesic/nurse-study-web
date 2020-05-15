@@ -110,6 +110,18 @@ export default {
             }catch(error){
                throw new Error(error.response)
             }
+        },      
+
+        //to delete an article under a section
+        async deleteArticle({ commit }, id) {
+            try{
+               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section_articles/${id}`, {
+                 headers: {'x-auth-token': userToken}
+               })
+               commit('setSectionArtcles', response.data)
+            }catch(error){
+               throw new Error(error.response)
+            }
         },
         
         //to get all questions under a section
