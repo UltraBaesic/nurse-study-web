@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import userToken from '../utils/helper.js'
+import nurseToken from '../utils/helper.js'
 import axios from 'axios'
  
 Vue.use(Vuex)
@@ -57,7 +57,7 @@ export default {
             try{
                const response = await axios.get('https://nurse-study-backend.herokuapp.com/users',{
                 headers: {
-                    'x-auth-token': userToken,
+                    'x-auth-token': nurseToken,
                     'Content-type': 'application/json'
                    }
                })
@@ -98,7 +98,7 @@ export default {
             try{
                 const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/block/${id}`, {
                     headers: {
-                        'x-auth-token': userToken
+                        'x-auth-token': nurseToken
                     }
                 })
                 commit('setblockUser', response.data)
@@ -112,7 +112,7 @@ export default {
             try{
                 const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/unblock/${id}`, {
                     headers: {
-                        'x-auth-token': userToken
+                        'x-auth-token': nurseToken
                     }
                 })
                 commit('setunblockUser', response.data)
