@@ -72,17 +72,14 @@ export default {
         async adminLogin({ commit }, user){
             commit("startRequest");
             try {
-                await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', user, {
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                })
+                await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', user)
                     .then(res =>{
+                        console.log(res)
                         if(res.data.code === 200){
                             const token = res.data.token.token;
                             localStorage.setItem('NurseToken', token)
+                            commit("endRequest")
                         }
-                        commit("endRequest")
                     })
             } catch(err){
                 commit("endRequest")
