@@ -57,7 +57,7 @@
             <div class="avatar">
               <img src="../assets/img/hs1.jpg" alt="">
             </div> 
-            <div @click='logout' style='cursor: pointer'>
+            <div @click='adminLogout' style='cursor: pointer'>
               <p class="pt-3" style="font-size:14px">
                 Logout
                 <i class="fas fa-arrow-alt-circle-right"></i>
@@ -75,12 +75,14 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   methods: {
-    logout() {
-      localStorage.removeItem('Nurse-Token')
-      this.$router.push('/')
-    }
+   ...mapActions(['logout']),
+   adminLogout(){
+     this.logout();
+     this.$router.push('/')
+   }
   }
 
 }
@@ -89,15 +91,12 @@ export default {
 <style scoped>
 #dashboard-layout {
   display: flex;
-  /* position: relative; */
-  /* background-color: #DDF2F8; */
-  /* height: AUTO; */
 }
 #dashboard-layout .side-nav{
   padding: 20px 50px 0px 30px;
   width: 13rem;
   background-color: #ffffff;
-  color: #000000;
+  color: #222222;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -119,7 +118,6 @@ export default {
 #dashboard-layout .navigation p{
   margin: 35px 0px;
   font-size: 14px;
-  /* font-weight: 500; */
 }
 #dashboard-layout .navigation p{
   color: #000000;
