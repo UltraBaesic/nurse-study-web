@@ -68,8 +68,8 @@
               <div class="row .mx-lg-n5 mt-5">
                 <div class="col-3" v-for="section in showSection" :key="section._id">
                     <div class="card card-style mb-3" @click="showSectionInfo(section.title, section._id )">
-                      <img v-if="section.image_link != null " :src="section.image_link" class="card-img-top" alt="...">
-                      <img v-else src="https://carrington.edu/wp-content/uploads/2015/01/pharmacy-pills.jpg" class="card-img-top" alt="...">
+                      <img v-if="getFileExtension(section.image_link) === 'jpg'" :src="section.image_link" class="card-img-top" alt="...">
+                      <div v-else class="blank-img card-img-top"></div>
                       <div class="card-body">
                         <h6 class="card-title">{{section.title}}</h6>
                         <p class="card-text ">{{section.description | truncate(80)}}.</p>
@@ -118,7 +118,9 @@ methods: {
       this.getSectionMedia(id)
       this.$router.push( {path: `/sections/${title}`} )
     },
-
+  getFileExtension(filename) {
+      return filename.split('.').pop();
+  },
   handleSubmit(event) {
     event.preventDefault()
     let payload = {
@@ -143,6 +145,7 @@ methods: {
   },
   created(){
     setInterval(this.getNow, 1000);
+    this.getAllSections();
   },
 updated(){
     this.$store.commit('setSections')
@@ -153,9 +156,10 @@ computed: {
       return this.$store.state.Sections.allSections
     }
   },
-  async mounted() {
-    await this.getAllSections();
-  }
+// mounted() {
+//      this.getAllSections();
+     
+//   }
 } 
 </script>
 
@@ -204,5 +208,9 @@ computed: {
     }
     .fields input{
       width: 100%;
+    }
+    .blank-img{
+      background: #e3e5e9;
+      height: 120px;
     }
 </style>

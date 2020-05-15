@@ -82,6 +82,7 @@ export default {
     actions: {
         //to get all the sections in the database
         async getAllSections({ commit }) {
+            console.log(userToken)
             commit('startRequest')
             try{
                const response = await axios.get('https://nurse-study-backend.herokuapp.com/content/sections', {
