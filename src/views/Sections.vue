@@ -11,7 +11,7 @@
         <div class="text-center">
           <img src="../assets/img/product.png" style="height: 5rem; margin-bottom: 20px;">
           <p style="color: #9F9F9F; font-size: 12px;">You don't have any Topic added yet,<br/> click on button to Start</p>
-          <button style="background-color: #04809A;  border: none;" class="btn btn-primary" type="submit">Add Topic</button>
+          <button style="background-color: #04809A;  border: none;" class="btn btn-primary" v-b-modal.my-modal type="submit">Add Topic</button>
         </div>
       </div>
     </section>
@@ -127,7 +127,10 @@ methods: {
     console.log(payload)
     this.$store.dispatch('submitSection', payload)
     .then(() => {
-      this.clearFields()
+      if(this.$store.state.Section.newsection == payload){
+        this.clearFields()
+        this.$bvModal.hide('my-modal')
+      }
     })
   },
 
