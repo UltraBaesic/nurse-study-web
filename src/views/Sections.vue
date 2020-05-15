@@ -128,7 +128,10 @@ methods: {
     }
     this.submitSection( payload)
     .then(() => {
-      this.clearFields()
+      if(this.$store.state.Section.newsection == payload){
+        this.clearFields()
+        this.$bvModal.hide('my-modal')
+      }
     })
   },
 
