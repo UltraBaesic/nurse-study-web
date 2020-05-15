@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import userToken from '../utils/helper.js'
+import nurseToken from '../utils/helper.js'
 import axios from 'axios'
  
 Vue.use(Vuex)
@@ -57,7 +57,7 @@ export default {
             try{
                const response = await axios.get('https://nurse-study-backend.herokuapp.com/users',{
                 headers: {
-                    'x-auth-token': userToken,
+                    'x-auth-token': nurseToken,
                     'Content-type': 'application/json'
                    }
                })
@@ -72,17 +72,14 @@ export default {
         async adminLogin({ commit }, user){
             commit("startRequest");
             try {
-                await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', user, {
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                })
+                await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', user)
                     .then(res =>{
+                        console.log(res)
                         if(res.data.code === 200){
                             const token = res.data.token.token;
                             localStorage.setItem('NurseToken', token)
+                            commit("endRequest")
                         }
-                        commit("endRequest")
                     })
             } catch(err){
                 commit("endRequest")
@@ -101,7 +98,7 @@ export default {
             try{
                 const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/block/${id}`, {
                     headers: {
-                        'x-auth-token': userToken
+                        'x-auth-token': nurseToken
                     }
                 })
                 commit('setblockUser', response.data)
@@ -115,7 +112,7 @@ export default {
             try{
                 const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/unblock/${id}`, {
                     headers: {
-                        'x-auth-token': userToken
+                        'x-auth-token': nurseToken
                     }
                 })
                 commit('setunblockUser', response.data)

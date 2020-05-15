@@ -6,12 +6,12 @@ Vue.use(Router)
 
 function guardMyroute(to, from, next){
 let userAuth = store.state.users.isAuthenticated
-if(localStorage.getItem('NurseToken'))
+if(localStorage.getItem('NurseToken')) {
     userAuth = true;
- else
+} else {
     userAuth = false;
- if(userAuth) 
- {
+}
+ if(userAuth) {
   next();
  } 
  else
