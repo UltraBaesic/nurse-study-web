@@ -8,7 +8,7 @@
     <div else>
       <section class="header">
           <div>
-              <p @click="$router.go(-1)">
+              <p class="back" @click="$router.go(-1)">
                   <i class="fas fa-angle-double-left"></i>
                   Back to Sections
               </p>
@@ -309,7 +309,13 @@ li{
   top: 350px;
   right: 20px;
 }
-
+.back{
+  cursor: pointer;
+}
+.back:hover{
+  color: #04809A ;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+}
 .audio-card audio
 {
 -webkit-transition:all 0.5s linear;

@@ -2,7 +2,7 @@
   <main class="new-sub-section">
       <section class="mb-4">
           <div>
-              <p @click="$router.go(-1)" style="font-size: 16px; cursor:pointer;">
+              <p class="back" @click="$router.go(-1)" style="font-size: 16px; cursor:pointer;">
                   <i class="fas fa-angle-double-left"></i>
                   Back
               </p>
@@ -14,7 +14,7 @@
           </div>
       </section>
       <section>
-          <div class=" card upload-option mb-3 card-style">
+          <div class="  upload-option mb-3 card-style">
             <div class="card-body">
               <div class="form-group mb-5 mt-3">
                 <label for="Topic">Topic</label>
@@ -29,7 +29,7 @@
               style="border: none;"
                  api-key="774tkv0y3q4mghhaagtmxn76g9sbq9yfzy320a0gkwd4v0cr"
                  :init="{
-                   height: 1000,
+                   height: 700,
                    menubar: false,
                    plugins: [
                      'advlist autolink lists link image charmap print preview anchor',
@@ -100,5 +100,9 @@ import Editor from '@tinymce/tinymce-vue'
       border: none;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
       /* background-color: #F6FAFB; */
+}
+.back:hover{
+  color: #04809A ;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
 }
 </style>
