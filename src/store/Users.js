@@ -10,12 +10,10 @@ export default {
     //store state
     state: {
         allUsers: [],
-        isAuthenticated: false,
         blockedUser: [],
         user: {},
         unblockedUser: [],
         isFetching: false,
-        errorMessage: ''
     },
 
     //store mutations
@@ -25,17 +23,8 @@ export default {
           state.allUsers = users
         },
 
-        setErrorMessage(state, message){
-            state.setErrorMessage = message
-        },
-
         startRequest(state){
             state.isFetching = true;
-        },
-
-        setAuthSuccess(state, user){
-            state.user = user
-            state.isAuthenticated = true;
         },
 
         endRequest(state) {
@@ -72,25 +61,6 @@ export default {
                 commit("endRequest")
                throw new Error(error.response)
             }
-        },
-
-        async adminLogin({ commit }, user){
-            const data = user;
-            commit("startRequest");
-            try {
-                await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', data)
-                    .then(res =>{
-                       if(res.data.code === 200){
-                            const token = res.data.token.token;
-                            localStorage.setItem('NurseToken', token)
-                            commit("endRequest")
-                        }
-                           
-                        })
-            }catch (error) {
-                commit("endRequest")
-                return error.response
-              }
         },
         logout({ commit, state}){
             commit('endRequest');

@@ -48,9 +48,9 @@
             <button
               type="submit"
               class="btn mt-4 submit-button btn-md btn-primary"
-              :disabled='this.users.isFetching'
+              :disabled=disabled
             >
-              {{ this.users.isFetching ? 'Loading...' : 'Submit'}}
+              {{ submitted ? 'Loading...' : 'Submit'}}
             </button>
           </form>
        </div>
@@ -61,7 +61,8 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapActions } from "vuex";
+import axios from 'axios'
+import { mapState } from "vuex";
 import { required } from "vuelidate/lib/validators";
 // eslint-disable-line
 export default {
@@ -82,19 +83,19 @@ export default {
       password: { required }
     }
   },
-  // watch: {
-  //   user: {
-  //     deep: true,
-  //     immediate: true,
-  //     handler(x){
-  //       if(x.password === ''){
-  //         this.disabled = true;
-  //       } else {
-  //         this.disabled = false
-  //       }
-  //     }
-  //   }
-  // },
+  watch: {
+    user: {
+      deep: true,
+      immediate: true,
+      handler(x){
+        if(x.password === ''){
+          this.disabled = true;
+        } else {
+          this.disabled = false
+        }
+      }
+    }
+  },
   computed:{
     ...mapState(["users"]),
     errorMessage(){
@@ -102,7 +103,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["adminLogin"]),
    // eslint-disable-next-line no-unused-vars
    async handleLogin(e) {
      this.submitted = true;
@@ -118,13 +118,30 @@ export default {
 
       // eslint-disable-next-line no-unused-vars
       let { email, password } = this.user
-      this.adminLogin(this.user)
-        .then(async () => {
-          this.clearFields();
-          this.$router.push('/dashboard');
-        })
-        .catch(error => {
-          console.log(error)
+      let url = 'https://nurse-study-backend.herokuapp.com/auth/login'
+
+      await axios.post(url, this.user)
+        .then(res => {
+          if(res.data.code === 400) {
+            this.submitted = false,
+            Vue.$toast.open({
+              message: res.data.message,
+              type: 'error',
+              position: 'top-right'
+            });
+            this.clearFields();
+          }
+          else if (res.data.code === 200){
+            const token = res.data.token.token;
+            localStorage.setItem('NurseToken', token)
+            Vue.$toast.open({
+              message: res.data.message,
+              type: 'success',
+              position: 'top-right'
+            });
+            this.clearFields();
+            this.$router.push('/dashboard')
+          }
         })
      },
      clearFields() {
