@@ -17,7 +17,7 @@
                       <i class="fas fa-book-medical" style="color:#04809A"></i>
                     </h5>
                     <h6 class="card-subtitle mb-2 ">Number Of Topics</h6>
-                    <p class="card-text stat-value">{{ showSection.length }}</p>
+                    <p class="card-text stat-value">1</p>
                   </div>
                 </div>
               </div>

@@ -65,7 +65,7 @@
                             <div class="card card-style" @click="readArticle(articles.title)">
                               <div class="card-body card-styling">
                               <h5 class="card-title"> {{articles.title}}</h5>
-                                <p class="card-text">{{articles.content  | truncate(80)}}</p>
+                                <p class="card-text" >{{articles.content  | truncate(80)}}</p>
                                 <div class="d-flex" style="display: flex; justify-content: space-between !important;">
                                   <p style="margin-bottom: 0px !important;">
                                     <i class="fas fa-book-open"></i> 124 Reads
