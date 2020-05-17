@@ -1,6 +1,8 @@
 <template>
   <main id="dashbaord-home">
-    <section class="page-name">
+    <div v-if="this.showSection.length === 0"></div>
+    <div v-else>
+       <section class="page-name">
       <h6>Dashboard</h6>
     </section>
 
@@ -25,7 +27,7 @@
                   <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-book-open" style="color:#F8A24C"></i></h5>
                     <h6 class="card-subtitle mb-2 ">Number Of Documents</h6>
-                  <p class="card-text stat-value">123</p>
+                  <p class="card-text stat-value">0</p>
                   </div>
                 </div>
               </div>
@@ -38,7 +40,7 @@
                       <i class="fas fa-question-circle" style="color:#3AC29C"></i>
                     </h5>
                     <h6 class="card-subtitle mb-2">Income</h6>
-                    <p class="card-text stat-value">345,980.67</p>
+                    <p class="card-text stat-value">0</p>
                   </div>
                 </div>
               </div>
@@ -58,7 +60,10 @@
               <div class="card-body recent-activity">
                 <h6 class="card-subtitle mb-2">Recent Activity</h6>
                 <div class="activities">
-                  <ul>
+                  <div class="d-flex justify-content-center alugn-items-center">
+                    <p>No Activity Yet!</p>
+                  </div>
+                  <!-- <ul>
                     <li>
                         <div class="new d-flex justify-content-between">
                             <p>You added a new Section: Corona Virus</p>
@@ -89,8 +94,7 @@
                             <p class="date">3 days ago</p>
                         </div>
                     </li>
-                    
-                  </ul>
+                  </ul> -->
                 </div>
               </div>
             </div>
@@ -98,31 +102,28 @@
         </div>
       </div>
     </section>
-      
+    </div>
   </main>
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
-  methods: {
-  // ...mapActions([
-  //   'getAllSections',
-  //   'getAllUsers',
-  //   ]),
-  },
   computed:{
     showSection() {
       return this.$store.state.Sections.allSections
     },
     Users() {
-        return this.$store.state.Users.allUsers
-        },
+      return this.$store.state.users.allUsers
+    },
   },
-  // async mounted() {
-  //       await this.getAllUsers()
-  //   }
+  methods: {
+    ...mapActions(['getAllSections'])
+  },
+  async mounted(){
+    await this.getAllSections()
+  }
 }
 </script>
 

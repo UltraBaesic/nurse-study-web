@@ -78,7 +78,6 @@ export default {
         },
 
         // delete mutations
-        //to add new question
         deleteSection(state, deletedSection){
             state.deletedSection = deletedSection
         }
@@ -89,18 +88,16 @@ export default {
     actions: {
         //to get all the sections in the database
         async getAllSections({ commit }) {
-            console.log(userToken)
             commit('startRequest')
             try{
                const response = await axios.get('https://nurse-study-backend.herokuapp.com/content/sections', {
                     headers: {
                         'x-auth-token': userToken,
-                        'Content-type': 'application/json'
                     }    
                })
                commit('setSections', response.data.data)
-            //    commit('endRequest')
-            //    console.log(response.data.data);
+               commit('endRequest')
+               
             }catch(error){ 
                commit('endRequest')
                throw new Error(error.response)
@@ -253,8 +250,6 @@ export default {
                     headers: {'x-auth-token': userToken}
                 };
                 let ID = state.section.data[0]._id
-                console.log('this is the ID' +ID)
-                console.log(state.section)
                 let load = {
                     "title" : payload.title,
                     "link" : payload.link,
@@ -282,14 +277,12 @@ export default {
                     headers: {'x-auth-token': userToken}
                 };
                 let ID = state.section.data[0]._id
-                console.log('this is the ID ' +ID)
                 let load = {
                     "question" : questionPayload.question,
                     "options" : questionPayload.options,
                     "section_id" : ID,
                     "correct_option" : questionPayload.correct_option,
                 }
-                console.log(load)
                 axios.post('https://nurse-study-backend.herokuapp.com/content/question', load, head)
                 .then((data) => {
                     commit('addQuestion', data)

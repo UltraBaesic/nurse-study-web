@@ -25,7 +25,8 @@
                         <p>Premium Users</p>
                     </div>
                     <div class="stats-result">
-                        {{compliledUsers.length}}
+                        <!-- {{compliledUsers.length}} -->
+                        0
                     </div>
                 </div>
             </div>
@@ -115,11 +116,9 @@ export default {
     methods: {
         ...mapActions(['getAllUsers']),
         blockUser(id){
-            console.log(id)
             this.$store.dispatch('blockUser', id)
         },
         unblockUser(id){
-            console.log(id)
             this.$store.dispatch('unblockUser', id)
         },
     },
@@ -131,12 +130,10 @@ export default {
         //filter and get all the audios in the state.sectionMedia
         activeUsers() {
             let activeUsers = this.$store.getters.getActiveUsers.filter((activeUsers) => activeUsers.status == "active" ).length
-            console.log(activeUsers)
             return activeUsers
         },
         blockedUsers() {
             let blockedUsers = [this.$store.getters.getActiveUsers.find((activeUsers) => activeUsers.status == "active" )]
-            console.log(blockedUsers)
             return blockedUsers
         },
     },

@@ -80,7 +80,6 @@ export default {
             try {
                 await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', data)
                     .then(res =>{
-                        console.log(res)
                        if(res.data.code === 200){
                             const token = res.data.token.token;
                             localStorage.setItem('NurseToken', token)
@@ -89,6 +88,7 @@ export default {
                            
                         })
             }catch (error) {
+                commit("endRequest")
                 return error.response
               }
         },

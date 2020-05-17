@@ -151,26 +151,26 @@ data(){
         this.sectionDesc = "",
         this.sectionImg = ""
   },
-  deleteSection(id){
-    this.$store.dispatch('deleteSection', id)
-  }
+    deleteSection(id){
+      this.$store.dispatch('deleteSection', id)
+    }
   },
   created(){
-      setInterval(this.getNow, 1000);
-      this.getAllSections();
+    setInterval(this.getNow, 1000);
+    this.getAllSections();
   },
-updated(){
+  updated(){
     this.$store.commit('setSections')
   },
 
-computed: {
+  computed: {
     showSection() {
       return this.$store.state.Sections.allSections
     }
   },
-async mounted() {
-        await this.getAllSections()
-    }
+  async mounted() {
+    await this.getAllSections()
+  }
 } 
 </script>
 
