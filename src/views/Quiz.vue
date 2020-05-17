@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <button style="background-color: #04809A;  border: none;" @click="createQuiz" class="btn btn-primary" type="submit">Add Question</button>
+                <button :disabled="buttonenable" style="background-color: #04809A;  border: none;" @click="createQuiz" class="btn btn-primary" type="submit">Add Question</button>
               </div>
           </div>
       </section>
@@ -120,6 +120,18 @@ methods: {
       this.optionD = "",
       this.correctAnswer = ""
   }
+},
+computed:{
+   buttonenable(){
+        let isDisabled = true
+        if(this.question == "" || this.correctAnswer == "" || this.optionA =="" || this.optionB =="" || this.optionC =="" || this.optionD ==""){
+          isDisabled = true
+        }else{
+          isDisabled = false
+        }
+        console.log(isDisabled)
+        return isDisabled
+     }
 }
 }
 </script>
@@ -201,5 +213,10 @@ input[type=radio]:checked ~ .check::before{
 
 input[type=radio]:checked ~ label{
   color:#04809A;
+}
+button:disabled,
+button[disabled]{
+  background-color: rgb(223, 223, 223) !Important;
+  border-color: rgb(223, 223, 223);
 }
 </style>

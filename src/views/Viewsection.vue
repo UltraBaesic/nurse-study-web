@@ -68,10 +68,13 @@
                     </div>
                     <div class="row">
                         <div class="col-4" v-for="articles in showSectionArticles.data" :key="articles._id">
-                            <div class="card card-style" @click="readArticle(articles.title)">
+                            <div class="card card-style">
                               <div class="card-body card-styling">
-                              <h5 class="card-title"> {{articles.title}}</h5>
-                                <p class="card-text" >{{articles.content  | truncate(80)}}</p>
+                                <div @click="readArticle(articles.title)">
+                                  <h5 class="card-title"> {{articles.title}}</h5>
+                                  <p class="card-text" >{{articles.content  | truncate(80)}}</p>
+                                </div>
+                             
                                 <div class="d-flex" style="display: flex; justify-content: space-between !important;">
                                   <p style="margin-bottom: 0px !important;">
                                     <i class="fas fa-book-open"></i> 124 Reads
@@ -100,7 +103,7 @@
                         <div class="col-4" v-for="videos in showSectionVideo[0]" :key="videos._id">
                           <div class="card card-style">
                             <video height="195" controls>
-                              <source src="https://drive.google.com/open?id=1T1vqS1nBGO-ZkE7hqbLS6CAz3a_SSLGC" type="video/mp4">
+                              <source src="https://drive.google.com/file/d/1T1vqS1nBGO-ZkE7hqbLS6CAz3a_SSLGC" type="video/mp4">
                               Your browser does not support the video tag.
                             </video>
                             <div class="card-body card-styling">
@@ -155,7 +158,7 @@
                                     <i class="fas fa-pen"></i>
                                     Edit
                                   </p>
-                                  <p class= "mr-3" style="font-size: 12px; color: red">
+                                  <p @click="deleteQuestion(questions._id)" class= "mr-3" style="font-size: 12px; color:#9A2804; cursor:pointer" >
                                     <i class="fas fa-trash"></i>
                                     Delete
                                   </p>
@@ -243,7 +246,19 @@ export default {
           this.$router.push(`/sections/sectioname/${title}`)
         },
         deleteArticle(id){
-            this.$store.dispatch('deleteQuestion', id)
+          this.$confirm("Are you sure you want to delete this Article?")
+          .then(() => {
+              this.$store.dispatch('deleteArticle', id)
+              this.$router.go()
+            });
+        },
+        deleteQuestion(id){
+          this.$confirm("Are you sure you want to delete this Article?")
+          .then(() => {
+              this.$store.dispatch('deleteQuestion', id)
+              this.$router.go()
+            });
+            
         },
       }
     }

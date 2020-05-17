@@ -19,6 +19,7 @@ export default {
         newVideo: [],
         newQuestion: [],
         deletedSection: "",
+        deleted:[],
         isFetching: false
     },
 
@@ -77,9 +78,20 @@ export default {
             state.newQuestion = setNewQuestion
         },
 
-        // delete mutations
+        // delete 
+        //delete section
         deleteSection(state, deletedSection){
             state.deletedSection = deletedSection
+        },
+
+        // delete Article
+        deleteArticle(state, deletedArticle){
+            state.deleted = deletedArticle
+        },
+        
+        // delete question
+        deleteQuestion(state, deletedQuestion){
+            state.deleted = deletedQuestion
         }
         
     },
@@ -153,7 +165,19 @@ export default {
                const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section_articles/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
-               commit('deleteSectionArticles', response.data)
+               commit('deleteArticles', response.data)
+            }catch(error){
+               throw new Error(error.response)
+            }
+        },
+
+        //to delete an article under a section
+        async deleteQuestion({ commit }, id) {
+            try{
+               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section_question/${id}`, {
+                 headers: {'x-auth-token': userToken}
+               })
+               commit('deleteQuestion', response.data)
             }catch(error){
                throw new Error(error.response)
             }

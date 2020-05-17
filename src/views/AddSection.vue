@@ -9,12 +9,12 @@
           </div>
           <div class="pagetitle">
               <h6>
-                  Add Article
+                  Add New Article
               </h6>
           </div>
       </section>
       <section>
-          <div class="  upload-option mb-3 card-style">
+          <div class="card  upload-option mb-3 card-style">
             <div class="card-body">
               <div class="form-group mb-3 mt-3">
                 <label for="Topic">Topic</label>

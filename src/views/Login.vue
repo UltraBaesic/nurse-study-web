@@ -27,7 +27,7 @@
                 <span v-if="!$v.user.email.email">Email is invalid</span>
               </div>
             </div>
-            <div class="form-group password pt-3">
+            <div class="form-group password pt-0">
               <label class="floating-label">Password</label>
               <input
                 type="password"
@@ -208,9 +208,9 @@ export default {
     font-weight: normal;
     text-align: center;
   }
-  #home .login-details{
-    margin-top: 35px;
-  }
+  /* #home .login-details{
+    margin-top: 5px;
+  } */
   input[ type=text],
   input[type=password]{
     background-color: transparent !important ;
@@ -222,7 +222,7 @@ export default {
     color: #ffffff;
     border-radius: 5px;
     background-color: transparent;
-    padding: 8px 15px;
+    padding: 10px 15px;
     width: 339px;
     font-size:14px;
   }
@@ -248,12 +248,13 @@ export default {
 }
 #home .forgot-password{
   font-size: 12px;
-  margin-top: -9px !important;
+  margin-top: -2px !important;
   text-align: right;
   cursor: pointer;
 }
 #home .login-details .form-group{
   background-color: none !important;
+  margin-bottom:5px !important;
 }
 #home .submit-button{
   width: 200px;
