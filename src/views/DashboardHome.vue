@@ -17,7 +17,7 @@
                       <i class="fas fa-book-medical" style="color:#04809A"></i>
                     </h5>
                     <h6 class="card-subtitle mb-2 ">Number Of Topics</h6>
-                    <p class="card-text stat-value">21</p>
+                    <p class="card-text stat-value">{{ showSection.length }}</p>
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                   <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-users" style="color:#F36386"></i></h5>
                     <h6 class="card-subtitle mb-2" >Number Of Users</h6>
-                  <p class="card-text stat-value">248</p>
+                  <p class="card-text stat-value">{{ Users.length }}</p>
                   </div>
                 </div>
               </div>
@@ -104,8 +104,26 @@
 </template>
 
 <script>
-export default {
+// import { mapActions } from 'vuex'
 
+export default {
+  methods: {
+  // ...mapActions([
+  //   'getAllSections',
+  //   'getAllUsers',
+  //   ]),
+  },
+  computed:{
+    showSection() {
+      return this.$store.state.Sections.allSections
+    },
+    Users() {
+        return this.$store.state.Users.allUsers
+        },
+  },
+  // async mounted() {
+  //       await this.getAllUsers()
+  //   }
 }
 </script>
 

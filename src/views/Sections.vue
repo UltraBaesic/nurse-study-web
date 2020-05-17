@@ -68,11 +68,16 @@
               <div class="row .mx-lg-n5 mt-5">
                 <div class="col-3" v-for="section in showSection" :key="section._id">
                     <div class="card card-style mb-3" @click="showSectionInfo(section.title, section._id )">
-                      <img v-if="getFileExtension(section.image_link) === 'jpg'" :src="section.image_link" class="card-img-top" alt="...">
+                      <img v-if="getFileExtension(section.image_link) === 'jpg' || getFileExtension(section.image_link) === 'png'" :src="section.image_link" class="card-img-top" alt="...">
                       <div v-else class="blank-img card-img-top"></div>
                       <div class="card-body">
                         <h6 class="card-title">{{section.title}}</h6>
-                        <p class="card-text ">{{section.description | truncate(80)}}.</p>
+                        <p class="card-text ">{{section.description | truncate(55)}}.</p>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-right:20px; margin-bottom: 8px !important;" @click="deleteSection(section._id)">
+                          <i class="fas fa-trash"></i>
+                        </p>
                       </div>
                     </div>
                 </div>     
@@ -99,53 +104,60 @@ data(){
     sectionImg: '', 
     AllSection: [], 
     userSections: null,
-    timestamp: ""
+    timestamp: "",
+    message: "",
   }
 },
-methods: {
-  ...mapActions([
-    'getAllSections',
-    'submitSection',
-    'loadSectionsInfo',
-    'getSectionArticles',
-    'getSectionQuestions',
-    'getSectionMedia'
-    ]),
-  showSectionInfo(title, id){
-      this.loadSectionsInfo(id)
-      this.getSectionArticles(id)
-      this.getSectionQuestions(id)
-      this.getSectionMedia(id)
-      this.$router.push( {path: `/sections/${title}`} )
-    },
-  getFileExtension(filename) {
-      return filename.split('.').pop();
+  methods: {
+      ...mapActions([
+        'getAllSections',
+        'submitSection',
+        'loadSectionsInfo',
+        'getSectionArticles',
+        'getSectionQuestions',
+        'getSectionMedia'
+        ]),
+      showSectionInfo(title, id){
+          this.loadSectionsInfo(id)
+          this.getSectionArticles(id)
+          this.getSectionQuestions(id)
+          this.getSectionMedia(id)
+          this.$router.push( {path: `/sections/${title}`} )
+        },
+      getFileExtension(filename) {
+          return filename.split('.').pop();
+      },
+      handleSubmit(event) {
+        event.preventDefault()
+        let payload = {
+            "title" : this.sectionName,
+            "description" : this.sectionDesc,
+            "image_link" : this.sectionImg
+        }
+        this.submitSection( payload)
+        .then(() => {
+          if(this.$store.state.Sections.newsection.data.message == "Successfully created section"){
+            this.message = this.$store.state.Sections.newsection.data.message
+            this.clearFields()
+            this.$bvModal.hide('my-modal')
+            this.$router.go()
+          }else{
+            console.log(this.$store.state.Sections.newsection.data.message);
+          }
+        })
+      },
+      clearFields() {
+        this.sectionName = "",
+        this.sectionDesc = "",
+        this.sectionImg = ""
   },
-  handleSubmit(event) {
-    event.preventDefault()
-    let payload = {
-        "title" : this.sectionName,
-        "description" : this.sectionDesc,
-        "image_link" : this.sectionImg
-    }
-    this.submitSection( payload)
-    .then(() => {
-      if(this.$store.state.Section.newsection == payload){
-        this.clearFields()
-        this.$bvModal.hide('my-modal')
-      }
-    })
-  },
-
-  clearFields() {
-    this.sectionName = "",
-    this.sectionDesc = "",
-    this.sectionImg = ""
-  },
+  deleteSection(id){
+    this.$store.dispatch('deleteSection', id)
+  }
   },
   created(){
-    setInterval(this.getNow, 1000);
-    this.getAllSections();
+      setInterval(this.getNow, 1000);
+      this.getAllSections();
   },
 updated(){
     this.$store.commit('setSections')
@@ -156,10 +168,9 @@ computed: {
       return this.$store.state.Sections.allSections
     }
   },
-// mounted() {
-//      this.getAllSections();
-     
-//   }
+async mounted() {
+        await this.getAllSections()
+    }
 } 
 </script>
 
@@ -182,19 +193,24 @@ computed: {
     font-size: 12px;
     margin-top: -8px;
   }
-  .card-style{
+#sections  .card-style{
     border: none;
     cursor: pointer;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+    height: 228px;
   }
-  .card-style p{
+#sections  .card-style:hover{
+    box-shadow: 2px 2px 12px rgba(139, 139, 139, 0.2);
+    height: 229px;
+  }
+#sections  .card-style p{
     font-size: 12px;
     color: #9F9F9F;
   }
-  .card-style h5{
+#sections .card-style h5{
     color: #292929;
   }
-    .card-style img{
+#sections   .card-style img{
       height: 120px;
       object-fit: cover;
       margin: 0 auto;
