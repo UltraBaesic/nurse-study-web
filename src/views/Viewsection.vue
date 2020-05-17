@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <main>
+    <div v-if="this.$store.state.Sections.section.data.length === 0">
+      <div class="d-flex justify-content-center align-items-center loader">
+        <Circle8 />
+      </div>
+    </div>
+    <div else>
       <section class="header">
           <div>
               <p @click="$router.go(-1)">
@@ -165,25 +171,28 @@
           </div>
       </section>
   </div>
+  </main>
 </template>
 
 <script>
 import {Tabs, Tab} from 'vue-tabs-component';
 import Progress from '../components/Progress.vue';
+import { Circle8 } from 'vue-loading-spinner'
 
 export default {
     data(){
-        return{
-          i : 1, 
-        }
+      return{
+        i: 1, 
+      }
     },
     components: {
         Tabs,
         Tab,
-        Progress
+        Progress,
+        Circle8
     },
     beforeMount(){
-        this.showSection
+      this.showSection
     },
 
     computed: {
@@ -206,7 +215,6 @@ export default {
         showSectionAudio() {
           this.$store.state.Sections.sectionMedia
             let audioResult = [this.$store.getters.getSectionAudio.filter((Audios) => Audios.title == "audio" )]
-            console.log(audioResult)
             return audioResult
         },
 
@@ -214,31 +222,30 @@ export default {
         showSectionVideo() {
           this.$store.state.Sections.sectionMedia
             let videoResult = [this.$store.getters.getSectionVideo.filter((Videos) => Videos.type == "video" )]
-            console.log(videoResult)
             return videoResult
         }
     },
     methods: {
-          // ...mapActions(['getSectionArticles']),
-          addSection(){
-            this.$router.push('/sections/sectioname/addsection')
-          },
-          addVideo(){
-            this.$router.push('/sections/sectioname/addsvideo')
-          },
-          addAudio(){
-            this.$router.push('/sections/sectioname/addaudio')
-          },
-          addQuestions(){
-            this.$router.push('/sections/sectioname/quiz')
-          },
-          readArticle(title){
-            this.$router.push(`/sections/sectioname/${title}`)
-          },
-          deleteArticle(id){
-             this.$store.dispatch('deleteQuestion', id)
-          },
-        }
+        // ...mapActions(['getSectionArticles']),
+        addSection(){
+          this.$router.push('/sections/sectioname/addsection')
+        },
+        addVideo(){
+          this.$router.push('/sections/sectioname/addsvideo')
+        },
+        addAudio(){
+          this.$router.push('/sections/sectioname/addaudio')
+        },
+        addQuestions(){
+          this.$router.push('/sections/sectioname/quiz')
+        },
+        readArticle(title){
+          this.$router.push(`/sections/sectioname/${title}`)
+        },
+        deleteArticle(id){
+            this.$store.dispatch('deleteQuestion', id)
+        },
+      }
     }
 </script>
 

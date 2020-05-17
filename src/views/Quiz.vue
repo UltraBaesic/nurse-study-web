@@ -125,37 +125,31 @@ methods: {
 </script>
 
 <style scoped>
-/* .options{
-    display:flex;
-} */
+
 .card-style{
-      border: none;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
-      /* background-color: #F6FAFB; */
+  border: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
 }
 .card-body{
-    padding: 2.5rem !important;
+  padding: 2.5rem !important;
 }
 .card-title p{
-    /* color: #04809A; */
-    font-weight: 600;
-    margin-bottom: 5px !important;
+  font-weight: 600;
+  margin-bottom: 5px !important;
 }
 .option-header{
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 5px !important;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px !important;
 }
 .la-radio input[type=radio]{
-     position: absolute;
+  position: absolute;
   visibility: hidden;
 }
 .la-radio label{
   display: block;
   position: relative;
-  /* font-weight: 300; */
   font-size: 14px;
-  /* padding: 25px 25px 25px 80px; */
   margin: 10px auto;
   height: 20px;
   z-index: 9;
@@ -202,10 +196,10 @@ input[type=radio]:checked ~ .check {
   border: 2px solid  #04809A;
 }
 input[type=radio]:checked ~ .check::before{
-  background:  #04809A;
+  background: #04809A;
 }
 
 input[type=radio]:checked ~ label{
-  color:  #04809A;
+  color:#04809A;
 }
 </style>

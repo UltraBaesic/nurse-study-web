@@ -29,7 +29,8 @@
     "vue-simple-alert": "^1.1.1",
     "vue-spinner": "^1.0.3",
     "vue-tabs-component": "^1.5.0",
-    "vue-toastr-2": "0.0.10",
+    "vue-toast-notification": "^0.4.0",
+    "vuelidate": "^0.7.5",
     "vuex": "^3.1.2",
     "vuex-persist": "^2.2.0",
     "vuex-persistedstate": "^3.0.1"
