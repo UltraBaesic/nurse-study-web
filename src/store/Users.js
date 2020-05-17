@@ -14,7 +14,8 @@ export default {
         blockedUser: [],
         user: {},
         unblockedUser: [],
-        isFetching: false
+        isFetching: false,
+        errorMessage: ''
     },
 
     //store mutations
@@ -22,6 +23,10 @@ export default {
         //to get all the sections in into sections in store
         setUsers(state, users){
           state.allUsers = users
+        },
+
+        setErrorMessage(state, message){
+            state.setErrorMessage = message
         },
 
         startRequest(state){
@@ -70,22 +75,22 @@ export default {
         },
 
         async adminLogin({ commit }, user){
+            const data = user;
             commit("startRequest");
             try {
-                await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', user)
+                await axios.post('https://nurse-study-backend.herokuapp.com/auth/login', data)
                     .then(res =>{
                         console.log(res)
-                        if(res.data.code === 200){
+                       if(res.data.code === 200){
                             const token = res.data.token.token;
                             localStorage.setItem('NurseToken', token)
                             commit("endRequest")
                         }
-                    })
-            } catch(err){
-                commit("endRequest")
-                throw new Error(err.response)
-
-            }
+                           
+                        })
+            }catch (error) {
+                return error.response
+              }
         },
         logout({ commit, state}){
             commit('endRequest');

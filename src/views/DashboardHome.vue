@@ -2,7 +2,6 @@
   <main id="dashbaord-home">
     <section class="page-name">
       <h6>Dashboard</h6>
-      <p>{{timestamp | todaysDate}}</p>
     </section>
 
     <section class="main-body">

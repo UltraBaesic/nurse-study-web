@@ -2,7 +2,6 @@
   <main id="all-users">
     <section class="page-name">
         <h6>Users</h6>
-        <p>{{timestamp | todaysDate}}</p>
     </section>
 
     <section>
@@ -14,7 +13,7 @@
                         <p>Number of Users</p>
                     </div>
                     <div class="stats-result">
-                        {{Users.length}}
+                        {{compliledUsers.length}}
                     </div>
                 </div>
             </div>
@@ -26,7 +25,7 @@
                         <p>Premium Users</p>
                     </div>
                     <div class="stats-result">
-                        {{Users.length}}
+                        {{compliledUsers.length}}
                     </div>
                 </div>
             </div>
@@ -79,7 +78,7 @@
 
                     </th>
                 </tr>
-                <tr class=" w-100  user-details" v-for="user in Users" :key="user.id">
+                <tr class=" w-100  user-details" v-for="user in compliledUsers" :key="user.id">
                     <td class="py-2 pl-2" >
                         <div class="d-flex ">                           
                             <div class="mr-3">
@@ -111,17 +110,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
     methods: {
         ...mapActions(['getAllUsers']),
-        getNow: function() {
-                        const today = new Date();
-                        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                        const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        const dateTime = date +' '+ time;
-                        this.timestamp = dateTime;
-        },
         blockUser(id){
             console.log(id)
             this.$store.dispatch('blockUser', id)
@@ -132,8 +124,9 @@ export default {
         },
     },
     computed: {
-        Users() {
-        return this.$store.state.Users.allUsers
+        ...mapState(["users"]),
+        compliledUsers() {
+        return this.users.allUsers
         },
         //filter and get all the audios in the state.sectionMedia
         activeUsers() {
