@@ -2,7 +2,7 @@
   <main class="new-sub-section">
       <section class="mb-4">
           <div>
-              <p @click="$router.go(-1)" style="font-size: 16px;">
+              <p class="back" @click="$router.go(-1)" style="font-size: 16px;">
                   <i class="fas fa-angle-double-left"></i>
                   Back
               </p>
@@ -41,5 +41,8 @@ export default {
 </script>
 
 <style>
-
+.back:hover{
+  color: #04809A ;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+}
 </style>

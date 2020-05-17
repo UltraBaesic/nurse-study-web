@@ -149,6 +149,7 @@ export default {
 .card-style{
   border: none;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+  cursor: pointer;
 }
 .stat-value{
   font-size: 22px;
