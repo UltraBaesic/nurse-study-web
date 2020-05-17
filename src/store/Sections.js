@@ -18,6 +18,7 @@ export default {
         newArticle: [],
         newVideo: [],
         newQuestion: [],
+        deletedSection: "",
         isFetching: false
     },
 
@@ -74,6 +75,12 @@ export default {
         //to add new question
         addQuestion(state, setNewQuestion){
             state.newQuestion = setNewQuestion
+        },
+
+        // delete mutations
+        //to add new question
+        deleteSection(state, deletedSection){
+            state.deletedSection = deletedSection
         }
         
     },
@@ -82,15 +89,17 @@ export default {
     actions: {
         //to get all the sections in the database
         async getAllSections({ commit }) {
+            console.log(userToken)
             commit('startRequest')
             try{
                const response = await axios.get('https://nurse-study-backend.herokuapp.com/content/sections', {
-                     headers: {
-                     'x-auth-token': userToken
-                    }
+                    headers: {
+                        'x-auth-token': userToken,
+                        'Content-type': 'application/json'
+                    }    
                })
                commit('setSections', response.data.data)
-               commit('endRequest')
+            //    commit('endRequest')
             //    console.log(response.data.data);
             }catch(error){ 
                commit('endRequest')
@@ -124,6 +133,31 @@ export default {
                commit('endRequest')
             }catch(error){
                 commit('endRequest')
+               throw new Error(error.response)
+            }
+        },      
+
+        //to delete a section
+        async deleteSection({ commit }, id) {
+            try{
+               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section/${id}`, {
+                 headers: {'x-auth-token': userToken}
+               })
+               commit('deleteSection', response.data)
+            }catch(error){
+               throw new Error(error.response)
+            }
+        },
+        
+
+        //to delete an article under a section
+        async deleteArticle({ commit }, id) {
+            try{
+               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section_articles/${id}`, {
+                 headers: {'x-auth-token': userToken}
+               })
+               commit('deleteSectionArticles', response.data)
+            }catch(error){
                throw new Error(error.response)
             }
         },
