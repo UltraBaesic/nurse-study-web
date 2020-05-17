@@ -1,6 +1,10 @@
 <template>
   <main id="dashbaord-home">
-    <div v-if="this.showSection.length === 0"></div>
+    <div v-if="this.showSection.length === 0 && this.Users.length === 0">
+      <div class="d-flex justify-content-center align-items-center loader">
+        <Circle8 />
+      </div>
+    </div>
     <div v-else>
        <section class="page-name">
       <h6>Dashboard</h6>
@@ -108,8 +112,12 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { Circle8 } from 'vue-loading-spinner'
 
 export default {
+  components: {
+    Circle8
+  },
   computed:{
     showSection() {
       return this.$store.state.Sections.allSections
@@ -122,7 +130,7 @@ export default {
     ...mapActions(['getAllSections'])
   },
   async mounted(){
-    await this.getAllSections()
+    await this.getAllSections();
   }
 }
 </script>
