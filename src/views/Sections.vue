@@ -67,15 +67,17 @@
           <div class="main-body">
               <div class="row .mx-lg-n5 mt-5">
                 <div class="col-3" v-for="section in showSection" :key="section._id">
-                    <div class="card card-style mb-3" @click="showSectionInfo(section.title, section._id )">
-                      <img v-if="getFileExtension(section.image_link) === 'jpg' || getFileExtension(section.image_link) === 'png'" :src="section.image_link" class="card-img-top" alt="...">
-                      <div v-else class="blank-img card-img-top"></div>
-                      <div class="card-body">
-                        <h6 class="card-title">{{section.title}}</h6>
-                        <p class="card-text ">{{section.description | truncate(55)}}.</p>
+                    <div class="card card-style mb-3">
+                      <div @click="showSectionInfo(section.title, section._id )">
+                          <img v-if="getFileExtension(section.image_link) === 'jpg' || getFileExtension(section.image_link) === 'png'" :src="section.image_link" class="card-img-top" alt="...">
+                          <div v-else class="blank-img card-img-top"></div>
+                          <div class="card-body">
+                            <h6 class="card-title">{{section.title}}</h6>
+                            <p class="card-text ">{{section.description | truncate(55)}}.</p>
+                          </div>
                       </div>
-                      <div class="d-flex justify-content-end">
-                        <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-right:20px; margin-bottom: 8px !important;" @click="deleteSection(section._id)">
+                      <div class="delete d-flex justify-content-end" @click="deleteSection(section._id)">
+                        <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-right:20px;">
                           <i class="fas fa-trash"></i>
                         </p>
                       </div>
@@ -151,9 +153,13 @@ data(){
         this.sectionDesc = "",
         this.sectionImg = ""
   },
-    deleteSection(id){
-      this.$store.dispatch('deleteSection', id)
-    }
+  deleteSection(id){
+    this.$confirm("Are you sure you want to delete this section?")
+    .then(() => {
+        this.$store.dispatch('deleteSection', id)
+        this.$router.go()
+      });
+  }
   },
   created(){
     setInterval(this.getNow, 1000);
@@ -215,6 +221,10 @@ data(){
       object-fit: cover;
       margin: 0 auto;
     }
+#sections .delete{
+  padding: 0px;
+  margin-top: -25px !important;
+}
     .right-page-name p{
          color: #292929;
          font-size: 14px;
