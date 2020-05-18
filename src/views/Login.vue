@@ -3,7 +3,7 @@
     <div class="main-details">
       <div>
         <div class="logo">
-          <img src="../assets/img/logo-white.png" alt="website logo">
+          <img src="../assets/img/ns-b.png" alt="website logo">
         </div>
 
         <div class="login-header">
@@ -21,6 +21,7 @@
                 v-model ="user.email"
                 class= "input-field eamil"
                 :class="{ 'is-invalid': submitted && $v.user.email.$error }"
+                maxlength="30"
               >
               <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
                 <span v-if="!$v.user.email.required">Email is required</span>
@@ -34,6 +35,7 @@
                 v-model ="user.password"
                 class="input-field password"
                 :class="{ 'is-invalid': submitted && $v.user.password.$error }"
+                maxlength="10"
               >
               <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
                 <span v-if="!$v.user.password.required">Password is required</span>
@@ -192,7 +194,8 @@ export default {
     padding: 30px;
   }
   #home .logo img{
-    height: 100px;
+    height: 80px;
+    margin-bottom: 20px;
   }
 
   #home .floating-label {
@@ -223,7 +226,8 @@ export default {
     border-radius: 5px;
     background-color: transparent;
     padding: 10px 15px;
-    width: 339px;
+    display: block;
+    width: 300px;
     font-size:14px;
   }
 
@@ -238,7 +242,7 @@ export default {
   height: 40px;
   outline: 1px solid #ffffff;
   box-shadow: none !important;
-  padding: 10px 0px 0 25px;
+  padding: 10px 0px 0 45px;
   color: #ffffff;
 }
 
@@ -248,13 +252,13 @@ export default {
 }
 #home .forgot-password{
   font-size: 12px;
-  margin-top: -2px !important;
+  margin-top: 3px !important;
   text-align: right;
   cursor: pointer;
 }
 #home .login-details .form-group{
   background-color: none !important;
-  margin-bottom:5px !important;
+  margin: 0px auto;
 }
 #home .submit-button{
   width: 200px;

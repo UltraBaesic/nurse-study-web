@@ -75,15 +75,15 @@
                                   <p class="card-text" >{{articles.content  | truncate(80)}}</p>
                                 </div>
                              
-                                <div class="d-flex" style="display: flex; justify-content: space-between !important;">
+                                <div class="d-flex mt-3" style="display: flex; justify-content: space-between !important; color: #F8A24C">
                                   <p style="margin-bottom: 0px !important;">
                                     <i class="fas fa-book-open"></i> 124 Reads
                                   </p>
                                   <div class="d-flex justify-content-end">
-                                    <p class= "mr-4" style="font-size: 12px; cursor: pointer; color: #04809A; margin-bottom: 0px !important;">
+                                    <!-- <p class= "mr-4" style="font-size: 12px; cursor: pointer; color: #04809A; margin-bottom: 0px !important;">
                                       <i class="fas fa-pen"></i>
                                       Edit
-                                    </p>
+                                    </p> -->
                                     <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-bottom: 0px !important;" @click="deleteArticle(articles._id)">
                                       <i class="fas fa-trash"></i>
                                       Delete
@@ -154,10 +154,10 @@
                                 <div class="answer d-flex justify-content-between">
                                   Answer: {{ questions.correct_option }}
                                    <div class="d-flex justify-content-end">
-                                  <p class= "mr-4" style="font-size: 12px; color: #04809A;">
+                                  <!-- <p class= "mr-4" style="font-size: 12px; color: #04809A;">
                                     <i class="fas fa-pen"></i>
                                     Edit
-                                  </p>
+                                  </p> -->
                                   <p @click="deleteQuestion(questions._id)" class= "mr-3" style="font-size: 12px; color:#9A2804; cursor:pointer" >
                                     <i class="fas fa-trash"></i>
                                     Delete
@@ -253,7 +253,7 @@ export default {
             });
         },
         deleteQuestion(id){
-          this.$confirm("Are you sure you want to delete this Article?")
+          this.$confirm("Are you sure you want to delete this Question?")
           .then(() => {
               this.$store.dispatch('deleteQuestion', id)
               this.$router.go()
@@ -298,7 +298,12 @@ li{
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
       margin-bottom: 1rem;
       color: #202020;
+      cursor: pointer;
     }
+.card-style:hover{
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1 );
+  
+}
 .card-style h5{
     color: #292929;
     }
