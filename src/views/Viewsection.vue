@@ -7,12 +7,12 @@
     </div>
     <div else>
       <section class="header">
-          <div>
-              <p class="back" @click="$router.go(-1)">
+          <router-link to="/sections">
+              <p class="back">
                   <i class="fas fa-angle-double-left"></i>
                   Back to Sections
               </p>
-          </div>
+          </router-link>
           <div> 
               <select class="custom-select" id="inputGroupSelect01">
                 <option selected>Premium</option>
@@ -77,7 +77,7 @@
                              
                                 <div class="d-flex mt-3" style="display: flex; justify-content: space-between !important; color: #F8A24C">
                                   <p style="margin-bottom: 0px !important;">
-                                    <i class="fas fa-book-open"></i> 124 Reads
+                                    <i class="fas fa-book-open"></i> 0 Reads
                                   </p>
                                   <div class="d-flex justify-content-end">
                                     <!-- <p class= "mr-4" style="font-size: 12px; cursor: pointer; color: #04809A; margin-bottom: 0px !important;">
@@ -268,6 +268,9 @@ export default {
 .header{
     display: flex;
     justify-content: space-between;
+}
+.header a:hover{
+  text-decoration-line: none !important;
 }
 .tab{
     display: flex;

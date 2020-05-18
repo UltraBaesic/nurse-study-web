@@ -1,26 +1,16 @@
 <template>
   <main id="dashbaord-home">
     <section >
+        <p class="back" @click="$router.go(-1)">
+            <i class="fas fa-angle-double-left"></i>
+            Back
+        </p>
         <div class="card card-style"  v-for="values in showArticle" :key="values._id">
             <div class="card-body">
                 <div class="class-header">
                     <h3 class="mb-4">
                         {{values.title}}
                     </h3>
-                    <div class="controls">
-                        <div class="edit mr-5" >
-                            <p style="font-size: 12px; color: #048464">
-                                <i class="fas fa-pen"></i>
-                                Edit
-                            </p>
-                        </div>
-                        <div class="delete">
-                            <p style="font-size: 12px; color: red">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 <div class="topic-story" v-html="values.content">
                     {{values.content}}

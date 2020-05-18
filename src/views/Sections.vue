@@ -154,11 +154,14 @@ data(){
         this.sectionImg = ""
   },
   deleteSection(id){
-    this.$confirm("Are you sure you want to delete this section?")
+    this.$confirm("Are you sure you want to delete this section? All documents under this section will be deleted too")
     .then(() => {
-        this.$store.dispatch('deleteSection', id)
-        this.$router.go()
+      this.$store.dispatch('deleteSection', id)
+      setTimeout(() => this.$router.go(), 2000);
+      this.$alert("Section Deleted");
+      
       });
+
   }
   },
   created(){

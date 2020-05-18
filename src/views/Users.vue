@@ -38,7 +38,7 @@
                         <p>Blocked Users</p>
                     </div>
                     <div class="stats-result">
-                         {{activeUsers}}
+                         {{blockedUsers}}
                     </div>
                 </div>
             </div>
@@ -76,31 +76,41 @@
                         Date Joined
                     </th>
                     <th>
-
+                        Status
                     </th>
                 </tr>
                 <tr class=" w-100  user-details" v-for="user in compliledUsers" :key="user.id">
-                    <td class="py-2 pl-2" >
-                        <div class="d-flex ">                           
-                            <div class="mr-3">
-                                <img src="../assets/img/hs1.jpg" alt="">
-                            </div>
+                    <td class="" >
+                        <div class="">                           
                             {{ user.firstname }}
                         </div>
                     </td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.subscription }} </td>
-                    <td>{{ user.created_on | fullDate }}</td>
-                    <td id="userAction" v-if="user.status == 'active'" class="pr-3" @click="blockUser(user._id)">
-                        <button 
-                            style="color:green; background-color: #C0E3C1; border: 1px solid #4CAF50; cursor: pointer; border-radius: 5px; font-style: light;"> 
-                            Active 
-                        </button> 
+                    <td
+                        style="color: #04809A;"> 
+                        {{ user.subscription }} 
                     </td>
-                    <td id="userAction" v-else class="pr-2" @click="unblockUser(user._id)">
+                    <td>{{ user.created_on | fullDate }}</td>
+                    <td id="userAction" style="text-transform: capitalize">
+                        {{ user.status }}
                         <button 
-                            style="color:green; background-color: #C0E3C1; border: 1px solid red; cursor: pointer; border-radius: 5px; font-style: light;"> 
-                            Blocked 
+                            v-if="user.status == 'active'" @click="blockUser(user._id)"
+                            style="color: #AA2804; float :right; 
+                                background-color: #FFDDD4; border:none; cursor: pointer; 
+                                border-radius: 5px; 
+                                font-style: light; 
+                                font-size: 9px;"> 
+                            Block 
+                        </button> 
+                         <button 
+                            v-else class="" @click="unblockUser(user._id)"
+                            style="color:green; 
+                                background-color: #C0E3C1; 
+                                float: right;
+                                border: none; 
+                                cursor: pointer; 
+                                border-radius: 5px; font-style: light; font-size: 8px;"> 
+                            Unblock 
                         </button>
                     </td>
                 </tr>
@@ -116,10 +126,21 @@ export default {
     methods: {
         ...mapActions(['getAllUsers']),
         blockUser(id){
-            this.$store.dispatch('blockUser', id)
+            this.$confirm("You are unblocking this user?")
+            .then(() => {
+                this.$store.dispatch('blockUser', id)
+                setTimeout(() => this.$router.go(), 2000);
+                this.$alert("User Unblocked");   
+            });
         },
-        unblockUser(id){
-            this.$store.dispatch('unblockUser', id)
+        unblockUser(id){     
+            // this.$confirm("You are unblocking this user?")
+            // .then(() => {
+                this.$store.dispatch('unblockUser', id)
+                // setTimeout(() => this.$router.go(), 3000);
+                // setTimeout(() => this.$alert("User Unblocked"), 3000);
+            // });
+            
         },
     },
     computed: {
@@ -133,7 +154,7 @@ export default {
             return activeUsers
         },
         blockedUsers() {
-            let blockedUsers = [this.$store.getters.getActiveUsers.find((activeUsers) => activeUsers.status == "active" )]
+            let blockedUsers = this.$store.getters.getBlockedUsers.filter((blockedUsers) => blockedUsers.status == "blocked" ).length
             return blockedUsers
         },
     },
@@ -165,10 +186,10 @@ export default {
 }
 
 #all-users .user-details {
-   background-color: white;
+   /* background-color: white; */
    padding: 5px 0;
-   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
-   border-radius: 30px;
+   /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 ); */
+   /* border-radius: 30px; */
    
 }
 #all-users .user-details td{
@@ -177,15 +198,22 @@ export default {
 #all-users .user-table table tr td{
     margin-bottom: 29px !important;
 }
+table{
+    background-color: white;
+}
+table th{
+    padding: 10px 30px;
+}
+table tr td{
+    padding: 10px 30px;
+}
+table tr:hover{
+    background-color: rgb(224, 237, 252);
+}
+tr:nth-child(odd) {background-color: #F6FAFF;}
 #all-users .user-table .table-head th{
     color: #9F9F9F;
     font-size: 12px;
-}
-#userAction{
-    font-size: 8px; 
-    color: #9F9F9F;
-    cursor: pointer;
-    text-align: right;
 }
 #userAction:hover{
     font-size: 10px; 

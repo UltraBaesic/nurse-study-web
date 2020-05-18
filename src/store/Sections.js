@@ -18,7 +18,7 @@ export default {
         newArticle: [],
         newVideo: [],
         newQuestion: [],
-        deletedSection: "",
+        deletedSection: [],
         deleted:[],
         isFetching: false
     },
@@ -81,7 +81,7 @@ export default {
         // delete 
         //delete section
         deleteSection(state, deletedSection){
-            state.deletedSection = deletedSection
+            state.deleted = deletedSection
         },
 
         // delete Article
@@ -153,6 +153,7 @@ export default {
                  headers: {'x-auth-token': userToken}
                })
                commit('deleteSection', response.data)
+               console.log(response.data)
             }catch(error){
                throw new Error(error.response)
             }

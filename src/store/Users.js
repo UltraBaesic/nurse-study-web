@@ -84,13 +84,16 @@ export default {
 
         //to unblock an active user
         async unblockUser({ commit } , id){
+            console.log("I reached here")
             try{
+                console.log("I reached here too")
                 const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/unblock/${id}`, {
                     headers: {
                         'x-auth-token': userToken
                     }
                 })
                 commit('setunblockUser', response.data)
+                console.log("I reached here too too")
             }catch(error){
                 throw new Error(error.response)
             }
