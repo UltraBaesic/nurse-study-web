@@ -45,11 +45,13 @@
               <div class="pa-3">
                 <div class="fields pt-1">
                   <span class="">Name of Section</span><br/>
-                  <input v-model="sectionName" id="input-small" class="py-2" size="sm" placeholder="">
+                  <input maxlength="50" v-model="sectionName" id="input-small" class="py-2" size="sm" placeholder="" @keyup='charCount()'>
+                  <span style="font-size: 12px; color: grey; float: right;">{{ sectionName.length }} /50</span>
                 </div>
                 <div class="fields pt-2">
                   <span class="mt-3">Short description of Section</span><br/>
-                  <input id="textarea" v-model="sectionDesc" placeholder="" class="py-2">
+                  <textarea rows="2" maxlength="150" id="textarea" v-model="sectionDesc" placeholder="" class="py-2" @keyup='charCount()'></textarea>
+                  <span style="font-size: 12px; color: grey; float: right;">{{ sectionDescC }} /150</span>
                 </div>
                 <div class="fields pt-2">
                   <span class="mt-3">Attach an Image</span><br/>
@@ -72,8 +74,8 @@
                           <img v-if="getFileExtension(section.image_link) === 'jpg' || getFileExtension(section.image_link) === 'png'" :src="section.image_link" class="card-img-top" alt="...">
                           <div v-else class="blank-img card-img-top"></div>
                           <div class="card-body">
-                            <h6 class="card-title">{{section.title}}</h6>
-                            <p class="card-text ">{{section.description | truncate(55)}}.</p>
+                            <h6 class="card-title">{{section.title | truncate(20)}}</h6>
+                            <p class="card-text ">{{section.description | truncate(50)}}.</p>
                           </div>
                       </div>
                       <div class="delete d-flex justify-content-end" @click="deleteSection(section._id)">
@@ -108,6 +110,8 @@ data(){
     userSections: null,
     timestamp: "",
     message: "",
+    sectionNameC : 0,
+    sectionDescC : 0,
   }
 },
   methods: {
@@ -129,40 +133,49 @@ data(){
       getFileExtension(filename) {
           return filename.split('.').pop();
       },
+      // submit new section
       handleSubmit(event) {
-        event.preventDefault()
-        let payload = {
-            "title" : this.sectionName,
-            "description" : this.sectionDesc,
-            "image_link" : this.sectionImg
-        }
-        this.submitSection( payload)
-        .then(() => {
-          if(this.$store.state.Sections.newsection.data.message == "Successfully created section"){
-            this.message = this.$store.state.Sections.newsection.data.message
-            this.clearFields()
-            this.$bvModal.hide('my-modal')
-            this.$router.go()
-          }else{
-            console.log(this.$store.state.Sections.newsection.data.message);
+          event.preventDefault()
+          let payload = {
+              "title" : this.sectionName,
+              "description" : this.sectionDesc,
+              "image_link" : this.sectionImg
           }
-        })
+          this.submitSection( payload)
+          .then(() => {
+            if(this.$store.state.Sections.newsection.data.message == "Successfully created section"){
+              this.message = this.$store.state.Sections.newsection.data.message
+              this.clearFields()
+              this.$bvModal.hide('my-modal')
+              this.$router.go()
+            }else{
+              console.log(this.$store.state.Sections.newsection.data.message);
+            }
+          })
       },
+      //clear input field after submit
       clearFields() {
         this.sectionName = "",
         this.sectionDesc = "",
         this.sectionImg = ""
-  },
-  deleteSection(id){
-    this.$confirm("Are you sure you want to delete this section? All documents under this section will be deleted too")
-    .then(() => {
-      this.$store.dispatch('deleteSection', id)
-      setTimeout(() => this.$router.go(), 2000);
-      this.$alert("Section Deleted");
-      
-      });
+      },
 
-  }
+      // word count for input fields
+       charCount(){
+           this.sectionNameC = this.sectionName.length
+           console.log(this.sectionNameC)
+       },
+
+      //to delete a section
+      deleteSection(id){
+        this.$confirm("Are you sure you want to delete this section? All documents under this section will be deleted too")
+        .then(() => {
+          this.$store.dispatch('deleteSection', id)
+          setTimeout(() => this.$router.go(), 2000);
+          this.$alert("Section Deleted");
+          
+          });
+      }
   },
   created(){
     setInterval(this.getNow, 1000);
@@ -236,6 +249,9 @@ data(){
         width: 102px;
     }
     .fields input{
+      width: 100%;
+    }
+    .fields textarea{
       width: 100%;
     }
     .blank-img{
