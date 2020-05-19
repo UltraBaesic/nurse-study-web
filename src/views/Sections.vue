@@ -154,7 +154,7 @@ export default {
           this.$bvModal.hide('my-modal')
           this.$alert("New Section Added");
         }else{
-          console.log(this.$store.state.Sections.newsection.data.message);
+          // console.log(this.$store.state.Sections.newsection.data.message);
         }
       })
     },      

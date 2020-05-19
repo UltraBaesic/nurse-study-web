@@ -90,7 +90,7 @@
                         style="color: #04809A;"> 
                         {{ user.subscription }} 
                     </td>
-                    <td>{{ user.created_on | fullDate }}</td>
+                    <td>{{ user.createdAt | fullDate }}</td>
                     <td id="userAction" style="text-transform: capitalize">
                         {{ user.status }}
                         <button 
