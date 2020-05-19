@@ -147,12 +147,13 @@ export default {
         },      
 
         //to delete a section
-        async deleteSection({ commit }, id) {
+        async deleteSection({ commit, dispatch }, id) {
             try{
                const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
                commit('deleteSection', response.data)
+               dispatch('getAllSections');
                console.log(response.data)
             }catch(error){
                throw new Error(error.response)
@@ -172,7 +173,7 @@ export default {
             }
         },
 
-        //to delete an article under a section
+        //to delete a question under a section
         async deleteQuestion({ commit }, id) {
             try{
                const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/question/${id}`, {
@@ -215,7 +216,7 @@ export default {
         },
 
         // to post a new section
-        submitSection : ({commit}, payload)=>{
+        submitSection : ({ commit, dispatch }, payload)=>{
             commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
@@ -229,6 +230,7 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/section', load , head)
                 .then((data) =>{
                     commit('newSection', data)
+                    dispatch('getAllSections');
                     commit('endRequest')
                     resolve(data)
                 })
