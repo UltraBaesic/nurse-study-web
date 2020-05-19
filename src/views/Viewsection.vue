@@ -101,9 +101,10 @@
                     </div>
                     <div class="row">
                         <div class="col-4" v-for="videos in showSectionVideo[0]" :key="videos._id">
+                          
                           <div class="card card-style">
                             <video height="195" controls>
-                              <source src="https://drive.google.com/file/d/1T1vqS1nBGO-ZkE7hqbLS6CAz3a_SSLGC" type="video/mp4">
+                              <source src="https://www.dropbox.com/s/0e3yyaagcc7wx92/Burns-%20Classification%20and%20Treatment.mp4" type="video/mp4">
                               Your browser does not support the video tag.
                             </video>
                             <div class="card-body card-styling">

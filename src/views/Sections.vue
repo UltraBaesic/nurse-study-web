@@ -46,12 +46,12 @@
                 <div class="fields pt-1">
                   <span class="">Name of Section</span><br/>
                   <input maxlength="50" v-model="sectionName" id="input-small" class="py-2" size="sm" placeholder="" @keyup='charCount()'>
-                  <span style="font-size: 12px; color: grey; float: right;">{{ sectionNameCount }} /50</span>
+                  <!-- <span style="font-size: 12px; color: grey; float: right;">{{ charCount() }} /50</span> -->
                 </div>
                 <div class="fields pt-2">
                   <span class="mt-3">Short description of Section</span><br/>
                   <textarea rows="2" maxlength="150" id="textarea" v-model="sectionDesc" placeholder="" class="py-2" @keyup='charCount()'></textarea>
-                  <span style="font-size: 12px; color: grey; float: right;">{{ sectionDescC }} /150</span>
+                  <!-- <span style="font-size: 12px; color: grey; float: right;">{{ sectionName.length }} /150</span> -->
                 </div>
                 <div class="fields pt-2">
                   <span class="mt-3">Attach an Image</span><br/>
@@ -98,93 +98,88 @@ import { mapActions } from 'vuex'
 import { Circle8 } from 'vue-loading-spinner'
 
 export default {
+  // COMPONENTS
   components: {
     Circle8
   },
-data(){
-  return {
-    sectionName: '',
-    sectionDesc: '',
-    sectionImg: '', 
-    AllSection: [], 
-    userSections: null,
-    timestamp: "",
-    message: "",
-    sectionNameC : 0,
-    sectionDescC : 0,
-  }
-},
-  methods: {
-      ...mapActions([
-        'getAllSections',
-        'submitSection',
-        'loadSectionsInfo',
-        'getSectionArticles',
-        'getSectionQuestions',
-        'getSectionMedia'
-        ]),
-      showSectionInfo(title, id){
-          this.loadSectionsInfo(id)
-          this.getSectionArticles(id)
-          this.getSectionQuestions(id)
-          this.getSectionMedia(id)
-          this.$router.push( {path: `/sections/${title}`} )
-        },
-      getFileExtension(filename) {
-          return filename.split('.').pop();
-      },
-
-      // submit new section
-      handleSubmit(event) {
-          event.preventDefault()
-          let payload = {
-              "title" : this.sectionName,
-              "description" : this.sectionDesc,
-              "image_link" : this.sectionImg
-          }
-          this.submitSection( payload)
-          .then(() => {
-            if(this.$store.state.Sections.newsection.data.message == "Successfully created section"){
-              this.message = this.$store.state.Sections.newsection.data.message
-              this.clearFields()
-              this.$bvModal.hide('my-modal')
-              this.$router.go()
-              this.$alert("New Section Added");
-
-            }else{
-              console.log(this.$store.state.Sections.newsection.data.message);
-            }
-          })
-      },
-      
-      //clear input field after submit
-      clearFields() {
-        this.sectionName = "",
-        this.sectionDesc = "",
-        this.sectionImg = ""
-      },
-
-      charCount(){
-        this.sectionNameC = 0
-        this.sectionNameC = this.sectionName.length
-        console.log(this.sectionNameC)
-      },
-      //to delete a section
-      deleteSection(id){
-        this.$confirm("Are you sure you want to delete this section? All documents under this section will be deleted too")
-        .then(() => {
-          this.$store.dispatch('deleteSection', id)
-          setTimeout(() => this.$router.go(), 2000);
-          this.$alert("Section Deleted");
-          
-          });
-      }
+  // DATA
+  data(){
+    return {
+      sectionName: '',
+      sectionDesc: '',
+      sectionImg: '', 
+      AllSection: [], 
+      userSections: null,
+      timestamp: "",
+      message: "",
+      sectionNameC : 0,
+      sectionDescC : 0,
+    }
   },
+  //METHODS
+  methods: {
+    ...mapActions([
+      'getAllSections',
+      'submitSection',
+      'loadSectionsInfo',
+      'getSectionArticles',
+      'getSectionQuestions',
+      'getSectionMedia'
+      ]),
+    //load single section when a section is clicked
+    showSectionInfo(title, id){
+        this.loadSectionsInfo(id)
+        this.getSectionArticles(id)
+        this.getSectionQuestions(id)
+        this.getSectionMedia(id)
+        this.$router.push( {path: `/sections/${title}`} )
+      },
+    // filter image type
+    getFileExtension(filename) {
+      return filename.split('.').pop();
+    },
+    // submit new section
+    handleSubmit(e) {
+      e.preventDefault()
+      let payload = {
+        "title"       : this.sectionName,
+        "description" : this.sectionDesc, 
+        "image_link"  : this.sectionImg
+      }
+      this.submitSection( payload)
+      .then(() => {
+        if(this.$store.state.Sections.newsection.data.message == "Successfully created section"){
+          this.message = this.$store.state.Sections.newsection.data.message
+          this.clearFields()
+          this.$bvModal.hide('my-modal')
+          this.$alert("New Section Added");
+        }else{
+          console.log(this.$store.state.Sections.newsection.data.message);
+        }
+      })
+    },      
+    //clear input field after submit
+    clearFields() {
+      this.sectionName = "",
+      this.sectionDesc = "",
+      this.sectionImg = ""
+    },
+    //to delete a section
+    deleteSection(id){
+      this.$confirm("Are you sure you want to delete this section? All documents under this section will be deleted too")
+      .then(() => {
+        this.$store.dispatch('deleteSection', id)
+        // setTimeout(() => this.$router.go(), 2000);
+        this.$alert("Section Deleted");
+        });
+    }
+  },
+  //CREATED
   created(){
     setInterval(this.getNow, 1000);
     this.getAllSections();
   },
-  
+  //UPDATED
   updated(){
     this.$store.commit('setSections')
   },
@@ -192,13 +187,9 @@ data(){
   computed: {
     showSection() {
       return this.$store.state.Sections.allSections
-    },
-    // word count for input fields
-    sectionNameCount(){
-        let sectionNameC = this.sectionNameC
-        return sectionNameC
-    },
+    }
   },
+  //MOUNTED
   async mounted() {
     await this.getAllSections()
   }
