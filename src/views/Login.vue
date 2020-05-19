@@ -141,8 +141,8 @@ export default {
               type: 'success',
               position: 'top-right'
             });
-            this.clearFields();
             this.$router.push('/dashboard')
+            this.clearFields();
           }
         })
      },

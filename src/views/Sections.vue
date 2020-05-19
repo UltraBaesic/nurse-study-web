@@ -46,7 +46,7 @@
                 <div class="fields pt-1">
                   <span class="">Name of Section</span><br/>
                   <input maxlength="50" v-model="sectionName" id="input-small" class="py-2" size="sm" placeholder="" @keyup='charCount()'>
-                  <span style="font-size: 12px; color: grey; float: right;">{{ sectionName.length }} /50</span>
+                  <span style="font-size: 12px; color: grey; float: right;">{{ sectionNameCount }} /50</span>
                 </div>
                 <div class="fields pt-2">
                   <span class="mt-3">Short description of Section</span><br/>
@@ -133,6 +133,7 @@ data(){
       getFileExtension(filename) {
           return filename.split('.').pop();
       },
+
       // submit new section
       handleSubmit(event) {
           event.preventDefault()
@@ -148,11 +149,14 @@ data(){
               this.clearFields()
               this.$bvModal.hide('my-modal')
               this.$router.go()
+              this.$alert("New Section Added");
+
             }else{
               console.log(this.$store.state.Sections.newsection.data.message);
             }
           })
       },
+      
       //clear input field after submit
       clearFields() {
         this.sectionName = "",
@@ -160,12 +164,11 @@ data(){
         this.sectionImg = ""
       },
 
-      // word count for input fields
-       charCount(){
-           this.sectionNameC = this.sectionName.length
-           console.log(this.sectionNameC)
-       },
-
+      charCount(){
+        this.sectionNameC = 0
+        this.sectionNameC = this.sectionName.length
+        console.log(this.sectionNameC)
+      },
       //to delete a section
       deleteSection(id){
         this.$confirm("Are you sure you want to delete this section? All documents under this section will be deleted too")
@@ -181,14 +184,20 @@ data(){
     setInterval(this.getNow, 1000);
     this.getAllSections();
   },
+  
   updated(){
     this.$store.commit('setSections')
   },
-
+  //COMPUTED
   computed: {
     showSection() {
       return this.$store.state.Sections.allSections
-    }
+    },
+    // word count for input fields
+    sectionNameCount(){
+        let sectionNameC = this.sectionNameC
+        return sectionNameC
+    },
   },
   async mounted() {
     await this.getAllSections()

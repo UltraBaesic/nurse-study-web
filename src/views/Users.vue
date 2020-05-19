@@ -126,11 +126,11 @@ export default {
     methods: {
         ...mapActions(['getAllUsers']),
         blockUser(id){
-            this.$confirm("You are unblocking this user?")
+            this.$confirm("This user will be blocked, click okay to continue.")
             .then(() => {
                 this.$store.dispatch('blockUser', id)
-                setTimeout(() => this.$router.go(), 2000);
-                this.$alert("User Unblocked");   
+                // setTimeout(() => this.$router.go(), 2000);
+                this.$alert("User blocked");   
             });
         },
         unblockUser(id){     

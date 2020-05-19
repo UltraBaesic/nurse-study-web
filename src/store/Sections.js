@@ -163,7 +163,7 @@ export default {
         //to delete an article under a section
         async deleteArticle({ commit }, id) {
             try{
-               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section_articles/${id}`, {
+               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/article/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
                commit('deleteArticles', response.data)
@@ -175,7 +175,7 @@ export default {
         //to delete an article under a section
         async deleteQuestion({ commit }, id) {
             try{
-               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/section_question/${id}`, {
+               const response = await axios.delete(`https://nurse-study-backend.herokuapp.com/content/question/${id}`, {
                  headers: {'x-auth-token': userToken}
                })
                commit('deleteQuestion', response.data)
@@ -240,7 +240,7 @@ export default {
         },
         
         //to post a new article
-        newArticle: ({commit, state}, newpayload) =>{
+        newArticle: ({commit, dispatch, state}, newpayload) =>{
             commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
@@ -258,6 +258,7 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/article', load, head)
                 .then((data) => {
                     commit('addArticle', data)
+                    dispatch('getSectionArticles' , ID );
                     commit('endRequest')
                     resolve(data)
                 })
@@ -295,7 +296,7 @@ export default {
         },
 
         //to post a new question
-        addQuestion: ({commit, state}, questionPayload) =>{
+        addQuestion: ({ commit , dispatch , state }, questionPayload) =>{
             commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
@@ -311,6 +312,7 @@ export default {
                 axios.post('https://nurse-study-backend.herokuapp.com/content/question', load, head)
                 .then((data) => {
                     commit('addQuestion', data)
+                    dispatch('getSectionQuestions' , ID );
                     commit('endRequest')
                     resolve(data)
                 })
@@ -319,14 +321,14 @@ export default {
                 })
             })
         }
-
     },
 
     //store getters
     getters: {
         getArticleInfo: (state) => state.sectionArticles.data,  
         getSectionAudio: (state) => state.sectionMedia.data,
-        getSectionVideo: (state) => state.sectionMedia.data
+        getSectionVideo: (state) => state.sectionMedia.data,
+        refreshQuestions: state => state.sectionQuestions
     }
 }
 

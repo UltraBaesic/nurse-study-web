@@ -84,7 +84,7 @@
                                       <i class="fas fa-pen"></i>
                                       Edit
                                     </p> -->
-                                    <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-bottom: 0px !important;" @click="deleteArticle(articles._id)">
+                                    <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-bottom: 0px !important;" @click="deleteArticle(articles._id, articles.section_id)">
                                       <i class="fas fa-trash"></i>
                                       Delete
                                     </p>
@@ -158,7 +158,7 @@
                                     <i class="fas fa-pen"></i>
                                     Edit
                                   </p> -->
-                                  <p @click="deleteQuestion(questions._id)" class= "mr-3" style="font-size: 12px; color:#9A2804; cursor:pointer" >
+                                  <p @click="deleteQuestion(questions._id, questions.section_id)" class= "mr-3" style="font-size: 12px; color:#9A2804; cursor:pointer" >
                                     <i class="fas fa-trash"></i>
                                     Delete
                                   </p>
@@ -226,7 +226,7 @@ export default {
           this.$store.state.Sections.sectionMedia
             let videoResult = [this.$store.getters.getSectionVideo.filter((Videos) => Videos.type == "video" )]
             return videoResult
-        }
+        },
     },
     methods: {
         // ...mapActions(['getSectionArticles']),
@@ -245,22 +245,24 @@ export default {
         readArticle(title){
           this.$router.push(`/sections/sectioname/${title}`)
         },
-        deleteArticle(id){
+        deleteArticle(id, section_id){
           this.$confirm("Are you sure you want to delete this Article?")
           .then(() => {
               this.$store.dispatch('deleteArticle', id)
-              this.$router.go()
+              setTimeout(() => this.$store.dispatch('getSectionArticles', section_id), 1000);
+              // this.$router.go()
             });
         },
-        deleteQuestion(id){
+        deleteQuestion(id, section_id){
           this.$confirm("Are you sure you want to delete this Question?")
           .then(() => {
               this.$store.dispatch('deleteQuestion', id)
-              this.$router.go()
+              setTimeout(() => this.$store.dispatch('getSectionQuestions', section_id), 1000);
+              // this.$router.go()
             });
             
         },
-      }
+      },
     }
 </script>
 

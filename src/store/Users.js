@@ -70,14 +70,18 @@ export default {
 
         //to block an active user
         async blockUser({ commit } , id){
+            commit("startRequest");
             try{
+                console.log("I reached here")
                 const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/block/${id}`, {
                     headers: {
                         'x-auth-token': userToken
                     }
                 })
                 commit('setblockUser', response.data)
+                commit("endRequest")
             }catch(error){
+                commit("endRequest")
                 throw new Error(error.response)
             }
         },
@@ -89,7 +93,8 @@ export default {
                 console.log("I reached here too")
                 const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/unblock/${id}`, {
                     headers: {
-                        'x-auth-token': userToken
+                        'x-auth-token': userToken,
+                        'Content-type': 'application/json'
                     }
                 })
                 commit('setunblockUser', response.data)

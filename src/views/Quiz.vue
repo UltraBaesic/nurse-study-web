@@ -79,60 +79,59 @@
 
 <script>
 export default {
-data (){
-  return {
-    addedQuestions: [],
-    section_id: "",
-    question: "",
-    correct_option: "", 
-    optionA: "",
-    optionB: "",
-    optionC: "",
-    optionD: "",
-    correctAnswer: "", 
-  }
-},
-methods: {
-  createQuiz(event){
-  event.preventDefault()
-  let  newQuestion= {
-        "options": {
-          "A": this.optionA,
-          "B": this.optionB,
-          "C": this.optionC,
-          "D": this.optionD
-        }, 
-        "correct_option": this.correctAnswer, 
-        "question": this.question
-      }
-      console.log(newQuestion)
-      this.$store.dispatch('addQuestion', newQuestion)
-      .then(() => {
-      this.$alert("Question Added");
-      this.clearFields()
-    })
-  },
-    clearFields() {
-      this.question = "",
-      this.optionA = "",
-      this.optionB = "",
-      this.optionC = "",
-      this.optionD = "",
-      this.correctAnswer = ""
-  }
-},
-computed:{
-   buttonenable(){
-        let isDisabled = true
-        if(this.question == "" || this.correctAnswer == "" || this.optionA =="" || this.optionB =="" || this.optionC =="" || this.optionD ==""){
-          isDisabled = true
-        }else{
-          isDisabled = false
+      data (){
+        return {
+          addedQuestions: [],
+          section_id: "",
+          question: "",
+          correct_option: "", 
+          optionA: "",
+          optionB: "",
+          optionC: "",
+          optionD: "",
+          correctAnswer: "", 
         }
-        console.log(isDisabled)
-        return isDisabled
-     }
-}
+      },
+      methods: {
+        createQuiz(e){
+        e.preventDefault()
+        let newQuestion = 
+          {
+            "options": {
+              "A": this.optionA,
+              "B": this.optionB,
+              "C": this.optionC,
+              "D": this.optionD
+            }, 
+            "correct_option": this.correctAnswer, 
+            "question": this.question
+          }
+          this.$store.dispatch('addQuestion', newQuestion)
+          .then(() => {
+          this.$alert("Question Added");
+          this.clearFields()
+        })
+        },
+          clearFields() {
+            this.question = "",
+            this.optionA = "",
+            this.optionB = "",
+            this.optionC = "",
+            this.optionD = "",
+            this.correctAnswer = ""
+        }
+      },
+      computed:{
+        buttonenable(){
+              let isDisabled = true
+              if(this.question == "" || this.correctAnswer == "" || this.optionA =="" || this.optionB =="" || this.optionC =="" || this.optionD ==""){
+                isDisabled = true
+              }else{
+                isDisabled = false
+              }
+              return isDisabled
+          }
+      }
 }
 </script>
 
