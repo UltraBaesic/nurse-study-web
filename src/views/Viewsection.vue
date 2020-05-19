@@ -251,7 +251,6 @@ export default {
           .then(() => {
               this.$store.dispatch('deleteArticle', id)
               setTimeout(() => this.$store.dispatch('getSectionArticles', section_id), 1000);
-              // this.$router.go()
             });
         },
         deleteQuestion(id, section_id){
@@ -259,7 +258,6 @@ export default {
           .then(() => {
               this.$store.dispatch('deleteQuestion', id)
               setTimeout(() => this.$store.dispatch('getSectionQuestions', section_id), 1000);
-              // this.$router.go()
             });
             
         },
