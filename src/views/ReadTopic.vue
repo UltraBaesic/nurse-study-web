@@ -30,7 +30,7 @@ computed: {
     showArticle(){
         let topicname = this.$route.params.topicname
         let answ = [this.$store.getters.getArticleInfo.find((sectionArticle) => sectionArticle.title == topicname )]
-        console.log(answ)
+        // console.log(answ)
         return answ
     }
   }

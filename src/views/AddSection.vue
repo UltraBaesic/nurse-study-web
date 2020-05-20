@@ -104,25 +104,25 @@ import Editor from '@tinymce/tinymce-vue'
 </script>
 
 <style scoped>
-.pagetitle h6{
-      font-weight: 700;
-      color: #292929;
-    }
-  .card-style{
-      border: none;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
-      /* background-color: #F6FAFB; */
-}
-.back:hover{
-  color: #04809A ;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
-}
-input{
-  width: 50%;
-}
-button:disabled,
-button[disabled]{
-  background-color: rgb(223, 223, 223) !Important;
-  border-color: rgb(223, 223, 223);
-}
+  .pagetitle h6{
+        font-weight: 700;
+        color: #292929;
+      }
+    .card-style{
+        border: none;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+        /* background-color: #F6FAFB; */
+  }
+  .back:hover{
+    color: #04809A ;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+  }
+  input{
+    width: 50%;
+  }
+  button:disabled,
+  button[disabled]{
+    background-color: rgb(223, 223, 223) !Important;
+    border-color: rgb(223, 223, 223);
+  }
 </style>

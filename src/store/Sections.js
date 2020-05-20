@@ -322,7 +322,39 @@ export default {
                     reject(error)
                 })
             })
-        }
+        },
+
+
+        // Edit Requests
+          //to post a new article
+          editArticle: ({commit, dispatch, state}, editpayload) =>{
+            commit('startRequest')
+            return new Promise((resolve, reject) =>{
+                let head = {
+                    headers: {'x-auth-token': userToken}
+                };
+                let ID = state.section.data[0]._id
+                let id = editpayload.id
+                console.log('this is the ID' +ID)
+                console.log(state.section)
+                let load = {
+                    "title" : editpayload.title,
+                    "content" : editpayload.content,
+                    "category" : editpayload.category
+                }
+                axios.put(`https://nurse-study-backend.herokuapp.com/content/article/${id}`, load, head)
+                .then((data) => {
+                    commit('addArticle', data)
+                    dispatch('getSectionArticles' , ID );
+                    commit('endRequest')
+                    resolve(data)
+                })
+                .catch((error) => {
+                    commit('endRequest')
+                    reject(error)
+                })
+            })
+        },
     },
 
     //store getters

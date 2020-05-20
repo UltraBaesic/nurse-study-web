@@ -80,10 +80,10 @@
                                     <i class="fas fa-book-open"></i> 0 Reads
                                   </p>
                                   <div class="d-flex justify-content-end">
-                                    <!-- <p class= "mr-4" style="font-size: 12px; cursor: pointer; color: #04809A; margin-bottom: 0px !important;">
+                                    <p @click="editArticle(articles.title)" class= "mr-4" style="font-size: 12px; cursor: pointer; color: #04809A; margin-bottom: 0px !important;">
                                       <i class="fas fa-pen"></i>
                                       Edit
-                                    </p> -->
+                                    </p>
                                     <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-bottom: 0px !important;" @click="deleteArticle(articles._id, articles.section_id)">
                                       <i class="fas fa-trash"></i>
                                       Delete
@@ -104,7 +104,7 @@
                           
                           <div class="card card-style">
                             <video height="195" controls>
-                              <source src="https://www.dropbox.com/s/0e3yyaagcc7wx92/Burns-%20Classification%20and%20Treatment.mp4" type="video/mp4">
+                              <source src="videos.link" type="video/mp4">
                               Your browser does not support the video tag.
                             </video>
                             <div class="card-body card-styling">
@@ -155,10 +155,10 @@
                                 <div class="answer d-flex justify-content-between">
                                   Answer: {{ questions.correct_option }}
                                    <div class="d-flex justify-content-end">
-                                  <!-- <p class= "mr-4" style="font-size: 12px; color: #04809A;">
+                                  <p class= "mr-4" style="font-size: 12px; color: #04809A;">
                                     <i class="fas fa-pen"></i>
                                     Edit
-                                  </p> -->
+                                  </p>
                                   <p @click="deleteQuestion(questions._id, questions.section_id)" class= "mr-3" style="font-size: 12px; color:#9A2804; cursor:pointer" >
                                     <i class="fas fa-trash"></i>
                                     Delete
@@ -245,6 +245,9 @@ export default {
         },
         readArticle(title){
           this.$router.push(`/sections/sectioname/${title}`)
+        },
+        editArticle(title){
+          this.$router.push(`/sections/sectioname/${title}/edit`)
         },
         deleteArticle(id, section_id){
           this.$confirm("Are you sure you want to delete this Article?")
