@@ -95,7 +95,6 @@ export default {
                 "content" : this.showArticle[0].content,
                 "category" : this.showArticle[0].category,
             }
-            console.log(payload)
             this.$store.dispatch('editArticle', payload)
             .then(() => {
             this.$alert("This Article has been Edited");

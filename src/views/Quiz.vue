@@ -137,85 +137,85 @@ export default {
 
 <style scoped>
 
-.card-style{
-  border: none;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
-}
-.card-body{
-  padding: 2.5rem !important;
-}
-.card-title p{
-  font-weight: 600;
-  margin-bottom: 5px !important;
-}
-.option-header{
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 5px !important;
-}
-.la-radio input[type=radio]{
-  position: absolute;
-  visibility: hidden;
-}
-.la-radio label{
-  display: block;
-  position: relative;
-  font-size: 14px;
-  margin: 10px auto;
-  height: 20px;
-  z-index: 9;
-  cursor: pointer;
-  transition: all 0.25s linear;
-}
-textarea.form-control{
-  font-size: 14px
+  .card-style{
+    border: none;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
+  }
+  .card-body{
+    padding: 2.5rem !important;
+  }
+  .card-title p{
+    font-weight: 600;
+    margin-bottom: 5px !important;
+  }
+  .option-header{
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px !important;
+  }
+  .la-radio input[type=radio]{
+    position: absolute;
+    visibility: hidden;
+  }
+  .la-radio label{
+    display: block;
+    position: relative;
+    font-size: 14px;
+    margin: 10px auto;
+    height: 20px;
+    z-index: 9;
+    cursor: pointer;
+    transition: all 0.25s linear;
+  }
+  textarea.form-control{
+    font-size: 14px
 
-}
-.la-radio:hover label{
-	color: rgb(4,128,154,0.7);
-}
-.la-radio .check{
-  display: block;
-  position: absolute;
-  border: 2px solid #292929;
-  border-radius: 100%;
-  height: 13px;
-  width: 13px;
-  top: 69px;
-  left: 17px;
-  z-index: 5;
-  transition: border .25s linear;
-  -webkit-transition: border .25s linear;
-}
-.la-radio:hover .check {
-  border: 2px solid rgb(4,128,154,0.7);
-}
-.la-radio .check::before {
-  display: block;
-  position: absolute;
-  content: '';
-  border-radius: 100%;
-  height: 7px;
-  width: 7px;
-  top: 1px;
-  left: 1px;
-  margin: auto;
-  transition: background 0.25s linear;
-  -webkit-transition: background 0.25s linear;
-}
-input[type=radio]:checked ~ .check {
-  border: 2px solid  #04809A;
-}
-input[type=radio]:checked ~ .check::before{
-  background: #04809A;
-}
+  }
+  .la-radio:hover label{
+    color: rgb(4,128,154,0.7);
+  }
+  .la-radio .check{
+    display: block;
+    position: absolute;
+    border: 2px solid #292929;
+    border-radius: 100%;
+    height: 13px;
+    width: 13px;
+    top: 69px;
+    left: 17px;
+    z-index: 5;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+  }
+  .la-radio:hover .check {
+    border: 2px solid rgb(4,128,154,0.7);
+  }
+  .la-radio .check::before {
+    display: block;
+    position: absolute;
+    content: '';
+    border-radius: 100%;
+    height: 7px;
+    width: 7px;
+    top: 1px;
+    left: 1px;
+    margin: auto;
+    transition: background 0.25s linear;
+    -webkit-transition: background 0.25s linear;
+  }
+  input[type=radio]:checked ~ .check {
+    border: 2px solid  #04809A;
+  }
+  input[type=radio]:checked ~ .check::before{
+    background: #04809A;
+  }
 
-input[type=radio]:checked ~ label{
-  color:#04809A;
-}
-button:disabled,
-button[disabled]{
-  background-color: rgb(223, 223, 223) !Important;
-  border-color: rgb(223, 223, 223);
-}
+  input[type=radio]:checked ~ label{
+    color:#04809A;
+  }
+  button:disabled,
+  button[disabled]{
+    background-color: rgb(223, 223, 223) !Important;
+    border-color: rgb(223, 223, 223);
+  }
 </style>

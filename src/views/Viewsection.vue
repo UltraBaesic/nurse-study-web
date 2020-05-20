@@ -61,7 +61,7 @@
       </section>
       <section class="topics">
           <div>
-              <Tabs cache-lifetime="0.0000010" class="tabs">
+              <Tabs cache-lifetime="0.0000010" :options="{ useUrlFragment: false }" class="tabs">
                   <Tab  name="Articles">
                     <div class="d-flex justify-content-end mb-2 add-btn">
                       <b-button @click="addSection()" variant="info">Add Article</b-button>
@@ -155,7 +155,7 @@
                                 <div class="answer d-flex justify-content-between">
                                   Answer: {{ questions.correct_option }}
                                    <div class="d-flex justify-content-end">
-                                  <p class= "mr-4" style="font-size: 12px; color: #04809A;">
+                                  <p @click="editQuestion(questions._id, questions.section_id)" class= "mr-4" style="font-size: 12px; color: #04809A;">
                                     <i class="fas fa-pen"></i>
                                     Edit
                                   </p>
@@ -248,6 +248,9 @@ export default {
         },
         editArticle(title){
           this.$router.push(`/sections/sectioname/${title}/edit`)
+        },
+        editQuestion(id){
+          this.$router.push(`/sections/sectioname/${id}/editquestion`)
         },
         deleteArticle(id, section_id){
           this.$confirm("Are you sure you want to delete this Article?")

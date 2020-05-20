@@ -69,6 +69,10 @@ export const router = new Router({
                     component: () => import('./views/EditArticle.vue')
                 },
                 {
+                    path: '/sections/sectioname/:id/editquestion',
+                    component: () => import('./views/EditQuestion.vue')
+                },
+                {
                     path: '/settings',
                     component: () => import('./views/Settings.vue')
                 },

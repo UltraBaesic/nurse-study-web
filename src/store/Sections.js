@@ -326,7 +326,7 @@ export default {
 
 
         // Edit Requests
-          //to post a new article
+          //to edit article
           editArticle: ({commit, dispatch, state}, editpayload) =>{
             commit('startRequest')
             return new Promise((resolve, reject) =>{
@@ -335,8 +335,6 @@ export default {
                 };
                 let ID = state.section.data[0]._id
                 let id = editpayload.id
-                console.log('this is the ID' +ID)
-                console.log(state.section)
                 let load = {
                     "title" : editpayload.title,
                     "content" : editpayload.content,
@@ -355,11 +353,42 @@ export default {
                 })
             })
         },
+
+          //to edit question
+          editQuestion: ({commit, dispatch, state}, editpayload) =>{
+            commit('startRequest')
+            return new Promise((resolve, reject) =>{
+                let head = {
+                    headers: {'x-auth-token': userToken}
+                };
+                let ID = state.section.data[0]._id
+                let id = editpayload.id
+                console.log('this is the ID' +ID)
+                console.log(state.section)
+                let load = {
+                    "question" : editpayload.question,
+                    "options" : editpayload.options,
+                    "correct_option" : editpayload.correct_option,
+                }
+                axios.put(`https://nurse-study-backend.herokuapp.com/content/question/${id}`, load, head)
+                .then((data) => {
+                    commit('addQuestion', data)
+                    dispatch('getSectionQuestions' , ID );
+                    commit('endRequest')
+                    resolve(data)
+                })
+                .catch((error) => {
+                    commit('endRequest')
+                    reject(error)
+                })
+            })
+        },
     },
 
     //store getters
     getters: {
         getArticleInfo: (state) => state.sectionArticles.data,  
+        getQuestionInfo: (state) => state.sectionQuestions.data,  
         getSectionAudio: (state) => state.sectionMedia.data,
         getSectionVideo: (state) => state.sectionMedia.data,
         refreshQuestions: state => state.sectionQuestions

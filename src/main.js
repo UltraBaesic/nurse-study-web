@@ -9,6 +9,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-default.css';
 import moment from 'moment'
+import {Tabs, Tab} from 'vue-tabs-component';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -20,6 +21,8 @@ Vue.use(IconsPlugin)
 Vue.use(BootstrapVue)
 Vue.use(axios)
 Vue.use(VueSimpleAlert);
+Vue.component('tabs', Tabs);
+Vue.component('tab', Tab);
 
 
 Vue.filter('truncate', function (string, number) {
