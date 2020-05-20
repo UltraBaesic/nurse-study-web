@@ -94,7 +94,8 @@
                     <td id="userAction" style="text-transform: capitalize">
                         {{ user.status }}
                         <button 
-                            v-if="user.status == 'active'" @click="blockUser(user._id)"
+                            v-if="user.status == 'active'" 
+                            @click="blockUser(user._id)"
                             style="color: #AA2804; float :right; 
                                 background-color: #FFDDD4; border:none; cursor: pointer; 
                                 border-radius: 5px; 
@@ -128,9 +129,9 @@ export default {
         blockUser(id){
             this.$confirm("This user will be blocked, click okay to continue.")
             .then(() => {
-                this.$store.dispatch('blockUser', id)
+                this.$store.dispatch('blockuser', id)
                 // setTimeout(() => this.$router.go(), 2000);
-                this.$alert("User blocked");   
+                // this.$alert("User blocked");   
             });
         },
         unblockUser(id){     
