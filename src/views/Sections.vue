@@ -61,11 +61,10 @@
               <div class="modal-button">
                 <b-button class="mt-2 mr-3" @click="handleSubmit" variant="info">Submit</b-button>
               </div>
-            </b-modal>
+            </b-modal>            
           </div>
       </section>
       <section class="main-section" v-if="this.showSection">
-
           <div class="main-body">
               <div class="row .mx-lg-n5 mt-5">
                 <div class="col-3" v-for="section in showSection" :key="section._id">
@@ -78,8 +77,8 @@
                             <p class="card-text ">{{section.description | truncate(50)}}.</p>
                           </div>
                       </div>
-                      <div class="delete d-flex justify-content-end" @click="deleteSection(section._id)">
-                        <p class= "" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-right:20px;">
+                      <div class="delete d-flex justify-content-end">
+                        <p class= "" @click="deleteSection(section._id)" style="font-size: 12px; cursor: pointer; color: #9A2804; margin-right:20px;">
                           <i class="fas fa-trash"></i>
                         </p>
                       </div>
@@ -172,7 +171,12 @@ export default {
         // setTimeout(() => this.$router.go(), 2000);
         this.$alert("Section Deleted");
         });
-    }
+    },
+    editSect(id){
+        this.$store.dispatch('loadSectionsInfo', id)
+        this.loadSectionsInfo(id)
+        console.log("i did this")
+    },
   },
   //CREATED
   created(){
@@ -187,7 +191,7 @@ export default {
   computed: {
     showSection() {
       return this.$store.state.Sections.allSections
-    }
+    },
   },
   //MOUNTED
   async mounted() {

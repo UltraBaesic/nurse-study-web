@@ -22,6 +22,26 @@
       </section>
 
       <section class="about-section">
+        <!-- edit modal -->
+          <b-modal id="edit-modal" hide-footer title="Edit Section Details">
+            <div class="pa-3">
+              <div class="fields pt-1">
+                <span class="">Name of Section</span><br/>
+                <input maxlength="50" v-model="showSection.data[0].title" id="input-small" class="py-2" size="sm" placeholder="" @keyup='charCount()'>
+              </div>
+              <div class="fields pt-2">
+                <span class="mt-3">Short description of Section</span><br/>
+                <textarea rows="2" maxlength="150" id="textarea" v-model="showSection.data[0].description" placeholder="" class="py-2" @keyup='charCount()'></textarea>
+              </div>
+              <div class="fields pt-2">
+                <span class="mt-3">Attach an Image</span><br/>
+                <input id="textarea" v-model="showSection.data[0].image_link" placeholder="" class="py-2">
+              </div>
+            </div>
+            <div class="modal-button">
+              <b-button class="mt-2 mr-3" @click="editSection()" variant="info">Edit</b-button>
+            </div>
+          </b-modal>
           <div class="row">
               <div class="col-3" v-for="section in showSection.data" :key="section._id">
                   <div class="card card-style">
@@ -30,6 +50,11 @@
                     <div class="card-body">
                       <h6 class="card-title"> {{ section.title }} </h6>
                       <p class="card-text "> {{ section.description }} </p>
+                      <div class="delete d-flex justify-content-end">
+                        <p v-b-modal.edit-modal @click="editSect(section._id)" class="mr-4" style="font-size: 12px; color: #04809A;">
+                          <i class="fas fa-pen"></i>
+                        </p>
+                      </div>
                     </div>
                   </div>
               </div>
@@ -252,6 +277,18 @@ export default {
         editQuestion(id){
           this.$router.push(`/sections/sectioname/${id}/editquestion`)
         },
+        editSection() {
+            // e.preventDefault()
+            let payload = {
+                "title" : this.showSection.data[0].title,
+                "content" : this.showSection.data[0].description,
+                "pic" : this.showSection.data[0].image_link,
+            }
+            this.$store.dispatch('editSection', payload)
+            .then(() => {
+            this.$alert("This section details has been Edited");
+            })
+        },
         deleteArticle(id, section_id){
           this.$confirm("Are you sure you want to delete this Article?")
           .then(() => {
@@ -359,5 +396,11 @@ box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
 -moz-border-radius:7px 7px 7px 7px ;
 -webkit-border-radius:7px 7px 7px 7px ;
 border-radius:7px 7px 7px 7px ;
+}
+.fields input{
+  width: 100%;
+}
+.fields textarea{
+  width: 100%;
 }
 </style>
