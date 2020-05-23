@@ -50,11 +50,13 @@
                     <div class="card-body">
                       <h6 class="card-title"> {{ section.title }} </h6>
                       <p class="card-text "> {{ section.description }} </p>
-                      <div class="delete d-flex justify-content-end">
-                        <p v-b-modal.edit-modal @click="editSect(section._id)" class="mr-4" style="font-size: 12px; color: #04809A;">
-                          <i class="fas fa-pen"></i>
-                        </p>
-                      </div>
+                      <p 
+                        v-b-modal.edit-modal 
+                        @click="editSect(section._id)" 
+                        class="d-flex justify-content-end" 
+                        style="font-size: 12px; color: #04809A; margin-bottom: 2px !important;">
+                        <i class="fas fa-pen"></i>
+                      </p>
                     </div>
                   </div>
               </div>
@@ -359,7 +361,7 @@ li{
 }
 .card-style p{
     font-size: 12px;
-
+  margin-bottom: 5px !important;
     }
 .topics{
     margin-top: 1.08rem ;
