@@ -70,19 +70,16 @@ export default {
 
         //to block an active user
         blockuser( {commit}, id){
-            console.log(id)
             return new Promise((resolve, reject) =>{
                 let req = {
                     url: `https://nurse-study-backend.herokuapp.com/users/block/${id}`,
                     method: 'PUT',
                     headers: {'x-auth-token': userToken}
                 }
-                console.log(req)
                 axios(req)
                 .then((data) => {
                     commit('setblockUser', data)
                     resolve(data)
-                    console.log(data)
                 })
                 .catch((error) => {
                     reject(error)
@@ -92,19 +89,16 @@ export default {
 
         //to unblock a blocked user
         async unblockUser({ commit } , id){
-            console.log(id)
             return new Promise((resolve, reject) =>{
                 let req = {
                     url: `https://nurse-study-backend.herokuapp.com/users/unblock/${id}`,
                     method: 'PUT',
                     headers: {'x-auth-token': userToken}
                 }
-                console.log(req)
                 axios(req)
                 .then((data) => {
                     commit('setunblockUser', data)
                     resolve(data)
-                    console.log(data)
                 })
                 .catch((error) => {
                     reject(error)
