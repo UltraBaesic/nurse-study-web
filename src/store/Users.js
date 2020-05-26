@@ -69,38 +69,22 @@ export default {
         },
 
         //to block an active user
-        blockUser({ commit } , id){
-            // commit("startRequest");
-            let head = { headers: {'x-auth-token': userToken, 'Content-type': 'application/json' }}
-           console.log(head)
-            try{
-                console.log("I reached here")
-                const response = axios.put(`https://nurse-study-backend.herokuapp.com/users/block/${id}`, head )
-                commit('setblockUser', response.data)
-                commit("endRequest")
-            }catch(error){
-                // commit("endRequest")
-                throw new Error(error.response)
-            }
-        },
-
-        //to block an active user
-        blockuser({ commit } , id){
+        blockuser( {commit}, id){
+            console.log(id)
             return new Promise((resolve, reject) =>{
-                let head = {
-                headers: {'x-auth-token': userToken}
-                };
-                console.log(id)
-                console.log(head)
-                let url = "https://nurse-study-backend.herokuapp.com/users/block"
-                axios.put(`${url}/${id}`, head)
+                let req = {
+                    url: `https://nurse-study-backend.herokuapp.com/users/block/${id}`,
+                    method: 'PUT',
+                    headers: {'x-auth-token': userToken}
+                }
+                console.log(req)
+                axios(req)
                 .then((data) => {
                     commit('setblockUser', data)
-                    commit("endRequest")
                     resolve(data)
+                    console.log(data)
                 })
                 .catch((error) => {
-                    commit('endRequest')
                     reject(error)
                 })
             })
@@ -108,24 +92,24 @@ export default {
 
         //to unblock a blocked user
         async unblockUser({ commit } , id){
-            console.log("I reached here")
-           let head = { headers: {'x-auth-token': userToken}}
-           console.log(head)
-            try{
-                console.log("I reached here too")
-                const response = await axios.put(`https://nurse-study-backend.herokuapp.com/users/unblock/${id}`, head
-                // {
-                    // headers: {
-                    //     'x-auth-token': userToken,
-                    //     'Content-type': 'application/json'
-                    // }
-                // }
-                )
-                commit('setunblockUser', response.data)
-                console.log("I reached here too too")
-            }catch(error){
-                throw new Error(error.response)
-            }
+            console.log(id)
+            return new Promise((resolve, reject) =>{
+                let req = {
+                    url: `https://nurse-study-backend.herokuapp.com/users/unblock/${id}`,
+                    method: 'PUT',
+                    headers: {'x-auth-token': userToken}
+                }
+                console.log(req)
+                axios(req)
+                .then((data) => {
+                    commit('setunblockUser', data)
+                    resolve(data)
+                    console.log(data)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+            })
         },
     },
     getters: {

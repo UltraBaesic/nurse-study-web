@@ -92,6 +92,11 @@ export default {
         // delete question
         deleteQuestion(state, deletedQuestion){
             state.deleted = deletedQuestion
+        },
+
+        // delete question
+        editSection(state, editSection){
+            state.newsection = editSection
         }
         
     },
@@ -353,7 +358,7 @@ export default {
                 })
             })
         },
-          editSection: ({commit, dispatch, state}, editpayload) =>{
+          editSection: ({commit, dispatch, state}, editvalues) =>{
             commit('startRequest')
             return new Promise((resolve, reject) =>{
                 let head = {
@@ -361,13 +366,13 @@ export default {
                 };
                 let id = state.section.data[0]._id
                 let load = {
-                    "title" : editpayload.title,
-                    "description" : editpayload.description,
-                    "image_link" : editpayload.pic
+                    "title" : editvalues.title,
+                    "description" : editvalues.content,
+                    "image_link" : editvalues.pic
                 }
                 axios.put(`https://nurse-study-backend.herokuapp.com/content/section/${id}`, load, head)
                 .then((data) => {
-                    commit('addArticle', data)
+                    commit('editSection', data)
                     dispatch('loadSectionsInfo' , id );
                     commit('endRequest')
                     resolve(data)

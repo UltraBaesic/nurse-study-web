@@ -95,7 +95,7 @@
                         {{ user.status }}
                         <button 
                             v-if="user.status == 'active'" 
-                            @click="blockUser(user._id)"
+                            @click="blockuser(user._id)"
                             style="color: #AA2804; float :right; 
                                 background-color: #FFDDD4; border:none; cursor: pointer; 
                                 border-radius: 5px; 
@@ -126,22 +126,29 @@ import { mapActions, mapState } from 'vuex'
 export default {
     methods: {
         ...mapActions(['getAllUsers']),
-        blockUser(id){
-            this.$confirm("This user will be blocked, click okay to continue.")
+        blockuser(id){
+            this.$confirm("Blocking this user means this user will not have access to lectures, click okay to continue.")
             .then(() => {
                 this.$store.dispatch('blockuser', id)
-                // setTimeout(() => this.$router.go(), 2000);
-                // this.$alert("User blocked");   
+                if(this.$store.state.users.blockedUser.status == 200 ){
+                    setTimeout(() => this.$router.go(), 2000);
+                    this.$alert("User blocked");   
+                }else{
+                    this.$alert("Something went wrong try again.");   
+                }
             });
         },
         unblockUser(id){     
-            // this.$confirm("You are unblocking this user?")
-            // .then(() => {
+            this.$confirm("Unblocking this user makes this user Active , click okay to continue.")
+            .then(() => {
                 this.$store.dispatch('unblockUser', id)
-                // setTimeout(() => this.$router.go(), 3000);
-                // setTimeout(() => this.$alert("User Unblocked"), 3000);
-            // });
-            
+                if(this.$store.state.users.unblockedUser.status == 200 ){
+                    setTimeout(() => this.$router.go(), 2000);
+                    this.$alert("User is Active now");   
+                }else{
+                    this.$alert("Something went wrong try again.");   
+                }
+            });
         },
     },
     computed: {

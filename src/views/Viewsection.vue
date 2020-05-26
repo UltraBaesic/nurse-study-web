@@ -27,11 +27,11 @@
             <div class="pa-3">
               <div class="fields pt-1">
                 <span class="">Name of Section</span><br/>
-                <input maxlength="50" v-model="showSection.data[0].title" id="input-small" class="py-2" size="sm" placeholder="" @keyup='charCount()'>
+                <input maxlength="50" v-model="showSection.data[0].title" id="input-small" class="py-2" size="sm" placeholder="">
               </div>
               <div class="fields pt-2">
                 <span class="mt-3">Short description of Section</span><br/>
-                <textarea rows="2" maxlength="150" id="textarea" v-model="showSection.data[0].description" placeholder="" class="py-2" @keyup='charCount()'></textarea>
+                <textarea rows="2" maxlength="150" id="textarea" v-model="showSection.data[0].description" placeholder="" class="py-2" ></textarea>
               </div>
               <div class="fields pt-2">
                 <span class="mt-3">Attach an Image</span><br/>
@@ -39,7 +39,7 @@
               </div>
             </div>
             <div class="modal-button">
-              <b-button class="mt-2 mr-3" @click="editSection()" variant="info">Edit</b-button>
+              <b-button class="mt-2 mr-3" @click="editSection()" variant="info">{{ submitted ? 'Loading...' : 'Edit'}}</b-button>
             </div>
           </b-modal>
           <div class="row">
@@ -52,7 +52,6 @@
                       <p class="card-text "> {{ section.description }} </p>
                       <p 
                         v-b-modal.edit-modal 
-                        @click="editSect(section._id)" 
                         class="d-flex justify-content-end" 
                         style="font-size: 12px; color: #04809A; margin-bottom: 2px !important;">
                         <i class="fas fa-pen"></i>
@@ -214,6 +213,7 @@ export default {
     data(){
       return{
         i: 1, 
+        submitted: false,
       }
     },
     components: {
@@ -281,14 +281,16 @@ export default {
         },
         editSection() {
             // e.preventDefault()
-            let payload = {
+            let values = {
                 "title" : this.showSection.data[0].title,
                 "content" : this.showSection.data[0].description,
                 "pic" : this.showSection.data[0].image_link,
             }
-            this.$store.dispatch('editSection', payload)
+            this.submitted = true
+            this.$store.dispatch('editSection', values)
             .then(() => {
             this.$alert("This section details has been Edited");
+            this.submitted = false
             })
         },
         deleteArticle(id, section_id){
