@@ -42,11 +42,26 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div class="card-body">
-                    <div class="form-group row">
-                      <label for="number" class="col-sm-4 col-form-label" style="font-size: 14px;">Amount for Subscription</label>
-                      <div class="col-sm-3">
-                        <input type="number" class="form-control" id="number" style="font-size: 14px;" min="0" value="5000" step="100">
-                      </div>
+                    <p class="set-head">Plans</p>
+                    <div class="set-info" v-for="plan in plans" :key="plan._id" >
+                      <p>{{ plan.duration }} <span id="amount">&#8358;{{plan.amount}}</span> </p>
+                      <h6  v-b-modal.edit-plan-modal>Edit</h6>
+                      <!--Edit Modal -->
+                      <b-modal id="edit-plan-modal" hide-footer title="Edit Plan">
+                        <div class="pa-3" v-for="plan in plans" :key="plan._id">
+                          <div class="fields pt-1">
+                            <span class="">Amount</span><br/>
+                            <input maxlength="50" v-model="plan.amount" id="input-small" class="py-2" size="sm" placeholder="(naira)">
+                          </div>
+                          <div class="fields pt-2">
+                            <span class="mt-3">Duration</span><br/>
+                            <input id="textarea" v-model="plan.duration" value="" placeholder="" class="py-2">
+                          </div>
+                        </div>
+                        <div class="modal-button">
+                          <b-button class="mt-2 mr-3" @click="editPlan(plan._id)" variant="info">Change</b-button>
+                        </div>
+                      </b-modal>   
                     </div>
                   </div>
                 </div>
@@ -58,8 +73,48 @@
 </template>
 
 <script>
-export default {
+import { mapActions } from 'vuex'
 
+export default {
+  data(){
+    return{
+      submitted: false
+    }
+  },
+  methods:{
+    ...mapActions([
+        'getPlans',
+        'editPlan'
+        ]),
+    editPlan() {
+        let payload = {
+          "id": this.plans[0]._id,
+          "plan": this.plans[0].plan,
+          "amount": this.plans[0].amount,
+          "duration": this.plans[0].duration
+        }
+        this.submitted = true
+        this.$store.dispatch('editPlan', payload)
+        .then(() => {
+          if(this.$store.state.Settings.edittedplan.data.message == "Subscription Updated"){
+            this.submitted = false
+            this.$bvModal.hide('edit-plan-modal')
+            this.$alert("Payment Plan editted.");
+          }else{
+            this.$alert("Something went wrong try again");
+          }
+        })
+    }
+  },
+  created(){
+      this.getPlans();
+    },
+  computed: {
+      plans() {
+        console.log(this.$store.state.Settings.plans)
+        return this.$store.state.Settings.plans
+      },
+  }
 }
 </script>
 
@@ -78,6 +133,12 @@ export default {
       border: none;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1 );
     }
+    .card-header{
+      background-color: #F6FAFF !important;
+    }
+    .card-header:hover{
+      background-color: rgb(224, 237, 252) !important;
+    }
     .settings-header{
       text-decoration: none !important;
       color: #292929;
@@ -85,5 +146,36 @@ export default {
     .settings-header:hover{
       text-decoration: none;
       color: rgb(4,128,154,0.7);
+    }
+    .set-info{
+      margin-left: 10px;
+      display: inline-flex;
+    }
+    .set-head{
+      margin-left: 10px;
+      color: #9F9FB4;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    #amount{
+      margin-left: 40px;
+      font-weight: 600;
+    }
+    .set-info h6{
+      font-size:12px;
+      font-weight: 600;
+      color: #9A2804;
+      background-color: #FFDDD4 ;
+      text-align: center;
+      width: 60px;
+      margin-left: 40px;
+      height: 23px;
+      padding: 4px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .set-info h6:focus{
+      outline: none;
+      border: none;
     }
 </style>

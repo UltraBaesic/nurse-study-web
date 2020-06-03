@@ -134,7 +134,7 @@ export default {
                     setTimeout(() => this.$router.go(), 2000);
                     this.$alert("User blocked");   
                 }else{
-                    this.$alert("Something went wrong try again.");   
+                    this.$alert("Something went wrong,try again.");   
                 }
             });
         },
@@ -143,10 +143,10 @@ export default {
             .then(() => {
                 this.$store.dispatch('unblockUser', id)
                 if(this.$store.state.users.unblockedUser.status == 200 ){
-                    setTimeout(() => this.$router.go(), 2000);
+                    setTimeout(() => this.$router.go(), 3000);
                     this.$alert("User is Active now");   
                 }else{
-                    this.$alert("Something went wrong try again.");   
+                    this.$alert("Something went wrong,try again.");   
                 }
             });
         },
