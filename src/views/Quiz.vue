@@ -95,6 +95,17 @@ export default {
       methods: {
         createQuiz(e){
         e.preventDefault()
+        let Answer = ''
+        if(this.correctAnswer === 'A'){
+          Answer = this.optionA
+        }else if(this.correctAnswer === 'B'){
+          Answer = this.optionB
+        }else if(this.correctAnswer === 'C'){
+          Answer = this.optionC
+        }else if(this.correctAnswer === 'D'){
+          Answer = this.optionD
+        }
+        // console.log(Answer)
         let newQuestion = 
           {
             "options": {
@@ -103,9 +114,10 @@ export default {
               "C": this.optionC,
               "D": this.optionD
             }, 
-            "correct_option": this.correctAnswer, 
+            "correct_option": Answer, 
             "question": this.question
           }
+          //  console.log(newQuestion)
           this.$store.dispatch('addQuestion', newQuestion)
           .then(() => {
           this.$alert("Question Added");

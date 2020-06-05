@@ -129,8 +129,11 @@
                         <div class="col-4" v-for="videos in showSectionVideo[0]" :key="videos._id">
                           
                           <div class="card card-style">
+                            <!-- <iframe width="420" height="315"
+                              :src="videos.link">
+                            </iframe> -->
                             <video height="195" controls>
-                              <source src="videos.link" type="video/mp4">
+                              <source :src="videos.link" type="video/mp4">
                               Your browser does not support the video tag.
                             </video>
                             <div class="card-body card-styling">
