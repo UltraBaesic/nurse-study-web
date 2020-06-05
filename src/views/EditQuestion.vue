@@ -98,6 +98,16 @@ export default {
     methods: {
         editQuiz(e){
             e.preventDefault()
+            let Answer = ''
+            if(this.showQuestion.correct_option === 'A'){
+            Answer = this.showQuestion.options.A
+            }else if(this.showQuestion.correct_option === 'B'){
+            Answer = this.showQuestion.options.B
+            }else if(this.showQuestion.correct_option === 'C'){
+            Answer =this.showQuestion.options.C
+            }else if(this.showQuestion.correct_option === 'D'){
+            Answer = this.showQuestion.options.D
+            }
             let question = {
                 "id": this.showQuestion._id,
                 "options": {
@@ -106,7 +116,7 @@ export default {
                     "C": this.showQuestion.options.C,
                     "D": this.showQuestion.options.D
                 }, 
-                "correct_option": this.showQuestion.correct_option, 
+                "correct_option": Answer, 
                 "question": this.showQuestion.question
             }
             console.log(question)
